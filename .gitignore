@@ -18,6 +18,7 @@ mono_crash.*
 
 # Not yet we can create documentation
 SonetexApp.Documentation/
+Migrations/
 
 # Build results
 [Dd]ebug/

@@ -5,22 +5,21 @@ namespace SonetexApp.Data;
 
 public class ApplicationContext : DbContext
 {
-    public List<Culture> Cultures { get; set; }
-    public List<Resource> Resources { get; set; }
-    public List<Configuration> Configurations { get; set; }
-    public List<Document> Documents { get; set; }
-    public List<Image> Images { get; set; }
-    public List<Catalog> Catalogs { get; set; }
-    public List<Product> Products { get; set; }
-    public List<Certificate> Certificates { get; set; }
-    public List<Manufacturer> Manufacturers { get; set; }
-    public List<Partner> Partners { get; set; }
-    public List<Recommendation> Recommendations { get; set; }
-    public List<Specialist> Specialists { get; set; }
-    public List<State> States { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        optionsBuilder.UseSqlite("Data Source = SonetexDB.db");
+
     }
+    public DbSet<Culture> Cultures { get; set; }
+    public DbSet<Resource> Resources { get; set; }
+    public DbSet<Configuration> Configurations { get; set; }
+    public DbSet<Document> Documents { get; set; }
+    public DbSet<Image> Images { get; set; }
+    public DbSet<Catalog> Catalogs { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Certificate> Certificates { get; set; }
+    public DbSet<Manufacturer> Manufacturers { get; set; }
+    public DbSet<Partner> Partners { get; set; }
+    public DbSet<Recommendation> Recommendations { get; set; }
+    public DbSet<Specialist> Specialists { get; set; }
+    public DbSet<State> States { get; set; }
 }
