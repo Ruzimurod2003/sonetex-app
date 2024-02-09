@@ -5,6 +5,8 @@ namespace SonetexApp.Data;
 
 public class ApplicationContext : DbContext
 {
+    public List<Culture> Cultures { get; set; }
+    public List<Resource> Resources { get; set; }
     public List<Configuration> Configurations { get; set; }
     public List<Document> Documents { get; set; }
     public List<Image> Images { get; set; }
