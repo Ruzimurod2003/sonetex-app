@@ -5,6 +5,9 @@ namespace SonetexApp.Data;
 
 public class ApplicationContext : DbContext
 {
+    public List<Configuration> Configurations { get; set; }
+    public List<Document> Documents { get; set; }
+    public List<Image> Images { get; set; }
     public List<Catalog> Catalogs { get; set; }
     public List<Product> Products { get; set; }
     public List<Certificate> Certificates { get; set; }
