@@ -1,0 +1,49 @@
+﻿@model SonetexApp.Models.Certificate
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="text-center">
+    <h1>create_certificate</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">name</label>
+                <input asp-for="Name" class="form-input" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameRussian" class="control-label">name_russian</label>
+                <input asp-for="NameRussian" class="form-input" />
+                <span asp-validation-for="NameRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEnglish" class="control-label">name_english</label>
+                <input asp-for="NameEnglish" class="form-input" />
+                <span asp-validation-for="NameEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameUzbek" class="control-label">name_uzbek</label>
+                <input asp-for="NameUzbek" class="form-input" />
+                <span asp-validation-for="NameUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">description</label>
+                <input asp-for="Description" class="form-input" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
