@@ -1,0 +1,56 @@
+﻿@model AdministratorPartnerVM
+
+<div class="text-center">
+    <h1>edit_manufacturer</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Partner.Id" />
+            <div class="form-group">
+                <label asp-for="Partner.Name" class="control-label">name</label>
+                <input asp-for="Partner.Name" class="form-input" />
+                <span asp-validation-for="Partner.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partner.NameRussian" class="control-label">name_russian</label>
+                <input asp-for="Partner.NameRussian" class="form-input" />
+                <span asp-validation-for="Partner.NameRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partner.NameEnglish" class="control-label">name_english</label>
+                <input asp-for="Partner.NameEnglish" class="form-input" />
+                <span asp-validation-for="Partner.NameEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partner.NameUzbek" class="control-label">name_uzbek</label>
+                <input asp-for="Partner.NameUzbek" class="form-input" />
+                <span asp-validation-for="Partner.NameUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partner.Description" class="control-label">description</label>
+                <input asp-for="Partner.Description" class="form-input" />
+                <span asp-validation-for="Partner.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label">upload_file</label>
+                <input asp-for="File" class="form-input" type="file" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileCaption" class="control-label">file_caption</label>
+                <input asp-for="FileCaption" class="form-input" />
+                <span asp-validation-for="FileCaption" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    back_to_list
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

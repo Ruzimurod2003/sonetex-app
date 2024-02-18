@@ -1,0 +1,46 @@
+﻿@model AdministratorCatalogVM
+
+<div class="text-center">
+    <h1>edit_category</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Catalog.Id" />
+            <div class="form-group">
+                <label asp-for="Catalog.Name" class="control-label">name</label>
+                <input asp-for="Catalog.Name" class="form-input" />
+                <span asp-validation-for="Catalog.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catalog.NameRussian" class="control-label">name_russian</label>
+                <input asp-for="Catalog.NameRussian" class="form-input" />
+                <span asp-validation-for="Catalog.NameRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catalog.NameEnglish" class="control-label">name_english</label>
+                <input asp-for="Catalog.NameEnglish" class="form-input" />
+                <span asp-validation-for="Catalog.NameEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catalog.NameUzbek" class="control-label">name_uzbek</label>
+                <input asp-for="Catalog.NameUzbek" class="form-input" />
+                <span asp-validation-for="Catalog.NameUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catalog.Description" class="control-label">description</label>
+                <input asp-for="Catalog.Description" class="form-input" />
+                <span asp-validation-for="Catalog.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    back_to_list
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

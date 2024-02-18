@@ -1,0 +1,72 @@
+﻿@model SonetexApp.Models.Configuration
+
+<div class="text-center">
+    <h1>edit_category</h1>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-input" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-input" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelegramLink" class="control-label"></label>
+                <input asp-for="TelegramLink" class="form-input" />
+                <span asp-validation-for="TelegramLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InstagramLink" class="control-label"></label>
+                <input asp-for="InstagramLink" class="form-input" />
+                <span asp-validation-for="InstagramLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacebookLink" class="control-label"></label>
+                <input asp-for="FacebookLink" class="form-input" />
+                <span asp-validation-for="FacebookLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GithubLink" class="control-label"></label>
+                <input asp-for="GithubLink" class="form-input" />
+                <span asp-validation-for="GithubLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoogleLink" class="control-label"></label>
+                <input asp-for="GoogleLink" class="form-input" />
+                <span asp-validation-for="GoogleLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TwitterLink" class="control-label"></label>
+                <input asp-for="TwitterLink" class="form-input" />
+                <span asp-validation-for="TwitterLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YoutubeLink" class="control-label"></label>
+                <input asp-for="YoutubeLink" class="form-input" />
+                <span asp-validation-for="YoutubeLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-input" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    back_to_list
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

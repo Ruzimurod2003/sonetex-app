@@ -1,48 +1,54 @@
-﻿@model SonetexApp.Models.Certificate
-
-@{
-    ViewData["Title"] = "Create";
-}
+﻿@model AdministratorCertificateVM
 
 <div class="text-center">
-    <h1>create_certificate</h1>
+    <h1>create_manufacturer</h1>
 </div>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label">name</label>
-                <input asp-for="Name" class="form-input" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Certificate.Name" class="control-label">name</label>
+                <input asp-for="Certificate.Name" class="form-input" />
+                <span asp-validation-for="Certificate.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NameRussian" class="control-label">name_russian</label>
-                <input asp-for="NameRussian" class="form-input" />
-                <span asp-validation-for="NameRussian" class="text-danger"></span>
+                <label asp-for="Certificate.NameRussian" class="control-label">name_russian</label>
+                <input asp-for="Certificate.NameRussian" class="form-input" />
+                <span asp-validation-for="Certificate.NameRussian" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NameEnglish" class="control-label">name_english</label>
-                <input asp-for="NameEnglish" class="form-input" />
-                <span asp-validation-for="NameEnglish" class="text-danger"></span>
+                <label asp-for="Certificate.NameEnglish" class="control-label">name_english</label>
+                <input asp-for="Certificate.NameEnglish" class="form-input" />
+                <span asp-validation-for="Certificate.NameEnglish" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NameUzbek" class="control-label">name_uzbek</label>
-                <input asp-for="NameUzbek" class="form-input" />
-                <span asp-validation-for="NameUzbek" class="text-danger"></span>
+                <label asp-for="Certificate.NameUzbek" class="control-label">name_uzbek</label>
+                <input asp-for="Certificate.NameUzbek" class="form-input" />
+                <span asp-validation-for="Certificate.NameUzbek" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label">description</label>
-                <input asp-for="Description" class="form-input" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Certificate.Description" class="control-label">description</label>
+                <input asp-for="Certificate.Description" class="form-input" />
+                <span asp-validation-for="Certificate.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="File" class="control-label">upload_file</label>
+                <input asp-for="File" class="form-input" type="file" />
+                <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <a asp-action="Index">Back to List</a>
+                <label asp-for="FileCaption" class="control-label">file_caption</label>
+                <input asp-for="FileCaption" class="form-input" />
+                <span asp-validation-for="FileCaption" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    back_to_list
+                </a>
             </div>
         </form>
     </div>

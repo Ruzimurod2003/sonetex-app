@@ -1,16 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using SonetexApp.Data;
+using SonetexApp.Localizers;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("SonetexSqlServerConnection")));
 
+builder.Services.AddTransient<IStringLocalizer, EFStringLocalizer>();
+
+builder.Services.AddControllersWithViews().AddViewLocalization();
+
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment() || !app.Environment.IsProduction())
 {
     app.UseExceptionHandler("/Home/Error");
 
@@ -18,6 +24,19 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+var supportedCultures = new[]
+{
+    new CultureInfo("en"),
+    new CultureInfo("ru"),
+    new CultureInfo("uz")
+};
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("ru"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 app.UseStaticFiles();
 

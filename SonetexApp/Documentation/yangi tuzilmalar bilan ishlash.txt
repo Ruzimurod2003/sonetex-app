@@ -1,0 +1,11 @@
+Area ni proyektni ichiga qo'sh, 
+sababi Admin panel hamda user panel uchun bir marotaba Layout yaratiladi, 
+Batafsil: 
+
+https://metanit.com/sharp/mvc/6.5.php
+
+https://metanit.com/sharp/aspnet5/11.9.php
+
+https://metanit.com/sharp/aspnetmvc/4.4.php
+
+https://metanit.com/sharp/mvc5/6.5.php

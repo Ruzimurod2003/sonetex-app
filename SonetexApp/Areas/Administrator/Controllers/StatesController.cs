@@ -51,11 +51,9 @@ namespace SonetexApp.Areas.Administrator.Controllers
         }
 
         // POST: Administrator/States/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,NameRussian,NameEnglish,NameUzbek")] State state)
+        public async Task<IActionResult> Create(State state)
         {
             if (ModelState.IsValid)
             {
@@ -83,11 +81,9 @@ namespace SonetexApp.Areas.Administrator.Controllers
         }
 
         // POST: Administrator/States/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NameRussian,NameEnglish,NameUzbek")] State state)
+        public async Task<IActionResult> Edit(int id, State state)
         {
             if (id != state.Id)
             {
