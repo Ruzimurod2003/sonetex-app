@@ -1,1 +1,0 @@
-dotnet ef migrations add Initiadlw -p ..\SonetexApp.Data\SonetexApp.Data.csproj

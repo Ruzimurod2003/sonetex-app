@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Localization;
+﻿using FanurApp.Localizers;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SonetexApp.Data;
@@ -8,11 +9,18 @@ using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationContext>(option =>
-    option.UseSqlServer(builder.Configuration.GetConnectionString("SonetexSqlServerConnection")));
+    option.UseSqlite(builder.Configuration.GetConnectionString("SonetexSqliteConnection")));
 
 builder.Services.AddTransient<IStringLocalizer, EFStringLocalizer>();
 
-builder.Services.AddControllersWithViews().AddViewLocalization();
+builder.Services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(builder.Configuration.GetConnectionString("SonetexSqliteConnection")));
+
+builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization(options =>
+{
+    options.DataAnnotationLocalizerProvider = (type, factory) =>
+    factory.Create(null);
+})
+.AddViewLocalization();
 
 var app = builder.Build();
 

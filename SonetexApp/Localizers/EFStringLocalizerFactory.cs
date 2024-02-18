@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Localization;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using SonetexApp.Data;
 using SonetexApp.Localizers;
 
@@ -6,11 +7,10 @@ namespace FanurApp.Localizers;
 
 public class EFStringLocalizerFactory : IStringLocalizerFactory
 {
-    private readonly ApplicationContext context;
-
-    public EFStringLocalizerFactory(ApplicationContext _context)
+    string _connectionString;
+    public EFStringLocalizerFactory(string connection)
     {
-        context = _context;
+        _connectionString = connection;
     }
     public IStringLocalizer Create(Type resourceSource)
     {
@@ -24,7 +24,11 @@ public class EFStringLocalizerFactory : IStringLocalizerFactory
 
     private IStringLocalizer CreateStringLocalizer()
     {
+        ApplicationContext _db = new ApplicationContext(
+                new DbContextOptionsBuilder<ApplicationContext>()
+                    .UseSqlite(_connectionString)
+                    .Options);
         // инициализация базы данных
-        return new EFStringLocalizer(context);
+        return new EFStringLocalizer(_db);
     }
 }
