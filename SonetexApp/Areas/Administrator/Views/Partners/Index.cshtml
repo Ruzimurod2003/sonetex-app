@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Partner>
 
 <div class="text-center">
-    <h1>administrator_manufacturers_index</h1>
+    <h1>@Localizer["administrator_partners_index"]</h1>
 </div>
 
 <div class="mb-5 flex items-center gap-2">
@@ -10,7 +10,7 @@
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
-        create_new
+        @Localizer["create_new"]
     </a>
 </div>
 
@@ -18,22 +18,22 @@
     <thead>
         <tr>
             <th>
-                name
+                @Localizer["name"]
             </th>
             <th>
-                name_russian
+                @Localizer["name_russian"]
             </th>
             <th>
-                name_english
+                @Localizer["name_english"]
             </th>
             <th>
-                name_uzbek
+                @Localizer["name_uzbek"]
             </th>
             <th>
-                description
+                @Localizer["description"]
             </th>
             <th>
-                actions
+                @Localizer["actions"]
             </th>
         </tr>
     </thead>

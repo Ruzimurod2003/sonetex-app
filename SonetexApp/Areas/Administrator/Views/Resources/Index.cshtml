@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Resource>
 
 <div class="text-center">
-    <h1>administrator_categories_index</h1>
+    <h1>@Localizer["administrator_resources_index"]</h1>
 </div>
 
 <div class="mb-5 flex items-center gap-2">
@@ -10,7 +10,7 @@
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
-        create_new
+        @Localizer["create_new"]
     </a>
 </div>
 
@@ -18,16 +18,16 @@
     <thead>
         <tr>
             <th>
-                programing_key
+                @Localizer["programing_key"]
             </th>
             <th>
-                culture_name
+                @Localizer["culture_name"]
             </th>
             <th>
-                value
+                @Localizer["value"]
             </th>
             <th>
-                actions
+                @Localizer["actions"]
             </th>
         </tr>
     </thead>

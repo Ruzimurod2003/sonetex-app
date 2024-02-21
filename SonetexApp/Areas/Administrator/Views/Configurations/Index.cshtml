@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Configuration>
 
 <div class="text-center">
-    <h1>administrator_categories_index</h1>
+    <h1>@Localizer["administrator_configurations_index"]</h1>
 </div>
 
 <div class="mb-5 flex items-center gap-2">
@@ -10,7 +10,7 @@
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
-        create_new
+        @Localizer["create_new"]
     </a>
 </div>
 
@@ -18,22 +18,22 @@
     <thead>
         <tr>
             <th>
-                phone_number
+                @Localizer["phone_number"]
             </th>
             <th>
-                telegram_link
+                @Localizer["telegram_link"]
             </th>
             <th>
-                instagram_link
+                @Localizer["instagram_link"]
             </th>
             <th>
-                facebook_link
+                @Localizer["facebook_link"]
             </th>
             <th>
-                address
+                @Localizer["address"]
             </th>
             <th>
-                actions
+                @Localizer["actions"]
             </th>
         </tr>
     </thead>

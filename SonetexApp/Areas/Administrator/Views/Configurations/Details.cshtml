@@ -3,7 +3,7 @@
 <div>
     <div class="mb-6 flex flex-wrap items-center justify-center gap-4 lg:justify-end">
         <a asp-action="Index" class="btn btn-success gap-2">
-            back_to_list
+            @Localizer["back_to_list"]
         </a>
 
         <a asp-action="Create" class="btn btn-secondary gap-2">
@@ -20,7 +20,7 @@
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            create
+            @Localizer["create"]
         </a>
 
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning gap-2">
@@ -38,12 +38,12 @@
                       stroke="currentColor"
                       stroke-width="1.5"></path>
             </svg>
-            edit
+            @Localizer["edit"]
         </a>
     </div>
     <div class="panel">
         <div class="flex flex-wrap justify-between gap-4 px-4">
-            <div class="text-2xl font-semibold uppercase">details_certificate</div>
+            <div class="text-2xl font-semibold uppercase">@Localizer["details_configuration"]</div>
         </div>
 
         <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]" />
@@ -51,43 +51,43 @@
             <div class="flex flex-col justify-between gap-6 sm:flex-row lg:w-2/3">
                 <div class="xl:1/3 sm:w-1/2 lg:w-2/5">
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">phone_number :</div>
+                        <div class="text-white-dark">@Localizer["phone_number"] :</div>
                         <div>@Model.PhoneNumber</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">email :</div>
+                        <div class="text-white-dark">@Localizer["email"] :</div>
                         <div>@Model.Email</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">TelegramLink :</div>
+                        <div class="text-white-dark">@Localizer["telegram_link"] :</div>
                         <div>@Model.TelegramLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">InstagramLink :</div>
+                        <div class="text-white-dark">@Localizer["instagram_link"] :</div>
                         <div>@Model.InstagramLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">FacebookLink :</div>
+                        <div class="text-white-dark">@Localizer["facebook_link"] :</div>
                         <div>@Model.FacebookLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">GithubLink :</div>
+                        <div class="text-white-dark">@Localizer["github_link"] :</div>
                         <div>@Model.GithubLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">GoogleLink :</div>
+                        <div class="text-white-dark">@Localizer["google_link"] :</div>
                         <div>@Model.GoogleLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">TwitterLink :</div>
+                        <div class="text-white-dark">@Localizer["twitter_link"] :</div>
                         <div>@Model.TwitterLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">YoutubeLink :</div>
+                        <div class="text-white-dark">@Localizer["youtube_link"] :</div>
                         <div>@Model.YoutubeLink</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">Address :</div>
+                        <div class="text-white-dark">@Localizer["address"] :</div>
                         <div>@Model.Address</div>
                     </div>
                 </div>
