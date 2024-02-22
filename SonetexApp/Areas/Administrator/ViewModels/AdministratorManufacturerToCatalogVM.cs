@@ -1,7 +1,7 @@
 ﻿using SonetexApp.Models;
 
 namespace SonetexApp.Areas.Administrator.ViewModels;
-public class AdministratorManufacturerToCatalog
+public class AdministratorManufacturerToCatalogVM
 {
     public int ManufacturerId { get; set; }
     public string ManufacturerName { get; set; }

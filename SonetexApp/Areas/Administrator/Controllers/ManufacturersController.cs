@@ -204,7 +204,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var manufacturerVM = new AdministratorManufacturerToCatalog();
+            var manufacturerVM = new AdministratorManufacturerToCatalogVM();
             manufacturerVM.ManufacturerName = manufacturer.Name;
             manufacturerVM.ManufacturerId = manufacturer.Id;
             manufacturerVM.CatalogIds = manufacturer.Catalogs.Select(i => i.Id).ToList();
@@ -216,7 +216,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
         // POST: Administrator/Catalogs/AddCatalog/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddCatalog(int id, AdministratorManufacturerToCatalog manufacturerVM)
+        public async Task<IActionResult> AddCatalog(int id, AdministratorManufacturerToCatalogVM manufacturerVM)
         {
             if (id != manufacturerVM.ManufacturerId)
             {

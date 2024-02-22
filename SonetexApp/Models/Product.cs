@@ -12,7 +12,6 @@ public class Product                            // Товары
     public string VendorCode { get; set; }      // Артикул 
     public int Availability { get; set; }       // Наличие 
     public DateTime Guarantee { get; set; }     // Гарантия 
-    public int StateId { get; set; }            // Состояние 
     public string Address { get; set; }         // Адрес 
     public int CatalogId { get; set; }
     [ForeignKey(nameof(CatalogId))]
@@ -20,5 +19,8 @@ public class Product                            // Товары
     public int TypeId { get; set; }
     [ForeignKey(nameof(TypeId))]
     public Type Type { get; set; }              // Тип
+    public int StateId { get; set; }
+    [ForeignKey(nameof(StateId))]
+    public State State { get; set; }            // Состояние 
     public List<File> Images { get; set; }      // Изображение
 }

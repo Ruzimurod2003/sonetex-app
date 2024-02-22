@@ -133,28 +133,22 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="group">
+                                    <a asp-area="Administrator" asp-controller="Catalogs" asp-action="Index" class="group
+                                        @Functions.CheckCurrentUrlLocatedInThis(Context.Request.Path.Value.ToString(), "Administrator", "Catalogs")
+                                        ">
                                         <div class="flex items-center">
-                                            <svg class="shrink-0 group-hover:!text-primary"
-                                                 width="20"
-                                                 height="20"
-                                                 viewBox="0 0 24 24"
-                                                 fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.5"
-                                                      d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
-                                                      fill="currentColor" />
-                                                <path fill-rule="evenodd"
-                                                      clip-rule="evenodd"
-                                                      d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V7.25H14C14.4142 7.25 14.75 7.58579 14.75 8C14.75 8.41421 14.4142 8.75 14 8.75L12.75 8.75L12.75 10C12.75 10.4142 12.4142 10.75 12 10.75C11.5858 10.75 11.25 10.4142 11.25 10L11.25 8.75H9.99997C9.58575 8.75 9.24997 8.41421 9.24997 8C9.24997 7.58579 9.58575 7.25 9.99997 7.25H11.25L11.25 6C11.25 5.58579 11.5858 5.25 12 5.25ZM7.25 14C7.25 13.5858 7.58579 13.25 8 13.25H16C16.4142 13.25 16.75 13.5858 16.75 14C16.75 14.4142 16.4142 14.75 16 14.75H8C7.58579 14.75 7.25 14.4142 7.25 14ZM8.25 18C8.25 17.5858 8.58579 17.25 9 17.25H15C15.4142 17.25 15.75 17.5858 15.75 18C15.75 18.4142 15.4142 18.75 15 18.75H9C8.58579 18.75 8.25 18.4142 8.25 18Z"
-                                                      fill="currentColor" />
+                                            <svg class="shrink-0 group-hover:!text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.6807 14.5869C19.1708 14.5869 22 11.7692 22 8.29344C22 4.81767 19.1708 2 15.6807 2C12.1907 2 9.3615 4.81767 9.3615 8.29344C9.3615 9.90338 10.0963 11.0743 10.0963 11.0743L2.45441 18.6849C2.1115 19.0264 1.63143 19.9143 2.45441 20.7339L3.33616 21.6121C3.67905 21.9048 4.54119 22.3146 5.2466 21.6121L6.27531 20.5876C7.30403 21.6121 8.4797 21.0267 8.92058 20.4412C9.65538 19.4167 8.77362 18.3922 8.77362 18.3922L9.06754 18.0995C10.4783 19.5045 11.7128 18.6849 12.1537 18.0995C12.8885 17.075 12.1537 16.0505 12.1537 16.0505C11.8598 15.465 11.272 15.465 12.0067 14.7333L12.8885 13.8551C13.5939 14.4405 15.0439 14.5869 15.6807 14.5869Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: currentColor;"></path>
+                                                <path d="M17.8853 8.29353C17.8853 9.50601 16.8984 10.4889 15.681 10.4889C14.4635 10.4889 13.4766 9.50601 13.4766 8.29353C13.4766 7.08105 14.4635 6.09814 15.681 6.09814C16.8984 6.09814 17.8853 7.08105 17.8853 8.29353Z" stroke="currentColor" stroke-width="1.5" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: currentColor;"></path>
                                             </svg>
-                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">@Localizer["types"]</span>
+                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">@Localizer["categories"]</span>
                                         </div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="group">
+                                    <a asp-area="Administrator" asp-controller="Products" asp-action="Index" class="group
+                                        @Functions.CheckCurrentUrlLocatedInThis(Context.Request.Path.Value.ToString(), "Administrator", "Products")
+                                        ">
                                         <div class="flex items-center">
                                             <svg class="shrink-0 group-hover:!text-primary"
                                                  width="20"
@@ -183,6 +177,29 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a asp-area="Administrator" asp-controller="Types" asp-action="Index" class="group
+                                        @Functions.CheckCurrentUrlLocatedInThis(Context.Request.Path.Value.ToString(), "Administrator", "Types")
+                                        ">
+                                        <div class="flex items-center">
+                                            <svg class="shrink-0 group-hover:!text-primary"
+                                                 width="20"
+                                                 height="20"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path opacity="0.5"
+                                                      d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
+                                                      fill="currentColor" />
+                                                <path fill-rule="evenodd"
+                                                      clip-rule="evenodd"
+                                                      d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V7.25H14C14.4142 7.25 14.75 7.58579 14.75 8C14.75 8.41421 14.4142 8.75 14 8.75L12.75 8.75L12.75 10C12.75 10.4142 12.4142 10.75 12 10.75C11.5858 10.75 11.25 10.4142 11.25 10L11.25 8.75H9.99997C9.58575 8.75 9.24997 8.41421 9.24997 8C9.24997 7.58579 9.58575 7.25 9.99997 7.25H11.25L11.25 6C11.25 5.58579 11.5858 5.25 12 5.25ZM7.25 14C7.25 13.5858 7.58579 13.25 8 13.25H16C16.4142 13.25 16.75 13.5858 16.75 14C16.75 14.4142 16.4142 14.75 16 14.75H8C7.58579 14.75 7.25 14.4142 7.25 14ZM8.25 18C8.25 17.5858 8.58579 17.25 9 17.25H15C15.4142 17.25 15.75 17.5858 15.75 18C15.75 18.4142 15.4142 18.75 15 18.75H9C8.58579 18.75 8.25 18.4142 8.25 18Z"
+                                                      fill="currentColor" />
+                                            </svg>
+                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">@Localizer["types"]</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a asp-area="Administrator" asp-controller="States" asp-action="Index" class="group
                                         @Functions.CheckCurrentUrlLocatedInThis(Context.Request.Path.Value.ToString(), "Administrator", "States")
                                         ">
@@ -192,19 +209,6 @@
                                                 <path opacity="0.5" d="M11 4L10.4497 3.44975C10.1763 3.17633 10.0396 3.03961 9.89594 2.92051C9.27652 2.40704 8.51665 2.09229 7.71557 2.01738C7.52976 2 7.33642 2 6.94975 2C6.06722 2 5.62595 2 5.25839 2.06935C3.64031 2.37464 2.37464 3.64031 2.06935 5.25839C2 5.62595 2 6.06722 2 6.94975V9.25V10H22L21.9531 9.25C21.8809 8.20117 21.6973 7.51276 21.2305 6.99383C21.1598 6.91514 21.0849 6.84024 21.0062 6.76946C20.1506 6 18.8345 6 16.2021 6H15.8284C14.6747 6 14.0979 6 13.5604 5.84678C13.2651 5.7626 12.9804 5.64471 12.7121 5.49543C12.2237 5.22367 11.8158 4.81578 11 4Z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"></path>
                                             </svg>
                                             <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">@Localizer["states"]</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="Administrator" asp-controller="Catalogs" asp-action="Index" class="group
-                                        @Functions.CheckCurrentUrlLocatedInThis(Context.Request.Path.Value.ToString(), "Administrator", "Catalogs")
-                                        ">
-                                        <div class="flex items-center">
-                                            <svg class="shrink-0 group-hover:!text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.6807 14.5869C19.1708 14.5869 22 11.7692 22 8.29344C22 4.81767 19.1708 2 15.6807 2C12.1907 2 9.3615 4.81767 9.3615 8.29344C9.3615 9.90338 10.0963 11.0743 10.0963 11.0743L2.45441 18.6849C2.1115 19.0264 1.63143 19.9143 2.45441 20.7339L3.33616 21.6121C3.67905 21.9048 4.54119 22.3146 5.2466 21.6121L6.27531 20.5876C7.30403 21.6121 8.4797 21.0267 8.92058 20.4412C9.65538 19.4167 8.77362 18.3922 8.77362 18.3922L9.06754 18.0995C10.4783 19.5045 11.7128 18.6849 12.1537 18.0995C12.8885 17.075 12.1537 16.0505 12.1537 16.0505C11.8598 15.465 11.272 15.465 12.0067 14.7333L12.8885 13.8551C13.5939 14.4405 15.0439 14.5869 15.6807 14.5869Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: currentColor;"></path>
-                                                <path d="M17.8853 8.29353C17.8853 9.50601 16.8984 10.4889 15.681 10.4889C14.4635 10.4889 13.4766 9.50601 13.4766 8.29353C13.4766 7.08105 14.4635 6.09814 15.681 6.09814C16.8984 6.09814 17.8853 7.08105 17.8853 8.29353Z" stroke="currentColor" stroke-width="1.5" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: currentColor;"></path>
-                                            </svg>
-                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">@Localizer["categories"]</span>
                                         </div>
                                     </a>
                                 </li>
@@ -455,7 +459,7 @@
                                    class="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                                    @@click="toggle">
                                     <img :src="`/lib/administrator/assets/images/flags/@{
-                                                            @requestCulture.RequestCulture.Culture.Name
+                                                                @requestCulture.RequestCulture.Culture.Name
 }.svg`"
                                          alt="image"
                                          class="h-5 w-5 rounded-full object-cover" />

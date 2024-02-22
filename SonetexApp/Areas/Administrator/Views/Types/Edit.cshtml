@@ -1,0 +1,41 @@
+﻿@model SonetexApp.Models.Type
+
+<div class="text-center">
+    <h1>@Localizer["edit_type"]</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">@Localizer["name"]</label>
+                <input asp-for="Name" class="form-input" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameRussian" class="control-label">@Localizer["name_russian"]</label>
+                <input asp-for="NameRussian" class="form-input" />
+                <span asp-validation-for="NameRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEnglish" class="control-label">@Localizer["name_english"]</label>
+                <input asp-for="NameEnglish" class="form-input" />
+                <span asp-validation-for="NameEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameUzbek" class="control-label">@Localizer["name_uzbek"]</label>
+                <input asp-for="NameUzbek" class="form-input" />
+                <span asp-validation-for="NameUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="@Localizer["save"]" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    @Localizer["back_to_list"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

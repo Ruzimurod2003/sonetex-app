@@ -23,7 +23,11 @@ namespace SonetexApp.Areas.Administrator.Controllers
         // GET: Administrator/Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var applicationContext = _context.Products
+                .Include(p => p.Catalog)
+                .Include(p => p.Type)
+                .Include(p => p.State);
+            return View(await applicationContext.ToListAsync());
         }
 
         // GET: Administrator/Products/Details/5
@@ -35,6 +39,9 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Catalog)
+                .Include(p => p.Type)
+                .Include(i => i.State)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -47,15 +54,16 @@ namespace SonetexApp.Areas.Administrator.Controllers
         // GET: Administrator/Products/Create
         public IActionResult Create()
         {
+            ViewData["CatalogId"] = new SelectList(_context.Catalogs, "Id", "Name");
+            ViewData["TypeId"] = new SelectList(_context.Type, "Id", "Name");
+            ViewData["StateId"] = new SelectList(_context.States, "Id", "Name");
             return View();
         }
 
         // POST: Administrator/Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,NameRussian,NameEnglish,NameUzbek,Description,VendorCode,Availability,Guarantee,StateId,Address")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,NameRussian,NameEnglish,NameUzbek,Description,VendorCode,Availability,Guarantee,StateId,Address,CatalogId,TypeId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +71,8 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CatalogId"] = new SelectList(_context.Catalogs, "Id", "Id", product.CatalogId);
+            ViewData["TypeId"] = new SelectList(_context.Type, "Id", "Id", product.TypeId);
             return View(product);
         }
 
@@ -79,6 +89,8 @@ namespace SonetexApp.Areas.Administrator.Controllers
             {
                 return NotFound();
             }
+            ViewData["CatalogId"] = new SelectList(_context.Catalogs, "Id", "Id", product.CatalogId);
+            ViewData["TypeId"] = new SelectList(_context.Type, "Id", "Id", product.TypeId);
             return View(product);
         }
 
@@ -87,7 +99,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NameRussian,NameEnglish,NameUzbek,Description,VendorCode,Availability,Guarantee,StateId,Address")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,NameRussian,NameEnglish,NameUzbek,Description,VendorCode,Availability,Guarantee,StateId,Address,CatalogId,TypeId")] Product product)
         {
             if (id != product.Id)
             {
@@ -114,6 +126,8 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CatalogId"] = new SelectList(_context.Catalogs, "Id", "Id", product.CatalogId);
+            ViewData["TypeId"] = new SelectList(_context.Type, "Id", "Id", product.TypeId);
             return View(product);
         }
 
@@ -126,6 +140,8 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Catalog)
+                .Include(p => p.Type)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {

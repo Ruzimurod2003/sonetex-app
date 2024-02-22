@@ -166,7 +166,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var catalogVM = new AdministratorCatalogToManufacturer();
+            var catalogVM = new AdministratorCatalogToManufacturerVM();
             catalogVM.CatalogName = catalog.Name;
             catalogVM.CatalogId = catalog.Id;
             catalogVM.ManufaturerIds = catalog.Manufacturers.Select(i => i.Id).ToList();
@@ -178,7 +178,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
         // POST: Administrator/Catalogs/AddManufacturer/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddManufacturer(int id, AdministratorCatalogToManufacturer catalogVM)
+        public async Task<IActionResult> AddManufacturer(int id, AdministratorCatalogToManufacturerVM catalogVM)
         {
             if (id != catalogVM.CatalogId)
             {

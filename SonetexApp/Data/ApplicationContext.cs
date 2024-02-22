@@ -37,4 +37,6 @@ public class ApplicationContext : DbContext
                 new State() { Id = 2, Name = "Сақлаш жойидан", NameUzbek = "Saqlash joyidan", NameRussian = "С хранения", NameEnglish = "From storage" }
             });
     }
+
+public DbSet<SonetexApp.Models.Type> Type { get; set; }
 }
