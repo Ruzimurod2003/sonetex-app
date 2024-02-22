@@ -29,5 +29,12 @@ public class ApplicationContext : DbContext
                 new Culture() { Id = 2, Name = "ru" },
                 new Culture() { Id = 3, Name = "uz" }
             });
+
+        modelBuilder.Entity<State>().HasData(
+            new List<State>()
+            {
+                new State() { Id = 1, Name = "Янги", NameUzbek = "Yangi", NameRussian = "Новый", NameEnglish = "New" },
+                new State() { Id = 2, Name = "Сақлаш жойидан", NameUzbek = "Saqlash joyidan", NameRussian = "С хранения", NameEnglish = "From storage" }
+            });
     }
 }

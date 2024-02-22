@@ -14,6 +14,11 @@ public class Product                            // Товары
     public DateTime Guarantee { get; set; }     // Гарантия 
     public int StateId { get; set; }            // Состояние 
     public string Address { get; set; }         // Адрес 
+    public int CatalogId { get; set; }
+    [ForeignKey(nameof(CatalogId))]
     public Catalog Catalog { get; set; }        // Категория
+    public int TypeId { get; set; }
+    [ForeignKey(nameof(TypeId))]
+    public Type Type { get; set; }              // Тип
     public List<File> Images { get; set; }      // Изображение
 }

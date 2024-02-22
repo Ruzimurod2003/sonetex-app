@@ -33,6 +33,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             var manufacturer = await _context.Manufacturers
                 .Include(i => i.File)
+                .Include(i => i.Catalogs)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (manufacturer == null)
             {
@@ -189,6 +190,59 @@ namespace SonetexApp.Areas.Administrator.Controllers
         private bool ManufacturerExists(int id)
         {
             return _context.Manufacturers.Any(e => e.Id == id);
+        }
+        public async Task<IActionResult> AddCatalog(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var manufacturer = await _context.Manufacturers.Include(i => i.Catalogs).FirstOrDefaultAsync(i => i.Id == id);
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+
+            var manufacturerVM = new AdministratorManufacturerToCatalog();
+            manufacturerVM.ManufacturerName = manufacturer.Name;
+            manufacturerVM.ManufacturerId = manufacturer.Id;
+            manufacturerVM.CatalogIds = manufacturer.Catalogs.Select(i => i.Id).ToList();
+            manufacturerVM.AllCatalogs = _context.Catalogs.ToList();
+
+            return View(manufacturerVM);
+        }
+
+        // POST: Administrator/Catalogs/AddCatalog/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCatalog(int id, AdministratorManufacturerToCatalog manufacturerVM)
+        {
+            if (id != manufacturerVM.ManufacturerId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var manufacturer = await _context.Manufacturers.Include(i => i.Catalogs).FirstOrDefaultAsync(i => i.Id == id);
+
+                var oldCatalogs = manufacturer.Catalogs.ToList();
+                var markedCatalogs = _context.Catalogs.Where(i => manufacturerVM.CatalogIds.Contains(i.Id)).ToList();
+                var removedCatalogs = oldCatalogs.Except(markedCatalogs).ToList();
+                var addedCatalogs = markedCatalogs.Except(oldCatalogs).ToList();
+
+                manufacturer.Catalogs.AddRange(addedCatalogs);
+                foreach (var removedCatalog in removedCatalogs)
+                {
+                    manufacturer.Catalogs.Remove(removedCatalog);
+                }
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Details), new { id = manufacturer.Id });
+            }
+
+            return View(manufacturerVM);
         }
     }
 }
