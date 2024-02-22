@@ -24,7 +24,7 @@ builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization(option
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment() || !app.Environment.IsProduction())
+if (!app.Environment.IsDevelopment() && !app.Environment.IsProduction())
 {
     app.UseExceptionHandler("/Home/Error");
 

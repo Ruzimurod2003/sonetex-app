@@ -1,0 +1,37 @@
+﻿@model AdministratorCatalogToManufacturer
+
+<div class="text-center">
+    <h1 class="text-dark">@Localizer["change_manufacturer"]</h1>
+</div>
+
+<hr />
+<form asp-action="AddManufacturer" method="post">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div class="panel">
+            <div class="mb-5 flex items-center justify-between">
+                <h5 class="text-lg font-semibold dark:text-white-light">@Model.CatalogName</h5>
+            </div>
+            <div class="mb-5">
+                <div class="space-y-2">
+                    <div>
+                        <input type="hidden" asp-for="CatalogId" />
+                        @foreach (Manufacturer manufaturer in Model.AllManufaturers)
+                        {
+                            <label class="inline-flex">
+                                <input type="checkbox" class="form-checkbox text-info" 
+                                name="ManufaturerIds" value="@manufaturer.Id"
+                                @(Model.ManufaturerIds.Contains(manufaturer.Id) ? "checked=\"checked\"" : "") />
+                                <span>@manufaturer.Name</span>
+                            </label>
+                        }
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success">
+                            @Localizer["save"]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

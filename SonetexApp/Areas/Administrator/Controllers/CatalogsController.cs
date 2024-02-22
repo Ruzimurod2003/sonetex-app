@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,6 +41,8 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
 
             var catalog = await _context.Catalogs
+                .Include(i => i.Manufacturers)
+                .ThenInclude(j => j.Catalogs)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (catalog == null)
             {
@@ -149,6 +152,59 @@ namespace SonetexApp.Areas.Administrator.Controllers
         private bool CatalogExists(int id)
         {
             return _context.Catalogs.Any(e => e.Id == id);
+        }
+        public async Task<IActionResult> AddManufacturer(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var catalog = await _context.Catalogs.Include(i => i.Manufacturers).FirstOrDefaultAsync(i => i.Id == id);
+            if (catalog == null)
+            {
+                return NotFound();
+            }
+
+            var catalogVM = new AdministratorCatalogToManufacturer();
+            catalogVM.CatalogName = catalog.Name;
+            catalogVM.CatalogId = catalog.Id;
+            catalogVM.ManufaturerIds = catalog.Manufacturers.Select(i => i.Id).ToList();
+            catalogVM.AllManufaturers = _context.Manufacturers.ToList();
+
+            return View(catalogVM);
+        }
+
+        // POST: Administrator/Catalogs/AddManufacturer/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddManufacturer(int id, AdministratorCatalogToManufacturer catalogVM)
+        {
+            if (id != catalogVM.CatalogId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var catalog = await _context.Catalogs.Include(i => i.Manufacturers).FirstOrDefaultAsync(i => i.Id == id);
+
+                var oldManufacturers = catalog.Manufacturers;
+                var markedManufacturers = _context.Manufacturers.Where(i => catalogVM.ManufaturerIds.Contains(i.Id)).ToList();
+                var removedManufacturers = oldManufacturers.Except(markedManufacturers).ToList();
+                var addedManufacturers = markedManufacturers.Except(oldManufacturers).ToList();
+
+                catalog.Manufacturers.AddRange(addedManufacturers);
+                foreach (var removedManufacturer in removedManufacturers)
+                {
+                    catalog.Manufacturers.Remove(removedManufacturer);
+                }
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Details), new { id = catalog.Id });
+            }
+
+            return View(catalogVM);
         }
     }
 }

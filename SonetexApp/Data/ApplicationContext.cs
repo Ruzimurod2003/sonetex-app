@@ -20,4 +20,14 @@ public class ApplicationContext : DbContext
     public DbSet<Partner> Partners { get; set; }
     public DbSet<Specialist> Specialists { get; set; }
     public DbSet<State> States { get; set; }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Culture>().HasData(
+            new List<Culture>()
+            {
+                new Culture() { Id = 1, Name = "en" },
+                new Culture() { Id = 2, Name = "ru" },
+                new Culture() { Id = 3, Name = "uz" }
+            });
+    }
 }

@@ -9,4 +9,5 @@ public class Catalog                                                            
     public string NameEnglish { get; set; }                                             // Английский название 
     public string NameUzbek { get; set; }                                               // Узбекский название 
     public string Description { get; set; }                                             // Описание 
+    public List<Manufacturer> Manufacturers { get; set; } = new List<Manufacturer>();
 }
