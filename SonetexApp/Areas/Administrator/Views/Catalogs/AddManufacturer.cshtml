@@ -18,17 +18,20 @@
                         @foreach (Manufacturer manufaturer in Model.AllManufaturers)
                         {
                             <label class="inline-flex">
-                                <input type="checkbox" class="form-checkbox text-info" 
-                                name="ManufaturerIds" value="@manufaturer.Id"
+                                <input type="checkbox" class="form-checkbox text-info"
+                                       name="ManufaturerIds" value="@manufaturer.Id"
                                 @(Model.ManufaturerIds.Contains(manufaturer.Id) ? "checked=\"checked\"" : "") />
                                 <span>@manufaturer.Name</span>
                             </label>
                         }
                     </div>
-                    <div>
+                    <div class="form-group flex">
                         <button type="submit" class="btn btn-success">
                             @Localizer["save"]
                         </button>
+                        <a asp-action="Details" asp-route-id="@Model?.CatalogId" class="btn btn-info">
+                            @Localizer["back_to_list"]
+                        </a>
                     </div>
                 </div>
             </div>
