@@ -1,0 +1,36 @@
+﻿@model SonetexApp.Models.File
+
+<div class="text-center">
+    <h1>@Localizer["edit_file"]</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-input" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Path" class="control-label"></label>
+                <input asp-for="Path" class="form-input" />
+                <span asp-validation-for="Path" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-input" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="@Localizer["save"]" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    @Localizer["back_to_list"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

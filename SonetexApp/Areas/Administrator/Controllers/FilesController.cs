@@ -1,32 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Data;
-using SonetexApp.Models;
 
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
-    public class TypesController : Controller
+    public class FilesController : Controller
     {
         private readonly ApplicationContext _context;
 
-        public TypesController(ApplicationContext context)
+        public FilesController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: Administrator/Types
+        // GET: Administrator/Files
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Types.ToListAsync());
+            return View(await _context.Files.ToListAsync());
         }
 
-        // GET: Administrator/Types/Details/5
+        // GET: Administrator/Files/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,37 +28,37 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var @type = await _context.Types
+            var @file = await _context.Files
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@type == null)
+            if (@file == null)
             {
                 return NotFound();
             }
 
-            return View(@type);
+            return View(@file);
         }
 
-        // GET: Administrator/Types/Create
+        // GET: Administrator/Files/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Administrator/Types/Create
+        // POST: Administrator/Files/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Models.Type @type)
+        public async Task<IActionResult> Create(Models.File file)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@type);
+                _context.Add(file);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@type);
+            return View(file);
         }
 
-        // GET: Administrator/Types/Edit/5
+        // GET: Administrator/Files/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,20 +66,20 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var @type = await _context.Types.FindAsync(id);
-            if (@type == null)
+            var @file = await _context.Files.FindAsync(id);
+            if (@file == null)
             {
                 return NotFound();
             }
-            return View(@type);
+            return View(@file);
         }
 
-        // POST: Administrator/Types/Edit/5
+        // POST: Administrator/Files/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Models.Type @type)
+        public async Task<IActionResult> Edit(int id, Models.File file)
         {
-            if (id != @type.Id)
+            if (id != file.Id)
             {
                 return NotFound();
             }
@@ -94,12 +88,12 @@ namespace SonetexApp.Areas.Administrator.Controllers
             {
                 try
                 {
-                    _context.Update(@type);
+                    _context.Update(file);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TypeExists(@type.Id))
+                    if (!FileExists(file.Id))
                     {
                         return NotFound();
                     }
@@ -110,10 +104,10 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@type);
+            return View(file);
         }
 
-        // GET: Administrator/Types/Delete/5
+        // GET: Administrator/Files/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,34 +115,34 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var @type = await _context.Types
+            var @file = await _context.Files
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@type == null)
+            if (@file == null)
             {
                 return NotFound();
             }
 
-            return View(@type);
+            return View(@file);
         }
 
-        // POST: Administrator/Types/Delete/5
+        // POST: Administrator/Files/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @type = await _context.Types.FindAsync(id);
-            if (@type != null)
+            var @file = await _context.Files.FindAsync(id);
+            if (@file != null)
             {
-                _context.Types.Remove(@type);
+                _context.Files.Remove(@file);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TypeExists(int id)
+        private bool FileExists(int id)
         {
-            return _context.Types.Any(e => e.Id == id);
+            return _context.Files.Any(e => e.Id == id);
         }
     }
 }

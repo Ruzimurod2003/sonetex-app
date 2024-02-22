@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<SonetexApp.Models.File>
 
 <div class="text-center">
-    <h1>@Localizer["administrator_products_index"]</h1>
+    <h1>@Localizer["administrator_files_index"]</h1>
 </div>
 
 <div class="mb-5 flex items-center gap-2">
@@ -21,28 +21,10 @@
                 @Localizer["name"]
             </th>
             <th>
+                @Localizer["path"]
+            </th>
+            <th>
                 @Localizer["description"]
-            </th>
-            <th>
-                @Localizer["vendor_code"]
-            </th>
-            <th>
-                @Localizer["availability"]
-            </th>
-            <th>
-                @Localizer["guarantee"]
-            </th>
-            <th>
-                @Localizer["state"]
-            </th>
-            <th>
-                @Localizer["catalog_name"]
-            </th>
-            <th>
-                @Localizer["type"]
-            </th>
-            <th>
-                @Localizer["address"]
             </th>
             <th>
                 @Localizer["actions"]
@@ -57,28 +39,10 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Path)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VendorCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Availability)
-                </td>
-                <td>
-                    @item.Guarantee.ToString("dd.MM.yyyy")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Catalog.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
                     <div class="flex gap-4 items-center">

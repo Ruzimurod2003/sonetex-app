@@ -14,6 +14,7 @@ public class ApplicationContext : DbContext
     public DbSet<Resource> Resources { get; set; }
     public DbSet<Configuration> Configurations { get; set; }
     public DbSet<Catalog> Catalogs { get; set; }
+    public DbSet<Models.Type> Types { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Certificate> Certificates { get; set; }
     public DbSet<Manufacturer> Manufacturers { get; set; }
@@ -37,6 +38,4 @@ public class ApplicationContext : DbContext
                 new State() { Id = 2, Name = "Сақлаш жойидан", NameUzbek = "Saqlash joyidan", NameRussian = "С хранения", NameEnglish = "From storage" }
             });
     }
-
-public DbSet<SonetexApp.Models.Type> Type { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model SonetexApp.Models.File
 
 <div>
     <div class="mb-6 flex flex-wrap items-center justify-center gap-4 lg:justify-end">
@@ -43,7 +43,7 @@
     </div>
     <div class="panel">
         <div class="flex flex-wrap justify-between gap-4 px-4">
-            <div class="text-2xl font-semibold uppercase">@Localizer["details_product"]</div>
+            <div class="text-2xl font-semibold uppercase">@Localizer["details_file"]</div>
         </div>
 
         <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]" />
@@ -55,56 +55,19 @@
                         <div>@Model.Name</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["name_russian"] :</div>
-                        <div>@Model.NameRussian</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["name_english"] :</div>
-                        <div>@Model.NameEnglish</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["name_uzbek"] :</div>
-                        <div>@Model.NameUzbek</div>
+                        <div class="text-white-dark">@Localizer["path"] :</div>
+                        <div>@Model.Path</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
                         <div class="text-white-dark">@Localizer["description"] :</div>
                         <div>@Model.Description</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["vendor_code"] :</div>
-                        <div>@Model.VendorCode</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["availability"] :</div>
-                        <div>@Model.Availability</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["guarantee"] :</div>
-                        <div>@Model.Guarantee</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["state_name"] :</div>
-                        <div>@Model.State.Name</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["catalog_name"] :</div>
-                        <div>@Model.Catalog.Name</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["type_name"] :</div>
-                        <div>@Model.Type.Name</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["address"] :</div>
-                        <div>@Model.Address</div>
-                    </div>
-                    <div class="mb-2 flex w-full items-center justify-between">
-                        <div class="text-white-dark">@Localizer["images"] :</div>
+                        <div class="text-white-dark">@Localizer["file"] :</div>
                         <div>
-                            @foreach (var image in Model.Images)
-                            {
-                                <img src="~/files/@image.Name" style="width:100px" />
-                            }
+                            <a href="~/files/@Model.Name" class="btn btn-danger hover\:text-danger">
+                                @Model.Name
+                            </a>
                         </div>
                     </div>
                 </div>
