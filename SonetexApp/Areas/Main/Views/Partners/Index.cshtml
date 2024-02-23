@@ -15,10 +15,10 @@
             @foreach (var team in Model)
             {
                 <!-- Start Single Team  -->
-                <a asp-action="Details" asp-route-id="@team.PartnerId">
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="rbt-team team-style-default style-three rbt-hover">
-                            <div class="inner">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="rbt-team team-style-default style-three rbt-hover">
+                        <div class="inner">
+                            <a asp-action="Details" asp-route-id="@team.PartnerId">
                                 <div class="thumbnail">
                                     <img src="~/files/@team.ImageName">
                                 </div>
@@ -26,10 +26,10 @@
                                     <h2 class="title">@team.Name</h2>
                                     <h6 class="subtitle theme-gradient">@team.Description</h6>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
                 <!-- End Single Team  -->
             }
         </div>
