@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NuGet.Protocol.Core.Types;
 using SonetexApp.Areas.Main.ViewModels;
 using SonetexApp.Commons;
+using System.Security.Claims;
+using Telegram.Bot.Types;
 
 namespace SonetexApp.Areas.Main.Controllers
 {
@@ -31,10 +37,6 @@ namespace SonetexApp.Areas.Main.Controllers
 
             return LocalRedirect(returnUrl);
         }
-        public ActionResult Login()
-        {
-            return View();
-        }
         public async Task<ActionResult> ContactUs()
         {
             ViewBag.MessageResult = false;
@@ -55,6 +57,62 @@ namespace SonetexApp.Areas.Main.Controllers
                 return Redirect(nameof(ContactUs));
             }
             return View(viewModel);
+        }
+        public IActionResult Login()
+        {
+            AdministratorHomeLoginVM viewModel = new AdministratorHomeLoginVM();
+            viewModel.IsAuthenticated = true;
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(AdministratorHomeLoginVM viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = (viewModel.Email == _configuration.GetValue<string>("User:Email")) &&
+                                (viewModel.Password == _configuration.GetValue<string>("User:Password"));
+
+                if (result)
+                {
+                    await Authenticate(viewModel.Email);
+                    viewModel.IsAuthenticated = true;
+
+                    return RedirectToAction("Index", "Home", new { Area = "Administrator" });
+                }
+                viewModel.IsAuthenticated = false;
+            }
+            return View(viewModel);
+        }
+        private async Task Authenticate(string email)
+        {
+            // создаем один claim
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, email)
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home", new { Area = "Main" });
+        }
+        public ActionResult Faqs()
+        {
+            return View();
+        }
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+        public ActionResult AboutUs()
+        {
+            return View();
         }
     }
 }

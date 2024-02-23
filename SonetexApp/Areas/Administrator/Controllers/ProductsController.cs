@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Areas.Administrator.ViewModels;
@@ -8,6 +9,7 @@ using SonetexApp.Models;
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationContext _context;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Data;
@@ -7,6 +8,7 @@ using SonetexApp.Models;
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize]
     public class ResourcesController : Controller
     {
         private readonly ApplicationContext _context;

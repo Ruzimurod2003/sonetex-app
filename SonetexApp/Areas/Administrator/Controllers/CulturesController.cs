@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Data;
 using SonetexApp.Models;
@@ -6,6 +7,7 @@ using SonetexApp.Models;
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize]
     public class CulturesController : Controller
     {
         private readonly ApplicationContext _context;

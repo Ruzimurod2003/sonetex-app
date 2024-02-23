@@ -20,6 +20,7 @@ public class ApplicationContext : DbContext
     public DbSet<Manufacturer> Manufacturers { get; set; }
     public DbSet<Partner> Partners { get; set; }
     public DbSet<Specialist> Specialists { get; set; }
+    public DbSet<Team> Teams { get; set; }
     public DbSet<State> States { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

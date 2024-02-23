@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SonetexApp.Areas.Administrator.ViewModels;
 using SonetexApp.Data;
@@ -6,6 +7,7 @@ using SonetexApp.Data;
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationContext _context;
@@ -30,6 +32,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
             statisticsVM.Partners = _context.Partners.ToList();
             statisticsVM.Specialists = _context.Specialists.ToList();
             statisticsVM.States = _context.States.ToList();
+            statisticsVM.Teams = _context.Teams.ToList();
 
             return View(statisticsVM);
         }

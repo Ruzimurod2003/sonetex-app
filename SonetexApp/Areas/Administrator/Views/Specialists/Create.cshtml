@@ -35,8 +35,53 @@
                 <span asp-validation-for="Specialist.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Specialist.DescriptionRussian" class="control-label">@Localizer["description_russian"]</label>
+                <input asp-for="Specialist.DescriptionRussian" class="form-input" />
+                <span asp-validation-for="Specialist.DescriptionRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.DescriptionEnglish" class="control-label">@Localizer["description_english"]</label>
+                <input asp-for="Specialist.DescriptionEnglish" class="form-input" />
+                <span asp-validation-for="Specialist.DescriptionEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.DescriptionUzbek" class="control-label">@Localizer["description_uzbek"]</label>
+                <input asp-for="Specialist.DescriptionUzbek" class="form-input" />
+                <span asp-validation-for="Specialist.DescriptionUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.Position" class="control-label">@Localizer["position"]</label>
+                <input asp-for="Specialist.Position" class="form-input" />
+                <span asp-validation-for="Specialist.Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.Email" class="control-label">@Localizer["email"]</label>
+                <input asp-for="Specialist.Email" class="form-input" />
+                <span asp-validation-for="Specialist.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.Phone" class="control-label">@Localizer["phone"]</label>
+                <input asp-for="Specialist.Phone" class="form-input" />
+                <span asp-validation-for="Specialist.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.PositionEnglish" class="control-label">@Localizer["position_english"]</label>
+                <input asp-for="Specialist.PositionEnglish" class="form-input" />
+                <span asp-validation-for="Specialist.PositionEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.PositionUzbek" class="control-label">@Localizer["position_uzbek"]</label>
+                <input asp-for="Specialist.PositionUzbek" class="form-input" />
+                <span asp-validation-for="Specialist.PositionUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specialist.PositionRussian" class="control-label">@Localizer["position_russian"]</label>
+                <input asp-for="Specialist.PositionRussian" class="form-input" />
+                <span asp-validation-for="Specialist.PositionRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="File" class="control-label">@Localizer["upload_image"]</label>
-                <input asp-for="File" class="form-input" type="file" />
+                <input asp-for="File" class="form-input" type="file" accept="image/*" />
                 <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <div class="form-group">

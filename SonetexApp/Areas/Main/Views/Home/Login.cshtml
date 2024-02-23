@@ -1,17 +1,24 @@
-﻿<div class="rbt-elements-area bg-color-white rbt-section-gap align-content-center">
+﻿@model AdministratorHomeLoginVM;
+<div class="rbt-elements-area bg-color-white rbt-section-gap align-content-center">
     <div class="container">
         <div class="row gy-5">
             <div>
                 <div class="rbt-contact-form contact-form-style-1 max-width-auto">
                     <h3 class="title">@Localizer["login_page"]</h3>
-                    <form class="max-width-auto">
+                    <h5 class="title text-center text-danger">
+                        @if (!Model.IsAuthenticated)
+                        {
+                            @Localizer["email_or_password_incorrect"]
+                        }
+                    </h5>
+                    <form class="max-width-auto" asp-action="Login" method="post">
                         <div class="form-group">
-                            <input type="text" />
+                            <input type="text" asp-for="Email" />
                             <label>@Localizer["enter_email"]</label>
                             <span class="focus-border"></span>
                         </div>
                         <div class="form-group">
-                            <input type="password">
+                            <input type="password" asp-for="Password">
                             <label>@Localizer["enter_password"]</label>
                             <span class="focus-border"></span>
                         </div>

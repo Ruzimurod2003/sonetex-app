@@ -1,4 +1,5 @@
 ﻿using FanurApp.Localizers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -24,6 +25,11 @@ builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization(option
     factory.Create(null);
 })
 .AddViewLocalization();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = new PathString("/Main/Home/Login");
+});
 
 var app = builder.Build();
 
@@ -52,6 +58,8 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

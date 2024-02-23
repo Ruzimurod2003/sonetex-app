@@ -150,6 +150,18 @@
                     </div>
                 </a>
             </div>
+            
+            <!-- Teams -->
+            <div class="panel bg-gradient-to-r from-blue-500 to-blue-400">
+                <a asp-controller="Teams" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["teams"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Teams.Count</div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

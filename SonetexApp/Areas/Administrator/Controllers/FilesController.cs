@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Data;
 
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize]
     public class FilesController : Controller
     {
         private readonly ApplicationContext _context;

@@ -21,16 +21,13 @@
                 @Localizer["name"]
             </th>
             <th>
-                @Localizer["name_russian"]
-            </th>
-            <th>
-                @Localizer["name_english"]
-            </th>
-            <th>
-                @Localizer["name_uzbek"]
-            </th>
-            <th>
                 @Localizer["description"]
+            </th>
+            <th>
+                @Localizer["position"]
+            </th>
+            <th>
+                @Localizer["phone"]
             </th>
             <th>
                 @Localizer["actions"]
@@ -45,16 +42,13 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NameRussian)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameEnglish)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameUzbek)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
                     <div class="flex gap-4 items-center">
