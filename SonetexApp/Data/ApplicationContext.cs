@@ -37,5 +37,23 @@ public class ApplicationContext : DbContext
                 new State() { Id = 1, Name = "Янги", NameUzbek = "Yangi", NameRussian = "Новый", NameEnglish = "New" },
                 new State() { Id = 2, Name = "Сақлаш жойидан", NameUzbek = "Saqlash joyidan", NameRussian = "С хранения", NameEnglish = "From storage" }
             });
+
+        modelBuilder.Entity<Configuration>().HasData(
+            new List<Configuration>()
+            {
+                new Configuration() {
+                    Id = 1, 
+                    Address = "National Bank of Uzbekistan, Abdulla Qodiriy ko'chasi 1, 100019, Тоshkent, Toshkent",
+                    YoutubeLink = "https://youtu.be/8bPgK1feHuE?si=DXRHcaL8fVvpG3Sb",
+                    Email = "ruzimurodabdunazarov2003@mail.ru",
+                    TwitterLink = "https://twitter.com/elonmusk",
+                    FacebookLink = "https://www.facebook.com/Microsoft",
+                    GithubLink = "https://github.com/Ruzimurod2003",
+                    GoogleLink = "https://www.google.com/",
+                    InstagramLink = "https://www.instagram.com/kamelyamelnicofficial/",
+                    TelegramLink = "https://t.me/reiiz_d",
+                    PhoneNumber = "+998 97 537 84 72"
+                }
+            });
     }
 }

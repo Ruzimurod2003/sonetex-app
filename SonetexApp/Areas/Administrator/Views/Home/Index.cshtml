@@ -1,0 +1,155 @@
+﻿@model AdministratorStatisticsVM
+
+<div class="mb-5 flex items-center font-bold">
+    <span class="text-lg">@Localizer["admin_statistics_page"]</span>
+</div>
+
+<div>
+    <div class="pt-5">
+        <div class="mb-6 grid grid-cols-1 gap-6 text-white sm:grid-cols-2 xl:grid-cols-4">
+            <!-- Cultures -->
+            <div class="panel bg-gradient-to-r from-cyan-500 to-cyan-400">
+                <a asp-controller="Cultures" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["cultures"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Cultures.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Files -->
+            <div class="panel bg-gradient-to-r from-violet-500 to-violet-400">
+                <a asp-controller="Files" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["files"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Files.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Resources -->
+            <div class="panel bg-gradient-to-r from-blue-500 to-blue-400">
+                <a asp-controller="Resources" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["resources"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Resources.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Configurations -->
+            <div class="panel bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
+                <a asp-controller="Configurations" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["configurations"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Configurations.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Catalogs -->
+            <div class="panel bg-gradient-to-r from-blue-500 to-blue-400">
+                <a asp-controller="Catalogs" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["catalogs"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Catalogs.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Types -->
+            <div class="panel bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
+                <a asp-controller="Types" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["types"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Types.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Products -->
+            <div class="panel bg-gradient-to-r from-violet-500 to-violet-400">
+                <a asp-controller="Products" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["products"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Products.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Certificates -->
+            <div class="panel bg-gradient-to-r from-cyan-500 to-cyan-400">
+                <a asp-controller="Certificates" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["certificates"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Certificates.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Manufacturers -->
+            <div class="panel bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
+                <a asp-controller="Manufacturers" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["manufacturers"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Manufacturers.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Partners -->
+            <div class="panel bg-gradient-to-r from-violet-500 to-violet-400">
+                <a asp-controller="Partners" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["partners"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Partners.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Specialists -->
+            <div class="panel bg-gradient-to-r from-cyan-500 to-cyan-400">
+                <a asp-controller="Specialists" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["specialists"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.Specialists.Count</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- States -->
+            <div class="panel bg-gradient-to-r from-blue-500 to-blue-400">
+                <a asp-controller="States" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["states"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.States.Count</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

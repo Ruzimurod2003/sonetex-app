@@ -8,6 +8,8 @@
   <ItemGroup>
     <Folder Include="Areas\Administrator\Data\" />
     <Folder Include="Areas\Administrator\Models\" />
+    <Folder Include="Areas\Main\Data\" />
+    <Folder Include="Areas\Main\Models\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
@@ -24,5 +26,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
+    <PackageReference Include="Telegram.Bot" Version="19.0.0" />
   </ItemGroup>
 </Project>

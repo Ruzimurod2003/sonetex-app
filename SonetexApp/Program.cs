@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SonetexApp.Data;
 using SonetexApp.Localizers;
+using SonetexApp.Repositories;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<ApplicationContext>(option =>
     option.UseSqlite(builder.Configuration.GetConnectionString("SonetexSqliteConnection")));
 
 builder.Services.AddTransient<IStringLocalizer, EFStringLocalizer>();
+
+builder.Services.AddTransient<IConfigurationRepository, ConfigurationRepository>();
 
 builder.Services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(builder.Configuration.GetConnectionString("SonetexSqliteConnection")));
 
@@ -54,6 +57,12 @@ app.UseAuthorization();
 
 // маршрут для области Administrator
 app.MapAreaControllerRoute(
+    name: "main_area",
+    areaName: "main",
+    pattern: "main/{controller=Home}/{action=Index}/{id?}");
+
+// маршрут для области Administrator
+app.MapAreaControllerRoute(
     name: "administrator_area",
     areaName: "administrator",
     pattern: "administrator/{controller=Home}/{action=Index}/{id?}");
@@ -61,6 +70,6 @@ app.MapAreaControllerRoute(
 // добавляем поддержку для контроллеров, которые располагаются вне области
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Main}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
