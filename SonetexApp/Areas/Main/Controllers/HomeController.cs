@@ -9,6 +9,9 @@ using SonetexApp.Areas.Main.ViewModels;
 using SonetexApp.Commons;
 using System.Security.Claims;
 using Telegram.Bot.Types;
+using SonetexApp.Models;
+using SonetexApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SonetexApp.Areas.Main.Controllers
 {
@@ -16,10 +19,12 @@ namespace SonetexApp.Areas.Main.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly ApplicationContext _context;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration, ApplicationContext context)
         {
             _configuration = configuration;
+            _context = context;
         }
         // GET: HomeController
         public ActionResult Index()
@@ -112,7 +117,68 @@ namespace SonetexApp.Areas.Main.Controllers
         }
         public ActionResult AboutUs()
         {
-            return View();
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            List<AdministratorHomeAboutUsVM> teams = new List<AdministratorHomeAboutUsVM>();
+            var dbTeams = _context.Teams.Include(i => i.Image).ToList();
+
+            if (currentCultureName == "uz")
+            {
+                foreach (var dbTeam in dbTeams)
+                {
+                    var team = new AdministratorHomeAboutUsVM();
+                    team.Name = dbTeam.NameUzbek;
+                    team.Description = dbTeam.DescriptionUzbek;
+                    team.ImageName = dbTeam.Image.Name;
+                    team.Position = dbTeam.PositionUzbek;
+                    team.Phone = dbTeam.Phone;
+
+                    teams.Add(team);
+                }
+            }
+            else if (currentCultureName == "ru")
+            {
+                foreach (var dbTeam in dbTeams)
+                {
+                    var team = new AdministratorHomeAboutUsVM();
+                    team.Name = dbTeam.NameRussian;
+                    team.Description = dbTeam.DescriptionRussian;
+                    team.ImageName = dbTeam.Image.Name;
+                    team.Position = dbTeam.PositionRussian;
+                    team.Phone = dbTeam.Phone;
+
+                    teams.Add(team);
+                }
+            }
+            else if (currentCultureName == "en")
+            {
+                foreach (var dbTeam in dbTeams)
+                {
+                    var team = new AdministratorHomeAboutUsVM();
+                    team.Name = dbTeam.NameEnglish;
+                    team.Description = dbTeam.DescriptionEnglish;
+                    team.ImageName = dbTeam.Image.Name;
+                    team.Position = dbTeam.PositionEnglish;
+                    team.Phone = dbTeam.Phone;
+
+                    teams.Add(team);
+                }
+            }
+            else
+            {
+                foreach (var dbTeam in dbTeams)
+                {
+                    var team = new AdministratorHomeAboutUsVM();
+                    team.Name = dbTeam.Name;
+                    team.Description = dbTeam.Description;
+                    team.ImageName = dbTeam.Image.Name;
+                    team.Position = dbTeam.Position;
+                    team.Phone = dbTeam.Phone;
+
+                    teams.Add(team);
+                }
+            }
+
+            return View(teams);
         }
     }
 }
