@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
 @inject IOptions<RequestLocalizationOptions> LocOptions
-
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
 

@@ -1,4 +1,5 @@
-﻿using SonetexApp.Data;
+﻿using Microsoft.AspNetCore.Localization;
+using SonetexApp.Data;
 
 namespace SonetexApp.Repositories;
 public interface IConfigurationRepository
