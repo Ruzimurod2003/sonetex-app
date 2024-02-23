@@ -56,16 +56,6 @@
                 <span asp-validation-for="Team.Position" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Team.Email" class="control-label">@Localizer["email"]</label>
-                <input asp-for="Team.Email" class="form-input" />
-                <span asp-validation-for="Team.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Team.Phone" class="control-label">@Localizer["phone"]</label>
-                <input asp-for="Team.Phone" class="form-input" />
-                <span asp-validation-for="Team.Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Team.PositionEnglish" class="control-label">@Localizer["position_english"]</label>
                 <input asp-for="Team.PositionEnglish" class="form-input" />
                 <span asp-validation-for="Team.PositionEnglish" class="text-danger"></span>
@@ -79,6 +69,16 @@
                 <label asp-for="Team.PositionRussian" class="control-label">@Localizer["position_russian"]</label>
                 <input asp-for="Team.PositionRussian" class="form-input" />
                 <span asp-validation-for="Team.PositionRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.Email" class="control-label">@Localizer["email"]</label>
+                <input asp-for="Team.Email" class="form-input" />
+                <span asp-validation-for="Team.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.Phone" class="control-label">@Localizer["phone"]</label>
+                <input asp-for="Team.Phone" class="form-input" />
+                <span asp-validation-for="Team.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="File" class="control-label">@Localizer["upload_image"]</label>

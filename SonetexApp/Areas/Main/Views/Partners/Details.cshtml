@@ -1,0 +1,29 @@
+﻿@model AdministratorPatrnerVM
+
+<div class="rbt-overlay-page-wrapper">
+    <input type="hidden" asp-for="PartnerId" />
+    <div class="breadcrumb-image-container breadcrumb-style-max-width">
+        <div class="breadcrumb-image-wrapper">
+            <img src="~/lib/main_template/assets/images/bg/bg-image-10.jpg" alt="Education Images">
+        </div>
+        <div class="breadcrumb-content-top text-center">
+            <h1 class="title">@Model.Name</h1>
+        </div>
+    </div>
+
+    <div class="rbt-blog-details-area rbt-section-gapBottom breadcrumb-style-max-width">
+        <div class="blog-content-wrapper rbt-article-content-wrapper">
+            <div class="content">
+                <div class="post-thumbnail mb--30 position-relative wp-block-image alignwide">
+                    <figure>
+                        <img src="~/files/@Model.ImageName" alt="Blog Images">
+                        <figcaption>@Model.ImageCaption</figcaption>
+                    </figure>
+                </div>
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
