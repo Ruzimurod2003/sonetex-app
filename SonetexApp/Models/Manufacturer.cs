@@ -9,6 +9,9 @@ public class Manufacturer                                                   // �
     public string NameEnglish { get; set; }                                 // Английский название 
     public string NameUzbek { get; set; }                                   // Узбекский название 
     public string Description { get; set; }                                 // Описание 
+    public string DescriptionUzbek { get; set; }                            // Узбекский oписание 
+    public string DescriptionRussian { get; set; }                          // Русский oписание 
+    public string DescriptionEnglish { get; set; }                          // Английский oписание 
     public List<Catalog> Catalogs { get; set; } = new List<Catalog>();      // Каталоги
     public int ImageId { get; set; }                                        
     [ForeignKey(nameof(ImageId))]

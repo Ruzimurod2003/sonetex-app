@@ -34,6 +34,21 @@
                 <input asp-for="Catalog.Description" class="form-input" />
                 <span asp-validation-for="Catalog.Description" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Catalog.DescriptionRussian" class="control-label">@Localizer["description_russian"]</label>
+                <input asp-for="Catalog.DescriptionRussian" class="form-input" />
+                <span asp-validation-for="Catalog.DescriptionRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catalog.DescriptionEnglish" class="control-label">@Localizer["description_english"]</label>
+                <input asp-for="Catalog.DescriptionEnglish" class="form-input" />
+                <span asp-validation-for="Catalog.DescriptionEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catalog.DescriptionUzbek" class="control-label">@Localizer["description_uzbek"]</label>
+                <input asp-for="Catalog.DescriptionUzbek" class="form-input" />
+                <span asp-validation-for="Catalog.DescriptionUzbek" class="text-danger"></span>
+            </div>
             <div class="form-group flex">
                 <input type="submit" value="@Localizer["save"]" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-success gap-2">

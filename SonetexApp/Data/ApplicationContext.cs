@@ -43,7 +43,7 @@ public class ApplicationContext : DbContext
             new List<Configuration>()
             {
                 new Configuration() {
-                    Id = 1, 
+                    Id = 1,
                     Address = "National Bank of Uzbekistan, Abdulla Qodiriy ko'chasi 1, 100019, Тоshkent, Toshkent",
                     YoutubeLink = "https://youtu.be/8bPgK1feHuE?si=DXRHcaL8fVvpG3Sb",
                     Email = "ruzimurodabdunazarov2003@mail.ru",
@@ -55,6 +55,70 @@ public class ApplicationContext : DbContext
                     TelegramLink = "https://t.me/reiiz_d",
                     PhoneNumber = "+998 97 537 84 72"
                 }
+            });
+
+        modelBuilder.Entity<Models.File>().HasData(
+            new List<Models.File>()
+            {
+                new Models.File() {Id = 1, Name = "omron_manufacture.jpg", Description = "from https://olnisa.ru/"},
+                new Models.File() {Id = 2, Name = "keyence_manufacture.jpg", Description = "from https://olnisa.ru/"}
+            });
+
+        modelBuilder.Entity<Manufacturer>().HasData(
+            new List<Manufacturer>()
+            {
+                new Manufacturer() {
+                    Id = 1,
+                    Name = "Омрон",
+                    NameUzbek = "Omron",
+                    NameEnglish = "Omron",
+                    NameRussian = "Омрон",
+                    Description = "Бу ишлаб чиқарувчи компания телефон махсулотларини етказиб бериш билан ишлайди",
+                    DescriptionUzbek = "Bu ishlab chiqaruvchi kompaniya telefon maxsulotlarini yetkazib berish bilan ishlaydi",
+                    DescriptionEnglish = "This manufacturing company works with the delivery of phone products",
+                    DescriptionRussian = "Данная компания-производитель занимается доставкой телефонной продукции",
+                    ImageId = 1,
+                    Catalogs = new List<Catalog>()
+                    {
+                        new Catalog()
+                        {
+                            Id = 1,
+                            Name = "Автоматлаштириш",
+                            NameUzbek = "Avtomatlashtirish",
+                            NameRussian = "Автоматизация",
+                            NameEnglish = "Automation",
+                            Description = "Автоматлаштирилган категориялар синфи",
+                            DescriptionUzbek = "Avtomatlashtirilgan kategoriyalar sinfi",
+                            DescriptionEnglish = "A class of automated categories",
+                            DescriptionRussian = "Класс автоматизированных категорий"
+                        },
+                        new Catalog()
+                        {
+                            Id = 2,
+                            Name = "Аксессуарлар",
+                            NameUzbek = "Aksessuarlar",
+                            NameRussian = "Аксессуары",
+                            NameEnglish = "Accessories",
+                            Description = "Аксессуарлар категориялар синфи",
+                            DescriptionUzbek = "Aksessuarlar kategoriyalar sinfi",
+                            DescriptionEnglish = "Accessory category class",
+                            DescriptionRussian = "Категория аксессуаров класс"
+                        }
+                    }
+                },
+
+                new Manufacturer() {
+                    Id = 2,
+                    Name = "Кеенcе",
+                    NameUzbek = "Keyence",
+                    NameEnglish = "Keyence",
+                    NameRussian = "Кеенcе",
+                    Description = "Бу ишлаб чиқарувчи компания компютер махсулотларини етказиб бериш билан ишлайди",
+                    DescriptionUzbek = "Bu ishlab chiqaruvchi kompaniya kompyuter maxsulotlarini yetkazib berish bilan ishlaydi",
+                    DescriptionEnglish = "This manufacturing company deals with the supply of computer products",
+                    DescriptionRussian = "Данная производственная компания занимается поставками компьютерной продукции.",
+                    ImageId = 2
+                },
             });
     }
 }

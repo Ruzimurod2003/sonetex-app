@@ -177,6 +177,9 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 product.NameEnglish = productVM.Product.NameEnglish;
                 product.NameRussian = productVM.Product.NameRussian;
                 product.Description = productVM.Product.Description;
+                product.DescriptionRussian = productVM.Product.DescriptionRussian;
+                product.DescriptionEnglish = productVM.Product.DescriptionEnglish;
+                product.DescriptionUzbek = productVM.Product.DescriptionUzbek;
                 product.Availability = productVM.Product.Availability;
                 product.VendorCode = productVM.Product.VendorCode;
                 product.Guarantee = productVM.Product.Guarantee;

@@ -36,6 +36,21 @@
                 <span asp-validation-for="Manufacturer.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Manufacturer.DescriptionRussian" class="control-label">@Localizer["description_russian"]</label>
+                <input asp-for="Manufacturer.DescriptionRussian" class="form-input" />
+                <span asp-validation-for="Manufacturer.DescriptionRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manufacturer.DescriptionEnglish" class="control-label">@Localizer["description_english"]</label>
+                <input asp-for="Manufacturer.DescriptionEnglish" class="form-input" />
+                <span asp-validation-for="Manufacturer.DescriptionEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manufacturer.DescriptionUzbek" class="control-label">@Localizer["description_uzbek"]</label>
+                <input asp-for="Manufacturer.DescriptionUzbek" class="form-input" />
+                <span asp-validation-for="Manufacturer.DescriptionUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="File" class="control-label">@Localizer["upload_file"]</label>
                 <input asp-for="File" class="form-input" type="file" accept="image/*" />
                 <span asp-validation-for="File" class="text-danger"></span>
