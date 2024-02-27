@@ -26,5 +26,5 @@ public class Product                                            // Товары
     public int StateId { get; set; }
     [ForeignKey(nameof(StateId))]
     public State State { get; set; }                            // Состояние 
-    public List<File> Images { get; set; }                      // Изображение
+    public List<File> Images { get; set; } = new List<File>();  // Изображение
 }

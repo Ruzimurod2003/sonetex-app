@@ -12,5 +12,6 @@ public class Catalog                                                            
     public string DescriptionUzbek { get; set; }                                        // Узбекский oписание 
     public string DescriptionRussian { get; set; }                                      // Русский oписание 
     public string DescriptionEnglish { get; set; }                                      // Английский oписание 
+    public List<Product> Products { get; set; } = new List<Product>();                  // Товары
     public List<Manufacturer> Manufacturers { get; set; } = new List<Manufacturer>();
 }

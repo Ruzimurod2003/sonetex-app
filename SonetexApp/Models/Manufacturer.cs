@@ -15,5 +15,5 @@ public class Manufacturer                                                   // �
     public List<Catalog> Catalogs { get; set; } = new List<Catalog>();      // Каталоги
     public int ImageId { get; set; }                                        
     [ForeignKey(nameof(ImageId))]
-    public File File { get; set; }                                          // Изображение
+    public File Image { get; set; }                                          // Изображение
 }

@@ -34,7 +34,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
 
             var manufacturer = await _context.Manufacturers
-                .Include(i => i.File)
+                .Include(i => i.Image)
                 .Include(i => i.Catalogs)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (manufacturer == null)
@@ -75,7 +75,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 _context.Files.Add(file);
                 _context.SaveChanges();
 
-                manufacturerVM.Manufacturer.File = file;
+                manufacturerVM.Manufacturer.Image = file;
 
                 _context.Manufacturers.Add(manufacturerVM.Manufacturer);
                 await _context.SaveChangesAsync();
@@ -93,7 +93,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var manufacturer = await _context.Manufacturers.Include(i => i.File).FirstOrDefaultAsync(i => i.Id == id);
+            var manufacturer = await _context.Manufacturers.Include(i => i.Image).FirstOrDefaultAsync(i => i.Id == id);
             if (manufacturer == null)
             {
                 return NotFound();
@@ -101,7 +101,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             var manufacturerVM = new AdministratorManufacturerVM();
             manufacturerVM.Manufacturer = manufacturer;
-            manufacturerVM.FileCaption = manufacturer.File.Description;
+            manufacturerVM.FileCaption = manufacturer.Image.Description;
 
             return View(manufacturerVM);
         }
@@ -118,8 +118,8 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             if (ModelState.IsValid)
             {
-                var manufacturer = await _context.Manufacturers.Include(i => i.File).FirstOrDefaultAsync(i => i.Id == id);
-                int imageId = manufacturer.File.Id;
+                var manufacturer = await _context.Manufacturers.Include(i => i.Image).FirstOrDefaultAsync(i => i.Id == id);
+                int imageId = manufacturer.Image.Id;
                 manufacturer = manufacturerVM.Manufacturer;
 
                 if (manufacturerVM.File is not null)
@@ -140,7 +140,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
                     Models.File file = new Models.File { Name = manufacturerVM.File.FileName, Path = path, Description = manufacturerVM.FileCaption };
                     _context.Files.Add(file);
                     _context.SaveChanges();
-                    manufacturer.File = file;
+                    manufacturer.Image = file;
                 }
                 else
                 {
@@ -164,7 +164,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
 
             var manufacturer = await _context.Manufacturers
-                .Include(i => i.File)
+                .Include(i => i.Image)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (manufacturer == null)
             {

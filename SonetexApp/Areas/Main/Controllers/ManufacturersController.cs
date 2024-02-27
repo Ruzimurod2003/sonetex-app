@@ -22,7 +22,7 @@ namespace SonetexApp.Areas.Main.Controllers
             AdministratorManufacturerVM viewModel = new AdministratorManufacturerVM();
             viewModel.Manufacturers = new List<Manufacturer>();
             var dbManufacturers = _context.Manufacturers
-                                    .Include(i => i.File)
+                                    .Include(i => i.Image)
                                     .Include(i => i.Catalogs)
                                     .ToList();
 
@@ -33,7 +33,7 @@ namespace SonetexApp.Areas.Main.Controllers
                     var manufacturer = new Manufacturer();
                     manufacturer.Name = dbManufacturer.NameUzbek;
                     manufacturer.Description = dbManufacturer.DescriptionUzbek;
-                    manufacturer.File = dbManufacturer.File;
+                    manufacturer.Image = dbManufacturer.Image;
                     manufacturer.Catalogs = dbManufacturer.Catalogs;
                     manufacturer.Id = dbManufacturer.Id;
 
@@ -47,7 +47,7 @@ namespace SonetexApp.Areas.Main.Controllers
                     var manufacturer = new Manufacturer();
                     manufacturer.Name = dbManufacturer.NameRussian;
                     manufacturer.Description = dbManufacturer.DescriptionRussian;
-                    manufacturer.File = dbManufacturer.File;
+                    manufacturer.Image = dbManufacturer.Image;
                     manufacturer.Id = dbManufacturer.Id;
                     manufacturer.Catalogs = dbManufacturer.Catalogs;
 
@@ -61,7 +61,7 @@ namespace SonetexApp.Areas.Main.Controllers
                     var manufacturer = new Manufacturer();
                     manufacturer.Name = dbManufacturer.NameEnglish;
                     manufacturer.Description = dbManufacturer.DescriptionEnglish;
-                    manufacturer.File = dbManufacturer.File;
+                    manufacturer.Image = dbManufacturer.Image;
                     manufacturer.Id = dbManufacturer.Id;
                     manufacturer.Catalogs = dbManufacturer.Catalogs;
 
@@ -75,7 +75,7 @@ namespace SonetexApp.Areas.Main.Controllers
                     var manufacturer = new Manufacturer();
                     manufacturer.Name = dbManufacturer.Name;
                     manufacturer.Description = dbManufacturer.Description;
-                    manufacturer.File = dbManufacturer.File;
+                    manufacturer.Image = dbManufacturer.Image;
                     manufacturer.Id = dbManufacturer.Id;
                     manufacturer.Catalogs = dbManufacturer.Catalogs;
 
@@ -89,7 +89,7 @@ namespace SonetexApp.Areas.Main.Controllers
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             var manufacturer = new Manufacturer();
-            var dbManufacturer = _context.Manufacturers.Include(i => i.Catalogs).Include(i => i.File).FirstOrDefault(i => i.Id == id);
+            var dbManufacturer = _context.Manufacturers.Include(i => i.Catalogs).Include(i => i.Image).FirstOrDefault(i => i.Id == id);
             List<Manufacturer> manufacturers = new List<Manufacturer>();
             if (currentCultureName == "uz")
             {
@@ -117,7 +117,7 @@ namespace SonetexApp.Areas.Main.Controllers
                 manufacturer.Catalogs = dbManufacturer.Catalogs.Select(i => new Catalog() { Id = i.Id, Name = i.Name }).ToList();
             }
             manufacturer.Id = dbManufacturer.Id;
-            manufacturer.File = dbManufacturer.File;
+            manufacturer.Image = dbManufacturer.Image;
 
             return View(manufacturer);
         }
