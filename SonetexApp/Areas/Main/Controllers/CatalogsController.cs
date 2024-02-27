@@ -80,5 +80,40 @@ namespace SonetexApp.Areas.Main.Controllers
 
             return View(viewModel);
         }
+        public IActionResult Details(int id)
+        {
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            var catalog = new Catalog();
+            var dbCatalog = _context.Catalogs.Include(i => i.Manufacturers).FirstOrDefault(i => i.Id == id);
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
+            if (currentCultureName == "uz")
+            {
+                catalog.Name = dbCatalog.NameUzbek;
+                catalog.Description = dbCatalog.DescriptionUzbek;
+                catalog.Manufacturers = dbCatalog.Manufacturers.Select(i => new Manufacturer() { Id = i.Id, Name = i.NameUzbek }).ToList();
+            }
+            else if (currentCultureName == "ru")
+            {
+                catalog.Name = dbCatalog.NameRussian;
+                catalog.Description = dbCatalog.DescriptionRussian;
+                catalog.Manufacturers = dbCatalog.Manufacturers.Select(i => new Manufacturer() { Id = i.Id, Name = i.NameRussian }).ToList();
+            }
+            else if (currentCultureName == "en")
+            {
+                catalog.Name = dbCatalog.NameEnglish;
+                catalog.Description = dbCatalog.DescriptionEnglish;
+                catalog.Manufacturers = dbCatalog.Manufacturers.Select(i => new Manufacturer() { Id = i.Id, Name = i.NameEnglish }).ToList();
+            }
+            else
+            {
+                catalog.Name = dbCatalog.Name;
+                catalog.Description = dbCatalog.Description;
+
+                catalog.Manufacturers = dbCatalog.Manufacturers.Select(i => new Manufacturer() { Id = i.Id, Name = i.Name }).ToList();
+            }
+            catalog.Id = dbCatalog.Id;
+
+            return View(catalog);
+        }
     }
 }

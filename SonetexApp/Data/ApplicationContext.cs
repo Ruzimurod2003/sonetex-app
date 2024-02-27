@@ -64,6 +64,35 @@ public class ApplicationContext : DbContext
                 new Models.File() {Id = 2, Name = "keyence_manufacture.jpg", Description = "from https://olnisa.ru/"}
             });
 
+        modelBuilder.Entity<Catalog>().HasData(
+            new List<Catalog>()
+            {
+                new Catalog()
+                {
+                    Id = 1,
+                    Name = "Автоматлаштириш",
+                    NameUzbek = "Avtomatlashtirish",
+                    NameRussian = "Автоматизация",
+                    NameEnglish = "Automation",
+                    Description = "Автоматлаштирилган категориялар синфи",
+                    DescriptionUzbek = "Avtomatlashtirilgan kategoriyalar sinfi",
+                    DescriptionEnglish = "A class of automated categories",
+                    DescriptionRussian = "Класс автоматизированных категорий"
+                },
+                new Catalog()
+                {
+                    Id = 2,
+                    Name = "Аксессуарлар",
+                    NameUzbek = "Aksessuarlar",
+                    NameRussian = "Аксессуары",
+                    NameEnglish = "Accessories",
+                    Description = "Аксессуарлар категориялар синфи",
+                    DescriptionUzbek = "Aksessuarlar kategoriyalar sinfi",
+                    DescriptionEnglish = "Accessory category class",
+                    DescriptionRussian = "Категория аксессуаров класс"
+                }
+            });
+
         modelBuilder.Entity<Manufacturer>().HasData(
             new List<Manufacturer>()
             {
@@ -77,34 +106,7 @@ public class ApplicationContext : DbContext
                     DescriptionUzbek = "Bu ishlab chiqaruvchi kompaniya telefon maxsulotlarini yetkazib berish bilan ishlaydi",
                     DescriptionEnglish = "This manufacturing company works with the delivery of phone products",
                     DescriptionRussian = "Данная компания-производитель занимается доставкой телефонной продукции",
-                    ImageId = 1,
-                    Catalogs = new List<Catalog>()
-                    {
-                        new Catalog()
-                        {
-                            Id = 1,
-                            Name = "Автоматлаштириш",
-                            NameUzbek = "Avtomatlashtirish",
-                            NameRussian = "Автоматизация",
-                            NameEnglish = "Automation",
-                            Description = "Автоматлаштирилган категориялар синфи",
-                            DescriptionUzbek = "Avtomatlashtirilgan kategoriyalar sinfi",
-                            DescriptionEnglish = "A class of automated categories",
-                            DescriptionRussian = "Класс автоматизированных категорий"
-                        },
-                        new Catalog()
-                        {
-                            Id = 2,
-                            Name = "Аксессуарлар",
-                            NameUzbek = "Aksessuarlar",
-                            NameRussian = "Аксессуары",
-                            NameEnglish = "Accessories",
-                            Description = "Аксессуарлар категориялар синфи",
-                            DescriptionUzbek = "Aksessuarlar kategoriyalar sinfi",
-                            DescriptionEnglish = "Accessory category class",
-                            DescriptionRussian = "Категория аксессуаров класс"
-                        }
-                    }
+                    ImageId = 1
                 },
 
                 new Manufacturer() {
@@ -118,7 +120,7 @@ public class ApplicationContext : DbContext
                     DescriptionEnglish = "This manufacturing company deals with the supply of computer products",
                     DescriptionRussian = "Данная производственная компания занимается поставками компьютерной продукции.",
                     ImageId = 2
-                },
+                }
             });
     }
 }

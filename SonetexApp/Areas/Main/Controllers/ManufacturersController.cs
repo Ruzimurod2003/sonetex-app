@@ -85,5 +85,41 @@ namespace SonetexApp.Areas.Main.Controllers
 
             return View(viewModel);
         }
+        public IActionResult Details(int id)
+        {
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            var manufacturer = new Manufacturer();
+            var dbManufacturer = _context.Manufacturers.Include(i => i.Catalogs).Include(i => i.File).FirstOrDefault(i => i.Id == id);
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
+            if (currentCultureName == "uz")
+            {
+                manufacturer.Name = dbManufacturer.NameUzbek;
+                manufacturer.Description = dbManufacturer.DescriptionUzbek;
+                manufacturer.Catalogs = dbManufacturer.Catalogs.Select(i => new Catalog() { Id = i.Id, Name = i.NameUzbek }).ToList();
+            }
+            else if (currentCultureName == "ru")
+            {
+                manufacturer.Name = dbManufacturer.NameRussian;
+                manufacturer.Description = dbManufacturer.DescriptionRussian;
+                manufacturer.Catalogs = dbManufacturer.Catalogs.Select(i => new Catalog() { Id = i.Id, Name = i.NameRussian }).ToList();
+            }
+            else if (currentCultureName == "en")
+            {
+                manufacturer.Name = dbManufacturer.NameEnglish;
+                manufacturer.Description = dbManufacturer.DescriptionEnglish;
+                manufacturer.Catalogs = dbManufacturer.Catalogs.Select(i => new Catalog() { Id = i.Id, Name = i.NameEnglish }).ToList();
+            }
+            else
+            {
+                manufacturer.Name = dbManufacturer.Name;
+                manufacturer.Description = dbManufacturer.Description;
+
+                manufacturer.Catalogs = dbManufacturer.Catalogs.Select(i => new Catalog() { Id = i.Id, Name = i.Name }).ToList();
+            }
+            manufacturer.Id = dbManufacturer.Id;
+            manufacturer.File = dbManufacturer.File;
+
+            return View(manufacturer);
+        }
     }
 }

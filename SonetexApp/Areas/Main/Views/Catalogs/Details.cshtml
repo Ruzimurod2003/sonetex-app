@@ -1,4 +1,4 @@
-﻿@model Manufacturer
+﻿@model Catalog
 
 <div class="rbt-overlay-page-wrapper">
     <input type="hidden" asp-for="Id" />
@@ -14,17 +14,11 @@
     <div class="rbt-blog-details-area rbt-section-gapBottom breadcrumb-style-max-width">
         <div class="blog-content-wrapper rbt-article-content-wrapper">
             <div class="content">
-                <div class="post-thumbnail mb--30 position-relative wp-block-image alignwide">
-                    <figure>
-                        <img src="~/files/@Model.File.Name" alt="Blog Images">
-                        <figcaption>@Model.File.Description</figcaption>
-                    </figure>
-                </div>
                 <div class="tagcloud">
-                    @foreach (var catalog in Model.Catalogs)
+                    @foreach (var manufacturer in Model.Manufacturers)
                     {
-                        <a asp-action="Details" asp-controller="Catalogs" asp-route-id="@catalog.Id">
-                            @catalog.Name
+                        <a asp-action="Details" asp-controller="Manufacturers" asp-route-id="@manufacturer.Id">
+                            @manufacturer.Name
                         </a>
                     }
                 </div>

@@ -59,7 +59,7 @@ namespace SonetexApp.Areas.Main.Controllers
 
                 viewModel = new AdministratorHomeContactUsVM();
                 ViewBag.MessageResult = true;
-                return Redirect(nameof(ContactUs));
+                return Redirect(nameof(Index));
             }
             return View(viewModel);
         }
@@ -75,8 +75,10 @@ namespace SonetexApp.Areas.Main.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = (viewModel.Email == _configuration.GetValue<string>("User:Email")) &&
-                                (viewModel.Password == _configuration.GetValue<string>("User:Password"));
+                var result = (((viewModel.Email == _configuration.GetValue<string>("Users:SonetexAdmin:Email")) &&
+                                (viewModel.Password == _configuration.GetValue<string>("Users:SonetexAdmin:Password"))) ||
+                                    ((viewModel.Email == _configuration.GetValue<string>("Users:DurrizoAdmin:Email")) &&
+                                        (viewModel.Password == _configuration.GetValue<string>("Users:DurrizoAdmin:Password"))));
 
                 if (result)
                 {
