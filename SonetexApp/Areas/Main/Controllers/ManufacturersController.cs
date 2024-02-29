@@ -19,7 +19,7 @@ namespace SonetexApp.Areas.Main.Controllers
         public IActionResult Index()
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            AdministratorManufacturerVM viewModel = new AdministratorManufacturerVM();
+            MainManufacturerVM viewModel = new MainManufacturerVM();
             viewModel.Manufacturers = new List<Manufacturer>();
             var dbManufacturers = _context.Manufacturers
                                     .Include(i => i.Image)

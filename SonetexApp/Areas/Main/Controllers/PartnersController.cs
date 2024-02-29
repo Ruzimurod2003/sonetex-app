@@ -18,14 +18,14 @@ namespace SonetexApp.Areas.Main.Controllers
         public IActionResult Index()
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            List<AdministratorPatrnerVM> partners = new List<AdministratorPatrnerVM>();
+            List<MainPatrnerVM> partners = new List<MainPatrnerVM>();
             var dbPartners = _context.Partners.Include(i => i.Image).ToList();
 
             if (currentCultureName == "uz")
             {
                 foreach (var dbPartner in dbPartners)
                 {
-                    var partner = new AdministratorPatrnerVM();
+                    var partner = new MainPatrnerVM();
                     partner.Name = dbPartner.NameUzbek;
                     partner.Description = dbPartner.DescriptionUzbek;
                     partner.ImageName = dbPartner.Image.Name;
@@ -38,7 +38,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbPartner in dbPartners)
                 {
-                    var partner = new AdministratorPatrnerVM();
+                    var partner = new MainPatrnerVM();
                     partner.Name = dbPartner.NameRussian;
                     partner.Description = dbPartner.DescriptionRussian;
                     partner.ImageName = dbPartner.Image.Name;
@@ -51,7 +51,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbPartner in dbPartners)
                 {
-                    var partner = new AdministratorPatrnerVM();
+                    var partner = new MainPatrnerVM();
                     partner.Name = dbPartner.NameEnglish;
                     partner.Description = dbPartner.DescriptionEnglish;
                     partner.ImageName = dbPartner.Image.Name;
@@ -64,7 +64,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbPartner in dbPartners)
                 {
-                    var partner = new AdministratorPatrnerVM();
+                    var partner = new MainPatrnerVM();
                     partner.Name = dbPartner.Name;
                     partner.Description = dbPartner.Description;
                     partner.ImageName = dbPartner.Image.Name;
@@ -79,7 +79,7 @@ namespace SonetexApp.Areas.Main.Controllers
         public IActionResult Details(int id)
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            var partner = new AdministratorPatrnerVM();
+            var partner = new MainPatrnerVM();
             var dbPartner = _context.Partners.Include(i => i.Image).FirstOrDefault(i => i.Id == id);
 
             if (currentCultureName == "uz")

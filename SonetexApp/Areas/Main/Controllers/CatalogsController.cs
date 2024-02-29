@@ -18,7 +18,7 @@ namespace SonetexApp.Areas.Main.Controllers
         }
         public IActionResult Index()
         {
-            AdministratorCatalogVM viewModel = new AdministratorCatalogVM();
+            MainCatalogVM viewModel = new MainCatalogVM();
 
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             List<Catalog> catalogs = new List<Catalog>();

@@ -1,5 +1,5 @@
 ﻿namespace SonetexApp.Areas.Main.ViewModels;
-public class AdministratorHomeContactUsVM
+public class MainHomeContactUsVM
 {
     public string Name { get; set; }
     public string Email { get; set; }

@@ -1,9 +1,9 @@
 ﻿namespace SonetexApp.Areas.Main.ViewModels;
-public class AdministratorHomeAboutUsVM
+public class MainSpecialistVM
 {
+    public int SpecialistId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Position { get; set; }
-    public string Phone { get; set; }
     public string ImageName { get; set; }
+    public string ImageCaption { get; set; }
 }

@@ -45,11 +45,11 @@ namespace SonetexApp.Areas.Main.Controllers
         public async Task<ActionResult> ContactUs()
         {
             ViewBag.MessageResult = false;
-            var viewModel = new AdministratorHomeContactUsVM();
+            var viewModel = new MainHomeContactUsVM();
             return View(viewModel);
         }
         [HttpPost]
-        public async Task<ActionResult> ContactUsAsync(AdministratorHomeContactUsVM viewModel)
+        public async Task<ActionResult> ContactUsAsync(MainHomeContactUsVM viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace SonetexApp.Areas.Main.Controllers
                 string adminId = _configuration.GetValue<string>("Telegram:AdminId");
                 await Functions.SendMessageFromTelegramAsync(token, adminId, viewModel.Name, viewModel.Email, viewModel.Subject, viewModel.Message);
 
-                viewModel = new AdministratorHomeContactUsVM();
+                viewModel = new MainHomeContactUsVM();
                 ViewBag.MessageResult = true;
                 return Redirect(nameof(Index));
             }
@@ -65,13 +65,13 @@ namespace SonetexApp.Areas.Main.Controllers
         }
         public IActionResult Login()
         {
-            AdministratorHomeLoginVM viewModel = new AdministratorHomeLoginVM();
+            MainHomeLoginVM viewModel = new MainHomeLoginVM();
             viewModel.IsAuthenticated = true;
             return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AdministratorHomeLoginVM viewModel)
+        public async Task<IActionResult> Login(MainHomeLoginVM viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -120,14 +120,14 @@ namespace SonetexApp.Areas.Main.Controllers
         public ActionResult AboutUs()
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            List<AdministratorHomeAboutUsVM> teams = new List<AdministratorHomeAboutUsVM>();
+            List<MainHomeAboutUsVM> teams = new List<MainHomeAboutUsVM>();
             var dbTeams = _context.Teams.Include(i => i.Image).ToList();
 
             if (currentCultureName == "uz")
             {
                 foreach (var dbTeam in dbTeams)
                 {
-                    var team = new AdministratorHomeAboutUsVM();
+                    var team = new MainHomeAboutUsVM();
                     team.Name = dbTeam.NameUzbek;
                     team.Description = dbTeam.DescriptionUzbek;
                     team.ImageName = dbTeam.Image.Name;
@@ -141,7 +141,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbTeam in dbTeams)
                 {
-                    var team = new AdministratorHomeAboutUsVM();
+                    var team = new MainHomeAboutUsVM();
                     team.Name = dbTeam.NameRussian;
                     team.Description = dbTeam.DescriptionRussian;
                     team.ImageName = dbTeam.Image.Name;
@@ -155,7 +155,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbTeam in dbTeams)
                 {
-                    var team = new AdministratorHomeAboutUsVM();
+                    var team = new MainHomeAboutUsVM();
                     team.Name = dbTeam.NameEnglish;
                     team.Description = dbTeam.DescriptionEnglish;
                     team.ImageName = dbTeam.Image.Name;
@@ -169,7 +169,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbTeam in dbTeams)
                 {
-                    var team = new AdministratorHomeAboutUsVM();
+                    var team = new MainHomeAboutUsVM();
                     team.Name = dbTeam.Name;
                     team.Description = dbTeam.Description;
                     team.ImageName = dbTeam.Image.Name;

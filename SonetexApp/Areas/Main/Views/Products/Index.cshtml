@@ -1,1 +1,569 @@
-﻿
+﻿@model MainProductVM
+<div class="rbt-page-banner-wrapper">
+    <!-- Start Banner BG Image  -->
+    <div class="rbt-banner-image"></div>
+    <!-- End Banner BG Image  -->
+    <div class="rbt-banner-content">
+        <!-- Start Banner Content Top  -->
+        <div class="rbt-banner-content-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Start Breadcrumb Area  -->
+                        <ul class="page-list">
+                            <li class="rbt-breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li>
+                                <div class="icon-right"><i class="feather-chevron-right"></i></div>
+                            </li>
+                            <li class="rbt-breadcrumb-item active">All Courses</li>
+                        </ul>
+                        <!-- End Breadcrumb Area  -->
+
+                        <div class=" title-wrapper">
+                            <h1 class="title mb--0">@Localizer["our_products"]</h1>
+                            <a href="#" class="rbt-badge-2">
+                                50 Courses
+                            </a>
+                        </div>
+
+                        <p class="description">@Localizer["our_products_description"]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Banner Content Top  -->
+    </div>
+</div>
+
+<form asp-action="Index" method="post">
+    <!-- Start Card Style -->
+    <div class="rbt-section-overlayping-top rbt-section-gapBottom">
+        <div class="container">
+            <div class="row row--30 gy-5">
+                <div class="col-lg-3 order-1 order-lg-1">
+                    <aside class="rbt-sidebar-widget-wrapper">
+                        <!-- Start Widget Area  -->
+                        <div class="rbt-single-widget rbt-widget-search">
+                            <div class="inner">
+                                <div class="rbt-search-style-1">
+                                    <input type="text" placeholder="@Localizer["search_products"]" />
+                                    <button class="search-btn"><i class="feather-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Widget Area  -->
+                        <!-- Start Widget Area  -->
+                        <div class="rbt-single-widget rbt-widget-categories has-show-more">
+                            <div class="inner">
+                                <h4 class="rbt-widget-title">@Localizer["categories"]</h4>
+                                <ul class="rbt-sidebar-list-wrapper categories-list-check has-show-more-inner-content">
+                                    @foreach (var catalog in Model.Catalogs)
+                                    {
+                                        <li class="rbt-check-group">
+                                            <input type="checkbox" class="form-checkbox text-info"
+                                                   name="CatalogIds" id="catalog_@catalog.Id" value="@catalog.Id"
+                                            @(Model.CatalogIds.Contains(catalog.Id) ? "checked=\"checked\"" : "")>
+                                            <label for="catalog_@catalog.Id">
+                                                @catalog.Name
+                                                <span class="rbt-lable count">
+                                                    @catalog.Products.Count
+                                                </span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="rbt-show-more-btn">Show More</div>
+                        </div>
+                        <!-- End Widget Area  -->
+                        <!-- Start Widget Area  -->
+                        <div class="rbt-single-widget rbt-widget-instructor has-show-more">
+                            <div class="inner">
+                                <h4 class="rbt-widget-title">@Localizer["manufacturers"]</h4>
+                                <ul class="rbt-sidebar-list-wrapper instructor-list-check">
+                                    @foreach (var manufacturer in Model.Manufacturers)
+                                    {
+                                        <li class="rbt-check-group">
+                                            <input type="checkbox" class="form-checkbox text-info"
+                                                   name="ManufacturerIds" id="manufacturer_@manufacturer.Id" value="@manufacturer.Id"
+                                            @(Model.ManufacturerIds.Contains(manufacturer.Id) ? "checked=\"checked\"" : "")>
+                                            <label for="manufacturer_@manufacturer.Id">
+                                                @manufacturer.Name
+                                                <span class="rbt-lable count">
+                                                    @manufacturer.Catalogs.Count
+                                                </span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="rbt-show-more-btn">Show More</div>
+                        </div>
+                        <!-- End Widget Area  -->
+                        <!-- Start Widget Area  -->
+                        <div class="rbt-single-widget rbt-widget-prices has-show-more">
+                            <div class="inner">
+                                <h4 class="rbt-widget-title">@Localizer["states"]</h4>
+                                <ul class="rbt-sidebar-list-wrapper prices-list-check">
+                                    @foreach (var state in Model.States)
+                                    {
+                                        <li class="rbt-check-group">
+                                            <input type="checkbox" class="form-checkbox text-info"
+                                                   name="StateIds" id="state_@state.Id" value="@state.Id"
+                                            @(Model.StateIds.Contains(state.Id) ? "checked=\"checked\"" : "")>
+                                            <label for="state_@state.Id">
+                                                @state.Name
+                                                <span class="rbt-lable count">
+                                                    @state.Products.Count
+                                                </span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="rbt-show-more-btn">Show More</div>
+                        </div>
+                        <!-- End Widget Area  -->
+                        <!-- Start Widget Area  -->
+                        <div class="rbt-single-widget rbt-widget-lavels has-show-more">
+                            <div class="inner">
+                                <h4 class="rbt-widget-title">@Localizer["types"]</h4>
+                                <ul class="rbt-sidebar-list-wrapper lavels-list-check">
+                                    @foreach (var type in Model.Types)
+                                    {
+                                        <li class="rbt-check-group">
+                                            <input type="checkbox" class="form-checkbox text-info"
+                                                   name="TypeIds" id="type_@type.Id" value="@type.Id"
+                                            @(Model.TypeIds.Contains(type.Id) ? "checked=\"checked\"" : "")>
+                                            <label for="type_@type.Id">
+                                                @type.Name
+                                                <span class="rbt-lable count">
+                                                    @type.Products.Count
+                                                </span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="rbt-show-more-btn">Show More</div>
+                        </div>
+                        <!-- End Widget Area  -->
+                        <div class="text-center">
+                            <button class="rbt-btn btn-gradient btn-gradient-2 w-100" type="submit">
+                                @Localizer["test"]
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-lg-9 order-2 order-lg-2">
+                    <div class="rbt-course-grid-column">
+                        <!-- Start Single Card  -->
+                        <div class="course-grid-3">
+                            <div class="rbt-card variation-01 rbt-hover">
+                                <div class="rbt-card-img">
+                                    <a href="course-details.html">
+                                        <img src="assets/images/course/course-online-01.jpg" alt="Card image">
+                                        <div class="rbt-badge-3 bg-white">
+                                            <span>-40%</span>
+                                            <span>Off</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="rbt-card-body">
+                                    <div class="rbt-card-top">
+                                        <div class="rbt-review">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-count"> (15 Reviews)</span>
+                                        </div>
+                                        <div class="rbt-bookmark-btn">
+                                            <a class="rbt-round-btn" title="Bookmark" href="#">
+                                                <i class="feather-bookmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="rbt-card-title">
+                                        <a href="course-details.html">React Front To Back</a>
+                                    </h4>
+
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>12 Lessons</li>
+                                        <li><i class="feather-users"></i>50 Students</li>
+                                    </ul>
+
+                                    <p class="rbt-card-text">
+                                        It is a long established fact that a reader will be
+                                        distracted.
+                                    </p>
+                                    <div class="rbt-author-meta mb--10">
+                                        <div class="rbt-avater">
+                                            <a href="#">
+                                                <img src="assets/images/client/avatar-02.png" alt="Sophia Jaymes">
+                                            </a>
+                                        </div>
+                                        <div class="rbt-author-info">
+                                            By <a href="profile.html">Angela</a> In <a href="#">Development</a>
+                                        </div>
+                                    </div>
+                                    <div class="rbt-card-bottom">
+                                        <div class="rbt-price">
+                                            <span class="current-price">$60</span>
+                                            <span class="off-price">$120</span>
+                                        </div>
+                                        <a class="rbt-btn-link" href="course-details.html">
+                                            Learn
+                                            More<i class="feather-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Card  -->
+                        <!-- Start Single Card  -->
+                        <div class="course-grid-3">
+                            <div class="rbt-card variation-01 rbt-hover">
+                                <div class="rbt-card-img">
+                                    <a href="course-details.html">
+                                        <img src="assets/images/course/course-online-02.jpg" alt="Card image">
+                                    </a>
+                                </div>
+                                <div class="rbt-card-body">
+                                    <div class="rbt-card-top">
+                                        <div class="rbt-review">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-count"> (15 Reviews)</span>
+                                        </div>
+                                        <div class="rbt-bookmark-btn">
+                                            <a class="rbt-round-btn" title="Bookmark" href="#">
+                                                <i class="feather-bookmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="rbt-card-title">
+                                        <a href="course-details.html">PHP Beginner Advanced</a>
+                                    </h4>
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>12 Lessons</li>
+                                        <li><i class="feather-users"></i>50 Students</li>
+                                    </ul>
+
+                                    <p class="rbt-card-text">
+                                        It is a long established fact that a reader will be
+                                        distracted.
+                                    </p>
+                                    <div class="rbt-author-meta mb--10">
+                                        <div class="rbt-avater">
+                                            <a href="#">
+                                                <img src="assets/images/client/avatar-02.png" alt="Sophia Jaymes">
+                                            </a>
+                                        </div>
+                                        <div class="rbt-author-info">
+                                            By <a href="profile.html">Angela</a> In <a href="#">Development</a>
+                                        </div>
+                                    </div>
+                                    <div class="rbt-card-bottom">
+                                        <div class="rbt-price">
+                                            <span class="current-price">$60</span>
+                                            <span class="off-price">$120</span>
+                                        </div>
+                                        <a class="rbt-btn-link left-icon" href="course-details.html">
+                                            <i class="feather-shopping-cart"></i> Add To Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Card  -->
+                        <!-- Start Single Card  -->
+                        <div class="course-grid-3">
+                            <div class="rbt-card variation-01 rbt-hover">
+                                <div class="rbt-card-img">
+                                    <a href="course-details.html">
+                                        <img src="assets/images/course/course-online-03.jpg" alt="Card image">
+                                        <div class="rbt-badge-3 bg-white">
+                                            <span>-10%</span>
+                                            <span>Off</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="rbt-card-body">
+                                    <div class="rbt-card-top">
+                                        <div class="rbt-review">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-count"> (5 Reviews)</span>
+                                        </div>
+                                        <div class="rbt-bookmark-btn">
+                                            <a class="rbt-round-btn" title="Bookmark" href="#">
+                                                <i class="feather-bookmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="rbt-card-title">
+                                        <a href="course-details.html">Angular Zero to Mastery</a>
+                                    </h4>
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>8 Lessons</li>
+                                        <li><i class="feather-users"></i>30 Students</li>
+                                    </ul>
+                                    <p class="rbt-card-text">
+                                        Angular Js long fact that a reader will be distracted by
+                                        the readable.
+                                    </p>
+
+                                    <div class="rbt-author-meta mb--20">
+                                        <div class="rbt-avater">
+                                            <a href="#">
+                                                <img src="assets/images/client/avatar-03.png" alt="Sophia Jaymes">
+                                            </a>
+                                        </div>
+                                        <div class="rbt-author-info">
+                                            By <a href="profile.html">Slaughter</a> In <a href="#">Languages</a>
+                                        </div>
+                                    </div>
+                                    <div class="rbt-card-bottom">
+                                        <div class="rbt-price">
+                                            <span class="current-price">$80</span>
+                                            <span class="off-price">$100</span>
+                                        </div>
+                                        <a class="rbt-btn-link" href="course-details.html">
+                                            Learn
+                                            More<i class="feather-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Card  -->
+                        <!-- Start Single Card  -->
+                        <div class="course-grid-3">
+                            <div class="rbt-card variation-01 rbt-hover">
+                                <div class="rbt-card-img">
+                                    <a href="course-details.html">
+                                        <img src="assets/images/course/course-online-04.jpg" alt="Card image">
+                                        <div class="rbt-badge-3 bg-white">
+                                            <span>-40%</span>
+                                            <span>Off</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="rbt-card-body">
+                                    <div class="rbt-card-top">
+                                        <div class="rbt-review">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-count"> (15 Reviews)</span>
+                                        </div>
+                                        <div class="rbt-bookmark-btn">
+                                            <a class="rbt-round-btn" title="Bookmark" href="#">
+                                                <i class="feather-bookmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="rbt-card-title">
+                                        <a href="course-details.html">Web Front To Back</a>
+                                    </h4>
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>20 Lessons</li>
+                                        <li><i class="feather-users"></i>40 Students</li>
+                                    </ul>
+                                    <p class="rbt-card-text">
+                                        Web Js long fact that a reader will be distracted by
+                                        the readable.
+                                    </p>
+                                    <div class="rbt-author-meta mb--20">
+                                        <div class="rbt-avater">
+                                            <a href="#">
+                                                <img src="assets/images/client/avater-01.png" alt="Sophia Jaymes">
+                                            </a>
+                                        </div>
+                                        <div class="rbt-author-info">
+                                            By <a href="profile.html">Patrick</a> In <a href="#">Languages</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="rbt-card-bottom">
+                                        <div class="rbt-price">
+                                            <span class="current-price">$60</span>
+                                            <span class="off-price">$120</span>
+                                        </div>
+                                        <a class="rbt-btn-link" href="course-details.html">
+                                            Learn
+                                            More<i class="feather-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Card  -->
+                        <!-- Start Single Card  -->
+                        <div class="course-grid-3">
+                            <div class="rbt-card variation-01 rbt-hover">
+                                <div class="rbt-card-img">
+                                    <a href="course-details.html">
+                                        <img src="assets/images/course/course-online-05.jpg" alt="Card image">
+                                        <div class="rbt-badge-3 bg-white">
+                                            <span>-20%</span>
+                                            <span>Off</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="rbt-card-body">
+                                    <div class="rbt-card-top">
+                                        <div class="rbt-review">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-count"> (15 Reviews)</span>
+                                        </div>
+                                        <div class="rbt-bookmark-btn">
+                                            <a class="rbt-round-btn" title="Bookmark" href="#">
+                                                <i class="feather-bookmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="rbt-card-title">
+                                        <a href="course-details.html">SQL Beginner Advanced</a>
+                                    </h4>
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>12 Lessons</li>
+                                        <li><i class="feather-users"></i>50 Students</li>
+                                    </ul>
+                                    <p class="rbt-card-text">
+                                        It is a long established fact that a reader will be
+                                        distracted
+                                        by the readable.
+                                    </p>
+                                    <div class="rbt-author-meta mb--20">
+                                        <div class="rbt-avater">
+                                            <a href="#">
+                                                <img src="assets/images/client/avatar-02.png" alt="Sophia Jaymes">
+                                            </a>
+                                        </div>
+                                        <div class="rbt-author-info">
+                                            By <a href="profile.html">Angela</a> In <a href="#">Development</a>
+                                        </div>
+                                    </div>
+                                    <div class="rbt-card-bottom">
+                                        <div class="rbt-price">
+                                            <span class="current-price">$60</span>
+                                            <span class="off-price">$120</span>
+                                        </div>
+                                        <a class="rbt-btn-link left-icon" href="course-details.html">
+                                            <i class="feather-shopping-cart"></i> Add To Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Card  -->
+                        <!-- Start Single Card  -->
+                        <div class="course-grid-3">
+                            <div class="rbt-card variation-01 rbt-hover">
+                                <div class="rbt-card-img">
+                                    <a href="course-details.html">
+                                        <img src="assets/images/course/course-online-06.jpg" alt="Card image">
+                                    </a>
+                                </div>
+                                <div class="rbt-card-body">
+                                    <div class="rbt-card-top">
+                                        <div class="rbt-review">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-count"> (5 Reviews)</span>
+                                        </div>
+                                        <div class="rbt-bookmark-btn">
+                                            <a class="rbt-round-btn" title="Bookmark" href="#">
+                                                <i class="feather-bookmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="rbt-card-title">
+                                        <a href="course-details.html">JS Zero to Mastery</a>
+                                    </h4>
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>8 Lessons</li>
+                                        <li><i class="feather-users"></i>30 Students</li>
+                                    </ul>
+                                    <p class="rbt-card-text">
+                                        Angular Js long fact that a reader will be distracted by
+                                        the readable.
+                                    </p>
+
+                                    <div class="rbt-author-meta mb--20">
+                                        <div class="rbt-avater">
+                                            <a href="#">
+                                                <img src="assets/images/client/avatar-03.png" alt="Sophia Jaymes">
+                                            </a>
+                                        </div>
+                                        <div class="rbt-author-info">
+                                            By <a href="profile.html">Slaughter</a> In <a href="#">Languages</a>
+                                        </div>
+                                    </div>
+                                    <div class="rbt-card-bottom">
+                                        <div class="rbt-price">
+                                            <span class="current-price">$80</span>
+                                            <span class="off-price">$100</span>
+                                        </div>
+                                        <a class="rbt-btn-link" href="course-details.html">
+                                            Learn
+                                            More<i class="feather-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Card  -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 mt--60">
+                            <nav>
+                                <ul class="rbt-pagination">
+                                    <li><a href="#" aria-label="Previous"><i class="feather-chevron-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li class="active"><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#" aria-label="Next"><i class="feather-chevron-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Card Style -->
+</form>

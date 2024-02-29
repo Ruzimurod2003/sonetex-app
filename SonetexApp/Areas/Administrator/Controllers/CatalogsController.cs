@@ -108,7 +108,14 @@ namespace SonetexApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 var catalog = await _context.Catalogs.FirstOrDefaultAsync(i => i.Id == id);
-                catalog = catalogVM.Catalog;
+                catalog.Name = catalogVM.Catalog.Name;
+                catalog.NameRussian = catalogVM.Catalog.NameRussian;
+                catalog.NameEnglish = catalogVM.Catalog.NameEnglish;
+                catalog.NameUzbek = catalogVM.Catalog.NameUzbek;
+                catalog.Description = catalogVM.Catalog.Description;
+                catalog.DescriptionUzbek = catalogVM.Catalog.DescriptionUzbek;
+                catalog.DescriptionRussian = catalogVM.Catalog.DescriptionRussian;
+                catalog.DescriptionEnglish = catalogVM.Catalog.DescriptionEnglish;
 
                 await _context.SaveChangesAsync();
 

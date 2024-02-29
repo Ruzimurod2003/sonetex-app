@@ -35,8 +35,43 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<State>().HasData(
             new List<State>()
             {
-                new State() { Id = 1, Name = "Янги", NameUzbek = "Yangi", NameRussian = "Новый", NameEnglish = "New" },
-                new State() { Id = 2, Name = "Сақлаш жойидан", NameUzbek = "Saqlash joyidan", NameRussian = "С хранения", NameEnglish = "From storage" }
+                new State()
+                {
+                    Id = 1,
+                    Name = "Янги",
+                    NameUzbek = "Yangi",
+                    NameRussian = "Новый",
+                    NameEnglish = "New"
+                },
+                new State()
+                {
+                    Id = 2,
+                    Name = "Сақлаш жойидан",
+                    NameUzbek = "Saqlash joyidan",
+                    NameRussian = "С хранения",
+                    NameEnglish = "From storage"
+                }
+            });
+
+        modelBuilder.Entity<Models.Type>().HasData(
+            new List<Models.Type>()
+            {
+                new Models.Type()
+                {
+                    Id = 1,
+                    Name = "Қулай маҳсулотлар",
+                    NameUzbek = "Qulay mahsulotlar",
+                    NameRussian = "Товары повседневного спроса",
+                    NameEnglish = "Convenience products"
+                },
+                new Models.Type()
+                {
+                    Id = 2,
+                    Name = "Маҳсулотларни харид қилиш",
+                    NameUzbek = "Mahsulotlarni xarid qilish",
+                    NameRussian = "Товары для покупок",
+                    NameEnglish = "Shopping products"
+                }
             });
 
         modelBuilder.Entity<Configuration>().HasData(
@@ -60,8 +95,18 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<Models.File>().HasData(
             new List<Models.File>()
             {
-                new Models.File() {Id = 1, Name = "omron_manufacture.jpg", Description = "from https://olnisa.ru/"},
-                new Models.File() {Id = 2, Name = "keyence_manufacture.jpg", Description = "from https://olnisa.ru/"}
+                new Models.File()
+                {
+                    Id = 1,
+                    Name = "omron_manufacture.jpg",
+                    Description = "from https://olnisa.ru/"
+                },
+                new Models.File()
+                {
+                    Id = 2,
+                    Name = "keyence_manufacture.jpg",
+                    Description = "from https://olnisa.ru/"
+                }
             });
 
         modelBuilder.Entity<Catalog>().HasData(

@@ -18,14 +18,14 @@ namespace SonetexApp.Areas.Main.Controllers
         public IActionResult Index()
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            List<AdministratorSpecialistVM> specialists = new List<AdministratorSpecialistVM>();
+            List<MainSpecialistVM> specialists = new List<MainSpecialistVM>();
             var dbSpecialists = _context.Specialists.Include(i => i.Image).ToList();
 
             if (currentCultureName == "uz")
             {
                 foreach (var dbSpecialist in dbSpecialists)
                 {
-                    var specialist = new AdministratorSpecialistVM();
+                    var specialist = new MainSpecialistVM();
                     specialist.Name = dbSpecialist.NameUzbek;
                     specialist.Description = dbSpecialist.DescriptionUzbek;
                     specialist.ImageName = dbSpecialist.Image.Name;
@@ -38,7 +38,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbSpecialist in dbSpecialists)
                 {
-                    var specialist = new AdministratorSpecialistVM();
+                    var specialist = new MainSpecialistVM();
                     specialist.Name = dbSpecialist.NameRussian;
                     specialist.Description = dbSpecialist.DescriptionRussian;
                     specialist.ImageName = dbSpecialist.Image.Name;
@@ -51,7 +51,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbSpecialist in dbSpecialists)
                 {
-                    var specialist = new AdministratorSpecialistVM();
+                    var specialist = new MainSpecialistVM();
                     specialist.Name = dbSpecialist.NameEnglish;
                     specialist.Description = dbSpecialist.DescriptionEnglish;
                     specialist.ImageName = dbSpecialist.Image.Name;
@@ -64,7 +64,7 @@ namespace SonetexApp.Areas.Main.Controllers
             {
                 foreach (var dbSpecialist in dbSpecialists)
                 {
-                    var specialist = new AdministratorSpecialistVM();
+                    var specialist = new MainSpecialistVM();
                     specialist.Name = dbSpecialist.Name;
                     specialist.Description = dbSpecialist.Description;
                     specialist.ImageName = dbSpecialist.Image.Name;
@@ -79,7 +79,7 @@ namespace SonetexApp.Areas.Main.Controllers
         public IActionResult Details(int id)
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            var specialist = new AdministratorSpecialistVM();
+            var specialist = new MainSpecialistVM();
             var dbSpecialist = _context.Specialists.Include(i => i.Image).FirstOrDefault(i => i.Id == id);
 
             if (currentCultureName == "uz")
