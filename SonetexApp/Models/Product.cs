@@ -14,6 +14,7 @@ public class Product                                            // Товары
     public string DescriptionEnglish { get; set; }              // Английский oписание 
 
     public string VendorCode { get; set; }                      // Артикул 
+    public string Price { get; set; }                           // Цена
     public int Availability { get; set; }                       // Наличие 
     public DateTime Guarantee { get; set; }                     // Гарантия 
     public string Address { get; set; }                         // Адрес 

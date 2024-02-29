@@ -25,6 +25,8 @@ builder.Services.AddTransient<IStateRepository, StateRepository>();
 
 builder.Services.AddTransient<ITypeRepository, TypeRepository>();
 
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+
 builder.Services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(builder.Configuration.GetConnectionString("SonetexSqliteConnection")));
 
 builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization(options =>

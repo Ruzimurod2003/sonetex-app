@@ -15,13 +15,15 @@ namespace SonetexApp.Areas.Main.Controllers
         private readonly IManufacturerRepository _manufacturerRepository;
         private readonly IStateRepository _stateRepository;
         private readonly ITypeRepository _typeRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductsController(
             ApplicationContext context,
             ICatalogRepository catalogRepository,
             IManufacturerRepository manufacturerRepository,
             IStateRepository stateRepository,
-            ITypeRepository typeRepository
+            ITypeRepository typeRepository,
+            IProductRepository productRepository
             )
         {
             _context = context;
@@ -29,6 +31,7 @@ namespace SonetexApp.Areas.Main.Controllers
             _manufacturerRepository = manufacturerRepository;
             _stateRepository = stateRepository;
             _typeRepository = typeRepository;
+            _productRepository = productRepository;
         }
         public IActionResult Index()
         {
@@ -44,6 +47,7 @@ namespace SonetexApp.Areas.Main.Controllers
             viewModel.Manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName);
             viewModel.States = _stateRepository.GetStates(currentCultureName);
             viewModel.Types = _typeRepository.GetTypes(currentCultureName);
+            viewModel.Products = _productRepository.GetProducts(currentCultureName);
 
             return View(viewModel);
         }

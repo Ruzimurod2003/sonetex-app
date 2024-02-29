@@ -89,6 +89,10 @@
                         <div>@Model.Address</div>
                     </div>
                     <div class="mb-2 flex w-full items-center justify-between">
+                        <div class="text-white-dark">@Localizer["price"] :</div>
+                        <div>@Model.Price</div>
+                    </div>
+                    <div class="mb-2 flex w-full items-center justify-between">
                         <div class="text-white-dark">@Localizer["images"] :</div>
                         <div>
                             @foreach (var image in Model.Images)

@@ -69,7 +69,10 @@
                                 </li>
 
                                 <li class="has-dropdown has-menu-child-item">
-                                    <a href="#">@Localizer["company"]<i class="feather-chevron-down"></i></a>
+                                    <a asp-action="Index" asp-controller="Specialists">
+                                        @Localizer["company"]
+                                        <i class="feather-chevron-down"></i>
+                                    </a>
                                     <!-- Start Mega Menu  -->
                                     <ul class="submenu">
                                         <li>
@@ -107,7 +110,6 @@
                                     <i class="feather-search"></i>
                                 </a>
                             </li>
-
                         </ul>
 
                         <div class="rbt-btn-wrapper d-none d-xl-block">
@@ -222,7 +224,10 @@
                     </li>
 
                     <li class="with-megamenu has-menu-child-item">
-                        <a href="#">@Localizer["company"]<i class="feather-chevron-down"></i></a>
+                        <a asp-action="Index" asp-controller="Specialists">
+                            @Localizer["company"]
+                            <i class="feather-chevron-down"></i>
+                        </a>
                         <!-- Start Mega Menu  -->
                         <div class="rbt-megamenu grid-item-2">
                             <div class="wrapper">
@@ -260,9 +265,41 @@
 
             <div class="mobile-menu-bottom">
                 <div class="rbt-btn-wrapper mb--20">
-                    <a class="rbt-btn btn-border-gradient radius-round btn-sm hover-transform-none w-100 justify-content-center text-center" asp-action="Login" asp-controller="Account">
-                        <span>@Localizer["login"]...</span>
-                    </a>
+                    <div class="rbt-btn-wrapper d-none d-xl-block">
+                        <div class="header-info">
+                            <ul class="rbt-dropdown-menu switcher-language">
+                                <li class="has-child-menu">
+                                    <a>
+                                        <span class="menu-item">@Localizer["change_the_language"]</span>
+                                        <i class="right-icon feather-chevron-down"></i>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a asp-action="SetLanguage" asp-controller="Home"
+                                               asp-route-returnurl="@Context.Request.Path" asp-route-culture="en">
+                                                <img class="left-image" src="~/lib/main_template/assets/images/icons/en-us.png" alt="Language Images">
+                                                <span class="menu-item">English</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-action="SetLanguage" asp-controller="Home"
+                                               asp-route-returnurl="@Context.Request.Path" asp-route-culture="ru">
+                                                <img class="left-image" src="~/lib/main_template/assets/images/icons/ru.png" alt="Language Images">
+                                                <span class="menu-item">Русский</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-action="SetLanguage" asp-controller="Home"
+                                               asp-route-returnurl="@Context.Request.Path" asp-route-culture="uz">
+                                                <img class="left-image" src="~/lib/main_template/assets/images/icons/uz.png" alt="Language Images">
+                                                <span class="menu-item">O'zbekcha</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="social-share-wrapper">
