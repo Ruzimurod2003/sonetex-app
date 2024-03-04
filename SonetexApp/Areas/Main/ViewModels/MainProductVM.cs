@@ -12,4 +12,5 @@ public class MainProductVM
     public List<int> ManufacturerIds { get; set; }
     public List<int> StateIds { get; set; }
     public List<int> TypeIds { get; set; }
+    public string SearchProduct { get; set; }
 }

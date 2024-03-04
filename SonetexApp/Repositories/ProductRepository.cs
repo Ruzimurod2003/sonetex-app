@@ -28,10 +28,10 @@ public class ProductRepository : IProductRepository
                             .ThenInclude(i => i.Manufacturers)
                             .ToList();
         var product = new Product();
+        var dbProduct = dbProducts.Where(i => i.Id == productId).FirstOrDefault();
 
         if (currentCultureName == "uz")
         {
-            var dbProduct = dbProducts.Where(i => i.Id == productId).FirstOrDefault();
             product.Id = dbProduct.Id;
             product.Name = dbProduct.NameUzbek;
             product.Description = dbProduct.DescriptionUzbek;
@@ -58,7 +58,6 @@ public class ProductRepository : IProductRepository
         }
         else if (currentCultureName == "ru")
         {
-            var dbProduct = dbProducts.Where(i => i.Id == productId).FirstOrDefault();
             product.Id = dbProduct.Id;
             product.Name = dbProduct.NameRussian;
             product.Description = dbProduct.DescriptionRussian;
@@ -85,7 +84,6 @@ public class ProductRepository : IProductRepository
         }
         else if (currentCultureName == "en")
         {
-            var dbProduct = dbProducts.Where(i => i.Id == productId).FirstOrDefault();
             product.Id = dbProduct.Id;
             product.Name = dbProduct.NameEnglish;
             product.Description = dbProduct.DescriptionEnglish;
@@ -112,7 +110,6 @@ public class ProductRepository : IProductRepository
         }
         else
         {
-            var dbProduct = dbProducts.Where(i => i.Id == productId).FirstOrDefault();
             product.Id = dbProduct.Id;
             product.Name = dbProduct.Name;
             product.Description = dbProduct.Description;
@@ -137,6 +134,7 @@ public class ProductRepository : IProductRepository
             };
             product.Images = dbProduct.Images;
         }
+        product.Address = dbProduct.Address;
         return product;
     }
 
