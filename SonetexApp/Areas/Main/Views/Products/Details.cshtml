@@ -1,0 +1,64 @@
+﻿@model Product
+@{
+    int counter = 1;
+}
+<div class="rbt-overlay-page-wrapper">
+    <div class="breadcrumb-image-container breadcrumb-style-max-width">
+        <div class="breadcrumb-image-wrapper">
+            <img src="~/lib/main_template/assets/images/bg/bg-image-10.jpg" alt="Education Images">
+        </div>
+        <div class="breadcrumb-content-top text-center">
+            <h1 class="title">@Model.Name</h1>
+        </div>
+    </div>
+
+    <div class="rbt-blog-details-area rbt-section-gapBottom breadcrumb-style-max-width">
+        <div class="blog-content-wrapper rbt-article-content-wrapper">
+            <div class="content">
+                <div class="banner-card pb--60 mb--50 swiper rbt-dot-bottom-center banner-swiper-active swiper-cards swiper-3d swiper-initialized swiper-horizontal swiper-pointer-events">
+                    <div class="swiper-wrapper" style="cursor: grab; transition-duration: 0ms;" id="swiper-wrapper-9dbea6a326cab2c1" aria-live="polite">
+                        @foreach (var image in Model.Images)
+                        {
+                            <!-- Start Single Card  -->
+                            <div class="swiper-slide swiper-slide-prev"
+                                 style="width: 390px; z-index: 2; transform: translate3d(calc(-7.25% + 0px), 0px, -100px) rotateZ(-2deg) scale(1); transition-duration: 0ms;"
+                                 role="group" aria-label="@counter / @Model.Images.Count">
+                                <div class="rbt-card variation-01 rbt-hover">
+                                    <div class="rbt-card-body">
+                                        <img class="w-75" src="~/files/@image.Name" alt="Card image" />
+                                    </div>
+                                </div>
+                                <div class="swiper-slide-shadow" style="opacity: 1; transition-duration: 0ms;"></div>
+                            </div>
+                            <!-- End Single Card  -->
+                            counter = counter + 1;
+                        }
+                    </div>
+                    <div class="rbt-swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+                <br />
+                <p>
+                    @Html.Raw(Model.Description)
+                </p>
+
+                <p>
+                    <b>@Localizer["vendor_code"]</b> : <i>@Model.VendorCode</i>
+                    <br />
+                    <b>@Localizer["availability"]</b> : <i>@Model.Availability</i>
+                    <br />
+                    <b>@Localizer["guarantee"]</b> : <i>@Model.Guarantee</i>
+                    <br />
+                    <b>@Localizer["state_name"]</b> : <i>@Model.State.Name</i>
+                    <br />
+                    <b>@Localizer["catalog_name"]</b> : <i>@Model.Catalog.Name</i>
+                    <br />
+                    <b>@Localizer["type_name"]</b> : <i>@Model.Type.Name</i>
+                    <br />
+                    <b>@Localizer["address"]</b> : <i>@Model.Address</i>
+                    <br />
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

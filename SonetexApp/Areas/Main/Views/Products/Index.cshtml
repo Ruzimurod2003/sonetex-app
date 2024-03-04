@@ -152,30 +152,30 @@
                             <!-- Start Single Card  -->
                             <div class="course-grid-3">
                                 <div class="rbt-card variation-01 rbt-hover">
-                                    <div class="rbt-card-img">
-                                        <a href="course-details.html">
+                                    <a asp-action="Details" asp-route-id="@product.Id">
+                                        <div class="rbt-card-img">
                                             <img src="~/files/@product.Images.FirstOrDefault().Name" alt="Card image">
-                                        </a>
-                                    </div>
-                                    <div class="rbt-card-body">
-                                        <h4 class="rbt-card-title">
-                                            @product.Name
-                                        </h4>
-
-                                        <ul class="rbt-meta">
-                                            <li>@product.Catalog.Name</li>
-                                        </ul>
-
-                                        <p class="rbt-card-text">
-                                            @product.Description
-                                        </p>
-                                        <div class="rbt-card-bottom">
-                                            <div class="rbt-price">
-                                                <span class="current-price">@product.Price</span>
-                                            </div>
-                                            @Localizer["lear_more"]
                                         </div>
-                                    </div>
+                                        <div class="rbt-card-body">
+                                            <h4 class="rbt-card-title">
+                                                @product.Name
+                                            </h4>
+
+                                            <ul class="rbt-meta">
+                                                <li>@product.Catalog.Name</li>
+                                            </ul>
+
+                                            <p class="rbt-card-text">
+                                                @product.Description
+                                            </p>
+                                            <div class="rbt-card-bottom">
+                                                <div class="rbt-price">
+                                                    <span class="current-price">@product.Price</span>
+                                                </div>
+                                                @Localizer["lear_more"]
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <!-- End Single Card  -->

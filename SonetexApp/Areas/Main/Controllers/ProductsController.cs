@@ -56,5 +56,13 @@ namespace SonetexApp.Areas.Main.Controllers
         {
             return View(viewModel);
         }
+        public IActionResult Details(int id)
+        {
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+
+            var product = _productRepository.GetProductById(currentCultureName, id);
+
+            return View(product);
+        }
     }
 }
