@@ -12,7 +12,7 @@
                         <div class=" title-wrapper">
                             <h1 class="title mb--0">@Localizer["all_categories"]</h1>
                             <p class="rbt-badge-2">
-                                @Localizer["categories_cout_of"] &nbsp; @Model.Catalogs.Count
+                                @Localizer["categories_cout_of"] &nbsp; @Model.CatalogsCount
                                 </a>
                         </div>
                         <p class="description">@Localizer["category_list_description"]</p>
@@ -52,6 +52,15 @@
                 </div>
                 <!-- End Single Card  -->
             }
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 mt--60">
+                <nav>
+                    @Html.CreatePaginationList(Model.PageInfo,
+                             x => Url.Action("Index", new { page = x }))
+                </nav>
+            </div>
         </div>
     </div>
 </div>

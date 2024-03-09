@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SonetexApp.Areas.Main.ViewModels;
 using SonetexApp.Data;
 using SonetexApp.Models;
+using SonetexApp.Repositories;
 
 namespace SonetexApp.Areas.Main.Controllers
 {
@@ -11,72 +12,35 @@ namespace SonetexApp.Areas.Main.Controllers
     public class CatalogsController : Controller
     {
         private readonly ApplicationContext _context;
+        private readonly ICatalogRepository _catalogRepository;
 
-        public CatalogsController(ApplicationContext context)
+        public CatalogsController(ApplicationContext context, ICatalogRepository catalogRepository)
         {
             _context = context;
+            _catalogRepository = catalogRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             MainCatalogVM viewModel = new MainCatalogVM();
 
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            List<Catalog> catalogs = new List<Catalog>();
-            var dbCatalogs = _context.Catalogs.Include(i => i.Manufacturers).ToList();
+            var catalogs = _catalogRepository.GetCatalogs(currentCultureName);
 
-            if (currentCultureName == "uz")
+            int pageSize = 6; // количество объектов на страницу
+            List<Catalog> catalogsPerPages = catalogs
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
             {
-                foreach (var dbCatalog in dbCatalogs)
-                {
-                    var catalog = new Catalog();
-                    catalog.Name = dbCatalog.NameUzbek;
-                    catalog.Description = dbCatalog.DescriptionUzbek;
-                    catalog.Id = dbCatalog.Id;
-                    catalog.Manufacturers = dbCatalog.Manufacturers;
-
-                    catalogs.Add(catalog);
-                }
-            }
-            else if (currentCultureName == "ru")
-            {
-                foreach (var dbCatalog in dbCatalogs)
-                {
-                    var catalog = new Catalog();
-                    catalog.Name = dbCatalog.NameRussian;
-                    catalog.Description = dbCatalog.DescriptionRussian;
-                    catalog.Id = dbCatalog.Id;
-                    catalog.Manufacturers = dbCatalog.Manufacturers;
-
-                    catalogs.Add(catalog);
-                }
-            }
-            else if (currentCultureName == "en")
-            {
-                foreach (var dbCatalog in dbCatalogs)
-                {
-                    var catalog = new Catalog();
-                    catalog.Name = dbCatalog.NameEnglish;
-                    catalog.Description = dbCatalog.DescriptionEnglish;
-                    catalog.Id = dbCatalog.Id;
-                    catalog.Manufacturers = dbCatalog.Manufacturers;
-
-                    catalogs.Add(catalog);
-                }
-            }
-            else
-            {
-                foreach (var dbCatalog in dbCatalogs)
-                {
-                    var catalog = new Catalog();
-                    catalog.Name = dbCatalog.Name;
-                    catalog.Description = dbCatalog.Description;
-                    catalog.Id = dbCatalog.Id;
-                    catalog.Manufacturers = dbCatalog.Manufacturers;
-
-                    catalogs.Add(catalog);
-                }
-            }
-            viewModel.Catalogs = catalogs;
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = catalogs.Count
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Catalogs = catalogsPerPages;
+            viewModel.CatalogsCount = catalogs.Count;
 
             return View(viewModel);
         }
