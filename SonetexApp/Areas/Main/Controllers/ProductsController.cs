@@ -51,7 +51,7 @@ namespace SonetexApp.Areas.Main.Controllers
             viewModel.Types = _typeRepository.GetTypes(currentCultureName);
             var products = _productRepository.GetProducts(currentCultureName);
 
-            int pageSize = 1; // количество объектов на страницу
+            int pageSize = 3; // количество объектов на страницу
             List<Product> productsPerPages = products
                                             .Skip((page - 1) * pageSize)
                                             .Take(pageSize)
