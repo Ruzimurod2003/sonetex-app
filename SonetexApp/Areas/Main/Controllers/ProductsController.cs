@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using SonetexApp.Areas.Main.ViewModels;
 using SonetexApp.Data;
 using SonetexApp.Models;
 using SonetexApp.Repositories;
+using System.Drawing.Printing;
 
 namespace SonetexApp.Areas.Main.Controllers
 {
@@ -33,7 +35,7 @@ namespace SonetexApp.Areas.Main.Controllers
             _typeRepository = typeRepository;
             _productRepository = productRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             MainProductVM viewModel = new MainProductVM();
             viewModel.CatalogIds = new List<int>();
@@ -47,12 +49,28 @@ namespace SonetexApp.Areas.Main.Controllers
             viewModel.Manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName);
             viewModel.States = _stateRepository.GetStates(currentCultureName);
             viewModel.Types = _typeRepository.GetTypes(currentCultureName);
-            viewModel.Products = _productRepository.GetProducts(currentCultureName);
+            var products = _productRepository.GetProducts(currentCultureName);
+
+            int pageSize = 1; // количество объектов на страницу
+            List<Product> productsPerPages = products
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = products.Count
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Products = productsPerPages;
+            viewModel.ProductsCount = products.Count;
 
             return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Index(MainProductVM viewModel)
+        public IActionResult Index(MainProductVM viewModel, int page = 1)
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 
@@ -119,8 +137,21 @@ namespace SonetexApp.Areas.Main.Controllers
                 viewModel.SearchProduct = string.Empty;
             }
 
-
             viewModel.Products = products.DistinctBy(i => i.Id).ToList();
+
+            int pageSize = 1; // количество объектов на страницу
+            List<Product> productsPerPages = products
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = products.Count
+            };
+            viewModel.PageInfo = pageInfo;
 
             return View(viewModel);
         }

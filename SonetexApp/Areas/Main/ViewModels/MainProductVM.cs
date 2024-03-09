@@ -13,4 +13,6 @@ public class MainProductVM
     public List<int> StateIds { get; set; }
     public List<int> TypeIds { get; set; }
     public string SearchProduct { get; set; }
+    public PageInfoVM PageInfo { get; set; }
+    public int ProductsCount { get; set; }
 }
