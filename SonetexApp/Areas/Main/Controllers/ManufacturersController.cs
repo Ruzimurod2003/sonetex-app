@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Areas.Main.ViewModels;
 using SonetexApp.Data;
 using SonetexApp.Models;
+using SonetexApp.Repositories;
 
 namespace SonetexApp.Areas.Main.Controllers
 {
@@ -11,77 +13,35 @@ namespace SonetexApp.Areas.Main.Controllers
     public class ManufacturersController : Controller
     {
         private readonly ApplicationContext _context;
+        private readonly IManufacturerRepository _manufacturerRepository;
 
-        public ManufacturersController(ApplicationContext context)
+        public ManufacturersController(ApplicationContext context, IManufacturerRepository manufacturerRepository)
         {
             _context = context;
+            _manufacturerRepository = manufacturerRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             MainManufacturerVM viewModel = new MainManufacturerVM();
-            viewModel.Manufacturers = new List<Manufacturer>();
-            var dbManufacturers = _context.Manufacturers
-                                    .Include(i => i.Image)
-                                    .Include(i => i.Catalogs)
-                                    .ToList();
 
-            if (currentCultureName == "uz")
+            var manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName);
+
+            int pageSize = 6; // количество объектов на страницу
+            List<Manufacturer> manufacturersPerPages = manufacturers
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
             {
-                foreach (var dbManufacturer in dbManufacturers)
-                {
-                    var manufacturer = new Manufacturer();
-                    manufacturer.Name = dbManufacturer.NameUzbek;
-                    manufacturer.Description = dbManufacturer.DescriptionUzbek;
-                    manufacturer.Image = dbManufacturer.Image;
-                    manufacturer.Catalogs = dbManufacturer.Catalogs;
-                    manufacturer.Id = dbManufacturer.Id;
-
-                    viewModel.Manufacturers.Add(manufacturer);
-                }
-            }
-            else if (currentCultureName == "ru")
-            {
-                foreach (var dbManufacturer in dbManufacturers)
-                {
-                    var manufacturer = new Manufacturer();
-                    manufacturer.Name = dbManufacturer.NameRussian;
-                    manufacturer.Description = dbManufacturer.DescriptionRussian;
-                    manufacturer.Image = dbManufacturer.Image;
-                    manufacturer.Id = dbManufacturer.Id;
-                    manufacturer.Catalogs = dbManufacturer.Catalogs;
-
-                    viewModel.Manufacturers.Add(manufacturer);
-                }
-            }
-            else if (currentCultureName == "en")
-            {
-                foreach (var dbManufacturer in dbManufacturers)
-                {
-                    var manufacturer = new Manufacturer();
-                    manufacturer.Name = dbManufacturer.NameEnglish;
-                    manufacturer.Description = dbManufacturer.DescriptionEnglish;
-                    manufacturer.Image = dbManufacturer.Image;
-                    manufacturer.Id = dbManufacturer.Id;
-                    manufacturer.Catalogs = dbManufacturer.Catalogs;
-
-                    viewModel.Manufacturers.Add(manufacturer);
-                }
-            }
-            else
-            {
-                foreach (var dbManufacturer in dbManufacturers)
-                {
-                    var manufacturer = new Manufacturer();
-                    manufacturer.Name = dbManufacturer.Name;
-                    manufacturer.Description = dbManufacturer.Description;
-                    manufacturer.Image = dbManufacturer.Image;
-                    manufacturer.Id = dbManufacturer.Id;
-                    manufacturer.Catalogs = dbManufacturer.Catalogs;
-
-                    viewModel.Manufacturers.Add(manufacturer);
-                }
-            }
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = manufacturers.Count
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Manufacturers = manufacturersPerPages;
+            viewModel.ManufacturersCount = manufacturers.Count;
 
             return View(viewModel);
         }
