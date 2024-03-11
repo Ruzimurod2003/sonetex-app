@@ -10,17 +10,17 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">@Localizer["name"]</label>
                 <input asp-for="Name" class="form-input" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Path" class="control-label"></label>
-                <input asp-for="Path" class="form-control" />
+                <label asp-for="Path" class="control-label">@Localizer["path"]</label>
+                <input asp-for="Path" class="form-input" />
                 <span asp-validation-for="Path" class="text-input"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label">@Localizer["description"]</label>
                 <input asp-for="Description" class="form-input" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
