@@ -88,6 +88,6 @@ app.MapAreaControllerRoute(
 // добавляем поддержку для контроллеров, которые располагаются вне области
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Main}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Main}/{controller=Home}/{action=TechnicalSupport}/{id?}");
 
 app.Run();

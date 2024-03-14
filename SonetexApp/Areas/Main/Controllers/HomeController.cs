@@ -31,6 +31,10 @@ namespace SonetexApp.Areas.Main.Controllers
         {
             return View();
         }
+        public IActionResult TechnicalSupport()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
