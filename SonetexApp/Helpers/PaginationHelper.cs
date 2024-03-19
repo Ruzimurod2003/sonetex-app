@@ -18,27 +18,79 @@ public static class PaginationHelper
 
         if (pageInfo.HasPreviousPage)
         {
-            TagBuilder li = new TagBuilder("li");
-
-            TagBuilder a = new TagBuilder("a");
-            a.MergeAttribute("href", pageUrl(pageInfo.PageNumber - 1));
-            a.MergeAttribute("aria-label", "Previous");
-
-            TagBuilder i = new TagBuilder("i");
-            i.AddCssClass("feather-chevron-left");
-            a.InnerHtml.AppendHtml(i);
-
-            li.InnerHtml.AppendHtml(a);
-
-            ul.InnerHtml.AppendHtml(li);
+            AddedFirstPaginationElements(ul, pageInfo.PageNumber, pageUrl);
         }
 
-        for (int i = 1; i <= pageInfo.TotalPages; i++)
+        if (pageInfo.PageNumber <= 3)
+        {
+            AddedPaginationElements(1, 3, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.TotalPages - 2, pageInfo.TotalPages, ul, pageInfo.PageNumber, pageUrl);
+        }
+        else if (pageInfo.PageNumber == 4)
+        {
+            AddedPaginationElements(1, 3, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(4, 6, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.TotalPages - 2, pageInfo.TotalPages, ul, pageInfo.PageNumber, pageUrl);
+        }
+        else if (pageInfo.PageNumber >= 5 && pageInfo.PageNumber <= pageInfo.TotalPages - 4)
+        {
+            AddedPaginationElements(1, 3, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.PageNumber - 1, pageInfo.PageNumber + 1, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.TotalPages - 2, pageInfo.TotalPages, ul, pageInfo.PageNumber, pageUrl);
+        }
+        else if (pageInfo.PageNumber == pageInfo.TotalPages - 3)
+        {
+            AddedPaginationElements(1, 3, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.TotalPages - 5, pageInfo.TotalPages - 3, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.TotalPages - 2, pageInfo.TotalPages, ul, pageInfo.PageNumber, pageUrl);
+        }
+        else if (pageInfo.PageNumber >= pageInfo.TotalPages - 2)
+        {
+            AddedPaginationElements(1, 3, ul, pageInfo.PageNumber, pageUrl);
+
+            AddedPointPaginationElements(ul, pageUrl);
+
+            AddedPaginationElements(pageInfo.TotalPages - 2, pageInfo.TotalPages, ul, pageInfo.PageNumber, pageUrl);
+        }
+
+        if (pageInfo.HasNextPage)
+        {
+            AddedLastPaginationElements(ul, pageInfo.PageNumber, pageUrl);
+        }
+
+        var writer = new System.IO.StringWriter();
+        ul.WriteTo(writer, HtmlEncoder.Default);
+        return new HtmlString(writer.ToString());
+    }
+    private static void AddedPaginationElements(int from, int to, TagBuilder ul, int pageNumber, Func<int, string> pageUrl)
+    {
+        for (int i = from; i <= to; i++)
         {
             TagBuilder li = new TagBuilder("li");
             // если текущая страница, то выделяем ее,
             // например, добавляя класс
-            if (i == pageInfo.PageNumber)
+            if (i == pageNumber)
             {
                 li.AddCssClass("active");
             }
@@ -51,26 +103,45 @@ public static class PaginationHelper
 
             ul.InnerHtml.AppendHtml(li);
         }
+    }
+    private static void AddedLastPaginationElements(TagBuilder ul, int pageNumber, Func<int, string> pageUrl)
+    {
+        TagBuilder li = new TagBuilder("li");
 
-        if (pageInfo.HasNextPage)
-        {
-            TagBuilder li = new TagBuilder("li");
+        TagBuilder a = new TagBuilder("a");
+        a.MergeAttribute("href", pageUrl(pageNumber + 1));
+        a.MergeAttribute("aria-label", "Next");
 
-            TagBuilder a = new TagBuilder("a");
-            a.MergeAttribute("href", pageUrl(pageInfo.PageNumber + 1));
-            a.MergeAttribute("aria-label", "Next");
+        TagBuilder i = new TagBuilder("i");
+        i.AddCssClass("feather-chevron-right");
+        a.InnerHtml.AppendHtml(i);
 
-            TagBuilder i = new TagBuilder("i");
-            i.AddCssClass("feather-chevron-right");
-            a.InnerHtml.AppendHtml(i);
+        li.InnerHtml.AppendHtml(a);
 
-            li.InnerHtml.AppendHtml(a);
+        ul.InnerHtml.AppendHtml(li);
+    }
+    private static void AddedFirstPaginationElements(TagBuilder ul, int pageNumber, Func<int, string> pageUrl)
+    {
+        TagBuilder li = new TagBuilder("li");
 
-            ul.InnerHtml.AppendHtml(li);
-        }
+        TagBuilder a = new TagBuilder("a");
+        a.MergeAttribute("href", pageUrl(pageNumber - 1));
+        a.MergeAttribute("aria-label", "Previous");
 
-        var writer = new System.IO.StringWriter();
-        ul.WriteTo(writer, HtmlEncoder.Default);
-        return new HtmlString(writer.ToString());
+        TagBuilder i = new TagBuilder("i");
+        i.AddCssClass("feather-chevron-left");
+        a.InnerHtml.AppendHtml(i);
+
+        li.InnerHtml.AppendHtml(a);
+
+        ul.InnerHtml.AppendHtml(li);
+    }
+    private static void AddedPointPaginationElements(TagBuilder ul, Func<int, string> pageUrl)
+    {
+        TagBuilder liPoint = new TagBuilder("li");
+
+        liPoint.InnerHtml.AppendHtml("...");
+
+        ul.InnerHtml.AppendHtml(liPoint);
     }
 }
