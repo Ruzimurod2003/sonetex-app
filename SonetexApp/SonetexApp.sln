@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.9.34607.119
+VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonetexApp", "SonetexApp.csproj", "{8109F46D-BA3A-4AF3-A9C0-627B5C1852E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonetexApp", "SonetexApp.csproj", "{F710A7EF-6DD9-4685-B05E-CF9CFAE31653}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8109F46D-BA3A-4AF3-A9C0-627B5C1852E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8109F46D-BA3A-4AF3-A9C0-627B5C1852E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8109F46D-BA3A-4AF3-A9C0-627B5C1852E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8109F46D-BA3A-4AF3-A9C0-627B5C1852E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F710A7EF-6DD9-4685-B05E-CF9CFAE31653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F710A7EF-6DD9-4685-B05E-CF9CFAE31653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F710A7EF-6DD9-4685-B05E-CF9CFAE31653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F710A7EF-6DD9-4685-B05E-CF9CFAE31653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {96446281-9539-495C-992B-5C0D25EA37B1}
+		SolutionGuid = {5FB1DA3A-8A47-4F11-AFE9-F658494DA12A}
 	EndGlobalSection
 EndGlobal
