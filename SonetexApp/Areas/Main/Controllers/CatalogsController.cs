@@ -19,28 +19,15 @@ namespace SonetexApp.Areas.Main.Controllers
             _context = context;
             _catalogRepository = catalogRepository;
         }
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string firstLetter = null)
         {
             MainCatalogVM viewModel = new MainCatalogVM();
 
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             var catalogs = _catalogRepository.GetCatalogs(currentCultureName);
 
-            int pageSize = 6; // количество объектов на страницу
-            List<Catalog> catalogsPerPages = catalogs
-                                            .Skip((page - 1) * pageSize)
-                                            .Take(pageSize)
-                                            .ToList();
-
-            PageInfoVM pageInfo = new PageInfoVM
-            {
-                PageNumber = page,
-                PageSize = pageSize,
-                TotalItems = catalogs.Count
-            };
-            viewModel.PageInfo = pageInfo;
-            viewModel.Catalogs = catalogsPerPages;
-            viewModel.CatalogsCount = catalogs.Count;
+            viewModel.Catalogs = (string.IsNullOrEmpty(firstLetter)) ? catalogs : catalogs.Where(i => i.Name.Substring(0, 1).ToUpper() == firstLetter.ToUpper()).ToList();
+            viewModel.FirstLetters = catalogs.Select(i => i.Name.Substring(0, 1).ToUpper()).Distinct().ToList();
 
             return View(viewModel);
         }
