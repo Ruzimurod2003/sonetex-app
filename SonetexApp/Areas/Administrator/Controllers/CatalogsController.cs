@@ -40,15 +40,15 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
             else
             {
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.Name.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameRussian.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameUzbek.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameEnglish.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.Description.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionRussian.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionUzbek.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionEnglish.Contains(searchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.Id.ToString().Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Name.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameRussian.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameUzbek.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameEnglish.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Description.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionRussian.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionUzbek.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionEnglish.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Id.ToString().ToUpper().Contains(searchString.ToUpper())).ToListAsync());
             }
             catalogs = catalogs.Distinct().ToList();
 
@@ -85,15 +85,15 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
             else
             {
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameRussian.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameUzbek.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameEnglish.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionRussian.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionUzbek.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionEnglish.Contains(viewModel.SearchString)).ToListAsync());
-                catalogs.AddRange(await _context.Catalogs.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Name.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameRussian.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameUzbek.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameEnglish.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Description.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionRussian.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionUzbek.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionEnglish.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Id.ToString().ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
             }
 
             catalogs = catalogs.Distinct().ToList();

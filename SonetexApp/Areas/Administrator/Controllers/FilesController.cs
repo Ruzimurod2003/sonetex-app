@@ -30,10 +30,10 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
             else
             {
-                files.AddRange(await _context.Files.Where(i => i.Name.Contains(searchString)).ToListAsync());
-                files.AddRange(await _context.Files.Where(i => i.Path.Contains(searchString)).ToListAsync());
-                files.AddRange(await _context.Files.Where(i => i.Description.Contains(searchString)).ToListAsync());
-                files.AddRange(await _context.Files.Where(i => i.Id.ToString().Contains(searchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Name.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Path.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Description.ToUpper().Contains(searchString.ToUpper())).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Id.ToString().ToUpper().Contains(searchString.ToUpper())).ToListAsync());
             }
             files = files.Distinct().ToList();
 
@@ -69,10 +69,10 @@ namespace SonetexApp.Areas.Administrator.Controllers
             }
             else
             {
-                files.AddRange(await _context.Files.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
-                files.AddRange(await _context.Files.Where(i => i.Path.Contains(viewModel.SearchString)).ToListAsync());
-                files.AddRange(await _context.Files.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
-                files.AddRange(await _context.Files.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Name.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Path.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Description.ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Id.ToString().ToUpper().Contains(viewModel.SearchString.ToUpper())).ToListAsync());
             }
             files = files.Distinct().ToList();
             int page = 1;
