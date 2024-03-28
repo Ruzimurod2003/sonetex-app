@@ -67,7 +67,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             return View(viewModel);
         }
-        // POST: Administrator/Files
+        // POST: Administrator/Manufacturers
         [HttpPost]
         public async Task<IActionResult> Index(AdministratorIndexManufacturerVM viewModel)
         {

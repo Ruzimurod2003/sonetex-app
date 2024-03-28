@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -28,10 +29,93 @@ namespace SonetexApp.Areas.Administrator.Controllers
         }
 
         // GET: Administrator/Catalogs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString = null, int page = 1)
         {
-            var applicationContext = _context.Catalogs;
-            return View(await applicationContext.ToListAsync());
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            AdministratorIndexCatalogVM viewModel = new AdministratorIndexCatalogVM();
+            var catalogs = new List<Catalog>();
+            if (string.IsNullOrEmpty(searchString))
+            {
+                catalogs = await _context.Catalogs.ToListAsync();
+            }
+            else
+            {
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Name.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameRussian.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameUzbek.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameEnglish.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Description.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionRussian.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionUzbek.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionEnglish.Contains(searchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Id.ToString().Contains(searchString)).ToListAsync());
+            }
+            catalogs = catalogs.Distinct().ToList();
+
+            int pageSize = 50; // количество объектов на страницу
+            List<Catalog> catalogsPerPages = catalogs
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = catalogs.Count,
+                PreviousPageNumber = page - 1,
+                NextPageNumber = page + 1,
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Catalogs = catalogsPerPages;
+            viewModel.SearchString = searchString;
+
+            return View(viewModel);
+        }
+        // POST: Administrator/Catalogs
+        [HttpPost]
+        public async Task<IActionResult> Index(AdministratorIndexCatalogVM viewModel)
+        {
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            var catalogs = new List<Catalog>();
+
+            if (string.IsNullOrEmpty(viewModel.SearchString))
+            {
+                catalogs = await _context.Catalogs.ToListAsync();
+            }
+            else
+            {
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameRussian.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameUzbek.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.NameEnglish.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionRussian.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionUzbek.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.DescriptionEnglish.Contains(viewModel.SearchString)).ToListAsync());
+                catalogs.AddRange(await _context.Catalogs.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+            }
+
+            catalogs = catalogs.Distinct().ToList();
+            int page = 1;
+            int pageSize = 50; // количество объектов на страницу
+            List<Catalog> catalogsPerPage = catalogs
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = catalogs.Count,
+                PreviousPageNumber = page - 1,
+                NextPageNumber = page + 1,
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Catalogs = catalogsPerPage;
+
+            return View(viewModel);
         }
 
         // GET: Administrator/Catalogs/Details/5
