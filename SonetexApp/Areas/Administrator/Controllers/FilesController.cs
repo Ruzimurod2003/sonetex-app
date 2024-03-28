@@ -8,6 +8,7 @@ using SonetexApp.Data;
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize]
     public class FilesController : Controller
     {
         private readonly ApplicationContext _context;
@@ -62,11 +63,17 @@ namespace SonetexApp.Areas.Administrator.Controllers
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             var files = new List<Models.File>();
-
-            files.AddRange(await _context.Files.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
-            files.AddRange(await _context.Files.Where(i => i.Path.Contains(viewModel.SearchString)).ToListAsync());
-            files.AddRange(await _context.Files.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
-            files.AddRange(await _context.Files.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+            if (string.IsNullOrEmpty(viewModel.SearchString))
+            {
+                files = await _context.Files.ToListAsync();
+            }
+            else
+            {
+                files.AddRange(await _context.Files.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Path.Contains(viewModel.SearchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+            }
             files = files.Distinct().ToList();
             int page = 1;
             int pageSize = 50; // количество объектов на страницу

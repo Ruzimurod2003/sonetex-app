@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SonetexApp.Areas.Administrator.ViewModels;
 using SonetexApp.Data;
+using SonetexApp.Models;
 
 namespace SonetexApp.Areas.Administrator.Controllers
 {
@@ -20,9 +23,95 @@ namespace SonetexApp.Areas.Administrator.Controllers
         }
 
         // GET: Administrator/Manufacturers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString = null, int page = 1)
         {
-            return View(await _context.Manufacturers.ToListAsync());
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            AdministratorIndexManufacturerVM viewModel = new AdministratorIndexManufacturerVM();
+            var manufacturers = new List<Manufacturer>();
+            if (string.IsNullOrEmpty(searchString))
+            {
+                manufacturers = await _context.Manufacturers.ToListAsync();
+            }
+            else
+            {
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.Name.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.NameRussian.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.NameUzbek.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.NameEnglish.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.Description.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.DescriptionRussian.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.DescriptionUzbek.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.DescriptionEnglish.Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.ImageId.ToString().Contains(searchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.Id.ToString().Contains(searchString)).ToListAsync());
+            }
+            manufacturers = manufacturers.Distinct().ToList();
+
+            int pageSize = 50; // количество объектов на страницу
+            List<Manufacturer> manufacturersPerPages = manufacturers
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = manufacturers.Count,
+                PreviousPageNumber = page - 1,
+                NextPageNumber = page + 1,
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Manufacturers = manufacturersPerPages;
+            viewModel.SearchString = searchString;
+
+            return View(viewModel);
+        }
+        // POST: Administrator/Files
+        [HttpPost]
+        public async Task<IActionResult> Index(AdministratorIndexManufacturerVM viewModel)
+        {
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            var manufacturers = new List<Manufacturer>();
+
+            if (string.IsNullOrEmpty(viewModel.SearchString))
+            {
+                manufacturers = await _context.Manufacturers.ToListAsync();
+            }
+            else
+            {
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.NameRussian.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.NameUzbek.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.NameEnglish.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.DescriptionRussian.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.DescriptionUzbek.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.DescriptionEnglish.Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.ImageId.ToString().Contains(viewModel.SearchString)).ToListAsync());
+                manufacturers.AddRange(await _context.Manufacturers.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+            }
+
+            manufacturers = manufacturers.Distinct().ToList();
+            int page = 1;
+            int pageSize = 50; // количество объектов на страницу
+            List<Manufacturer> manufacturersPerPages = manufacturers
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = manufacturers.Count,
+                PreviousPageNumber = page - 1,
+                NextPageNumber = page + 1,
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Manufacturers = manufacturersPerPages;
+
+            return View(viewModel);
         }
 
         // GET: Administrator/Manufacturers/Details/5
