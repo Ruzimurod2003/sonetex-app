@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SonetexApp.Areas.Administrator.ViewModels;
 using SonetexApp.Data;
 
 namespace SonetexApp.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
-    [Authorize]
     public class FilesController : Controller
     {
         private readonly ApplicationContext _context;
@@ -17,9 +18,75 @@ namespace SonetexApp.Areas.Administrator.Controllers
         }
 
         // GET: Administrator/Files
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString = null, int page = 1)
         {
-            return View(await _context.Files.ToListAsync());
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            AdministratorFileVM viewModel = new AdministratorFileVM();
+            var files = new List<Models.File>();
+            if (string.IsNullOrEmpty(searchString))
+            {
+                files = await _context.Files.ToListAsync();
+            }
+            else
+            {
+                files.AddRange(await _context.Files.Where(i => i.Name.Contains(searchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Path.Contains(searchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Description.Contains(searchString)).ToListAsync());
+                files.AddRange(await _context.Files.Where(i => i.Id.ToString().Contains(searchString)).ToListAsync());
+            }
+            files = files.Distinct().ToList();
+
+            int pageSize = 50; // количество объектов на страницу
+            List<Models.File> filesPerPages = files
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = files.Count,
+                PreviousPageNumber = page - 1,
+                NextPageNumber = page + 1,
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Files = filesPerPages;
+            viewModel.SearchString = searchString;
+
+            return View(viewModel);
+        }
+        // POST: Administrator/Files
+        [HttpPost]
+        public async Task<IActionResult> Index(AdministratorFileVM viewModel)
+        {
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            var files = new List<Models.File>();
+
+            files.AddRange(await _context.Files.Where(i => i.Name.Contains(viewModel.SearchString)).ToListAsync());
+            files.AddRange(await _context.Files.Where(i => i.Path.Contains(viewModel.SearchString)).ToListAsync());
+            files.AddRange(await _context.Files.Where(i => i.Description.Contains(viewModel.SearchString)).ToListAsync());
+            files.AddRange(await _context.Files.Where(i => i.Id.ToString().Contains(viewModel.SearchString)).ToListAsync());
+            files = files.Distinct().ToList();
+            int page = 1;
+            int pageSize = 50; // количество объектов на страницу
+            List<Models.File> filesPerPages = files
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList();
+
+            PageInfoVM pageInfo = new PageInfoVM
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = files.Count,
+                PreviousPageNumber = page - 1,
+                NextPageNumber = page + 1,
+            };
+            viewModel.PageInfo = pageInfo;
+            viewModel.Files = filesPerPages;
+
+            return View(viewModel);
         }
 
         // GET: Administrator/Files/Details/5

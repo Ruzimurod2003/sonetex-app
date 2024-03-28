@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-lg-12 mt--60">
                 <nav>
-                    @Html.CreatePaginationList(Model.PageInfo,
+                    @Html.CreatePaginationListForMain(Model.PageInfo,
                              x => Url.Action("Index", new { page = x }))
                 </nav>
             </div>

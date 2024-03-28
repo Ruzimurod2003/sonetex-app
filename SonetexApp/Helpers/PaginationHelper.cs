@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SonetexApp.Areas.Main.ViewModels;
 using System.Text;
 using System.Text.Encodings.Web;
 
 namespace SonetexApp.Helpers;
 public static class PaginationHelper
 {
-    public static HtmlString CreatePaginationList(
+    public static HtmlString CreatePaginationListForMain(
         this IHtmlHelper html,
-        PageInfoVM pageInfo,
+        Areas.Main.ViewModels.PageInfoVM pageInfo,
         Func<int, string> pageUrl)
     {
         StringBuilder result = new StringBuilder();
@@ -143,5 +142,51 @@ public static class PaginationHelper
         liPoint.InnerHtml.AppendHtml("...");
 
         ul.InnerHtml.AppendHtml(liPoint);
+    }
+
+    public static HtmlString CreatePaginationListForAdministrator(
+        this IHtmlHelper html,
+        Areas.Administrator.ViewModels.PageInfoVM pageInfo,
+        Func<int, string> pageUrl)
+    {
+        var writer = new System.IO.StringWriter();
+
+        {
+            TagBuilder liPoint = new TagBuilder("li");
+            TagBuilder aPoint = new TagBuilder("a");
+            aPoint.InnerHtml.Append("***");
+            liPoint.InnerHtml.AppendHtml(aPoint);
+            liPoint.WriteTo(writer, HtmlEncoder.Default);
+        }
+
+        for (int i = pageInfo.PageNumber - 1; i <= pageInfo.PageNumber + 1; i++)
+        {
+            if (i <= 0 || i > pageInfo.TotalPages)
+            {
+                continue;
+            }
+            TagBuilder li = new TagBuilder("li");
+            // если текущая страница, то выделяем ее,
+            // например, добавляя класс
+            if (i == pageInfo.PageNumber)
+            {
+                li.AddCssClass("active");
+            }
+            TagBuilder a = new TagBuilder("a");
+            a.MergeAttribute("href", pageUrl(i));
+            a.InnerHtml.Append(i.ToString());
+            li.InnerHtml.AppendHtml(a);
+            li.WriteTo(writer, HtmlEncoder.Default);
+        }
+
+        {
+            TagBuilder liPoint = new TagBuilder("li");
+            TagBuilder aPoint = new TagBuilder("a");
+            aPoint.InnerHtml.Append("***");
+            liPoint.InnerHtml.AppendHtml(aPoint);
+            liPoint.WriteTo(writer, HtmlEncoder.Default);
+        }
+
+        return new HtmlString(writer.ToString());
     }
 }
