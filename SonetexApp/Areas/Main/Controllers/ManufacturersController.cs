@@ -20,28 +20,17 @@ namespace SonetexApp.Areas.Main.Controllers
             _context = context;
             _manufacturerRepository = manufacturerRepository;
         }
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string firstLetter = null)
         {
-            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             MainManufacturerVM viewModel = new MainManufacturerVM();
 
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             var manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName);
 
-            int pageSize = 6; // количество объектов на страницу
-            List<Manufacturer> manufacturersPerPages = manufacturers
-                                            .Skip((page - 1) * pageSize)
-                                            .Take(pageSize)
-                                            .ToList();
-
-            PageInfoVM pageInfo = new PageInfoVM
-            {
-                PageNumber = page,
-                PageSize = pageSize,
-                TotalItems = manufacturers.Count
-            };
-            viewModel.PageInfo = pageInfo;
-            viewModel.Manufacturers = manufacturersPerPages;
-            viewModel.ManufacturersCount = manufacturers.Count;
+            viewModel.Manufacturers = (string.IsNullOrEmpty(firstLetter)) ?
+                                    manufacturers.OrderBy(i => i.Id).ToList() :
+                                        manufacturers.Where(i => i.Name.Substring(0, 1).ToUpper() == firstLetter.ToUpper()).OrderBy(i => i.Id).ToList();
+            viewModel.FirstLetters = manufacturers.Select(i => i.Name.Substring(0, 1).ToUpper()).OrderBy(i => i).Distinct().ToList();
 
             return View(viewModel);
         }

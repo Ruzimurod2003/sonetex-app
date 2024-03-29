@@ -11,39 +11,70 @@
                 </div>
             </div>
         </div>
-        <div class="row g-5">
-            @foreach (var manufacturer in Model.Manufacturers)
+
+        <br />
+        <div class="row" style="text-align:center;">
+            <div class="items-center">
+                <a asp-action="Index" asp-controller="Manufacturers" asp-route-firstLetter="">
+                    @Localizer["select_all"]
+                </a>
+
+                @foreach (var firstLetter in Model.FirstLetters)
+                {
+                    <span>*</span>
+                    <a asp-action="Index" asp-controller="Manufacturers" asp-route-firstLetter="@firstLetter">
+                        @firstLetter
+                    </a>
+                }
+            </div>
+        </div>
+        <br />
+
+
+        <div class="row g-3">
+            @foreach (var manufacturer in Model.Manufacturers.ToList())
             {
-                <!-- Start Single Team  -->
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="rbt-team team-style-default style-three rbt-hover">
-                        <div class="inner">
-                            <a asp-action="Details" asp-route-id="@manufacturer.Id">
-                                <div class="thumbnail">
-                                    <img src="~/files/@manufacturer.Image.Name">
-                                </div>
-                                <div class="content">
-                                    <div class="title-wrapper">
-                                        <p class="rbt-badge-2">
-                                            @manufacturer.Catalogs.Count @Localizer["catalogs_cout_of"]
-                                        </p>
-                                    </div>
-                                    <h2 class="title">@manufacturer.Name</h2>
-                                </div>
+                if (@Model.Manufacturers.IndexOf(manufacturer) >= 54)
+                {
+                    <div id="manufacturer_@Model.Manufacturers.IndexOf(manufacturer)" class="col-lg-2 col-md-4 col-sm-6 col-6" style="display:none;">
+                        <div class="instagram-grid">
+                            <a asp-action="Details" asp-controller="Manufacturers" asp-route-id="@manufacturer.Id">
+                                <img src="~/files/@manufacturer.Image.Name" alt="instagram">
+                                <span class="user-info">
+                                    <span class="user-name">@manufacturer.Name</span>
+                                </span>
                             </a>
                         </div>
                     </div>
-                </div>
-                <!-- End Single Team  -->
+                }
+                else
+                {
+                    <div id="manufacturer_@Model.Manufacturers.IndexOf(manufacturer)" class="col-lg-2 col-md-4 col-sm-6 col-6">
+                        <div class="instagram-grid">
+                            <a asp-action="Details" asp-controller="Manufacturers" asp-route-id="@manufacturer.Id">
+                                <img src="~/files/@manufacturer.Image.Name" alt="instagram">
+                                <span class="user-info">
+                                    <span class="user-name">@manufacturer.Name</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                }
             }
         </div>
+        <br />
 
-        <div class="row">
-            <div class="col-lg-12 mt--60">
-                <nav>
-                    @Html.CreatePaginationListForMain(Model.PageInfo,
-                             x => Url.Action("Index", new { page = x }))
-                </nav>
+        <div class="row g-3" style="text-align:center;">
+            <div class="col-12">
+                <input type="hidden" name="counter" id="counter" value="1" />
+                <button class="rbt-btn btn-gradient radius-round btn-md" id="counter_button" name="counter_button" onclick="
+                        var counter=parseInt(document.getElementById('counter').value);
+                        for (var i=counter * 54; i < counter * 54 + 54; i++) {
+                            document.getElementById('manufacturer_' + i.toString()).style.display = 'block';
+                        }
+                        document.getElementById('counter').value = (counter + 1);">
+                    <span class="btn-text">Yana ko'rsatish</span>
+                </button>
             </div>
         </div>
     </div>

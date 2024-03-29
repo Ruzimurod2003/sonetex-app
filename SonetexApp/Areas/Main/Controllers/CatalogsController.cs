@@ -26,8 +26,10 @@ namespace SonetexApp.Areas.Main.Controllers
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             var catalogs = _catalogRepository.GetCatalogs(currentCultureName);
 
-            viewModel.Catalogs = (string.IsNullOrEmpty(firstLetter)) ? catalogs : catalogs.Where(i => i.Name.Substring(0, 1).ToUpper() == firstLetter.ToUpper()).ToList();
-            viewModel.FirstLetters = catalogs.Select(i => i.Name.Substring(0, 1).ToUpper()).Distinct().ToList();
+            viewModel.Catalogs = (string.IsNullOrEmpty(firstLetter)) ?
+                                    catalogs.OrderBy(i => i.Id).ToList() :
+                                        catalogs.Where(i => i.Name.Substring(0, 1).ToUpper() == firstLetter.ToUpper()).OrderBy(i => i.Id).ToList();
+            viewModel.FirstLetters = catalogs.Select(i => i.Name.Substring(0, 1).ToUpper()).OrderBy(i => i).Distinct().ToList();
 
             return View(viewModel);
         }
