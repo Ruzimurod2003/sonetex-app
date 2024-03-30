@@ -39,8 +39,8 @@ namespace SonetexApp.Areas.Main.Controllers
         {
             MainHomeIndexVM viewModel = new MainHomeIndexVM();
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            var catalogs = _catalogRepository.GetCatalogs(currentCultureName).Take(12).ToList();
-            var manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName).Take(12).ToList();
+            var catalogs = _catalogRepository.GetCatalogs(currentCultureName, 12).ToList();
+            var manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName, 12).ToList();
             var partners = _context.Partners.Include(i => i.Image).ToList();
 
             viewModel.Catalogs = catalogs;
