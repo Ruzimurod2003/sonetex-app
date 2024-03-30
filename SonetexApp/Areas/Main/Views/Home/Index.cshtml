@@ -1,129 +1,524 @@
-﻿<!-- Start Slider Area  -->
-<div class="rbt-splash-slider d-flex align-items-center">
-    <div class="wrapper">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-lg-12 col-xl-6 order-2 order-xl-1">
-                    <div class="inner">
-                        <h1 class="title" style="font-size: 50px;">
-                            @Localizer["the_word_next_to_the_video_is_main_index"]
-                        </h1>
-                        <p class="description">
-                            @Localizer["the_word_next_to_the_video_is_main_index_detail"]
-                        </p>
+﻿@model MainHomeIndexVM
+<main class="rbt-main-wrapper">
+    <!-- Start Banner Area -->
+    <div class="rbt-banner-area rbt-banner-8 variation-01 bg_image bg_image--9">
+        <div class="wrapper w-100">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 order-2 order-lg-1">
+                        <div class="content">
+                            <div class="inner">
+                                <h1 class="title">@Localizer["sonetex"]</h1>
+                                <p class="description has-medium-font-size mt--20">
+                                    @Localizer["main_sonetex_description"]
+                                </p>
+                                <div class="slider-btn rbt-button-group justify-content-start">
+                                    <a class="rbt-btn btn-gradient radius-round hover-icon-reverse" asp-action="ContactUs">
+                                        <span class="icon-reverse-wrapper">
+                                            <span class="btn-text">@Localizer["contact_with_us"]</span>
+                                            <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                            <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                        </span>
+                                    </a>
+                                    <a class="rbt-btn radius-round hover-icon-reverse btn-white" asp-action="Index" asp-controller="Manufacturers">
+                                        <span class="icon-reverse-wrapper">
+                                            <span class="btn-text">@Localizer["our_manufacturers"]</span>
+                                            <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                            <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 offset-xl-1 order-1 order-lg-2">
+                        <div class="video-popup-wrapper">
+                            <iframe width="600" height="500"
+                                    src="https://www.youtube.com/embed/WKji4zjIFK4" title="sonetex.uz"
+                                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-xl-6 order-1 order-xl-2">
-                    <div class="video-popup-wrapper">
-                        <iframe class="w-100 rbt-radius" width="1280" height="536"
-                                src="https://www.youtube.com/embed/vMXg4V-fKGw"
-                                title="test title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        <a class="rbt-btn rounded-player-2 popup-video position-to-top with-animation d-none" href="https://www.youtube.com/watch?v=nA1Aqp0sPQo">
-                            <span class="play-icon"></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner Area -->
+    <!-- Start Manufacturers Area -->
+    <div class="rbt-categories-area bg-color-white rbt-section-gapBottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">@Localizer["our_manufacturer_description"]</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 mt--20">
+                @foreach (var manufacturer in Model.Manufacturers)
+                {
+                    <!-- Start Category Box Layout  -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a class="rbt-cat-box rbt-cat-box-1 text-center" asp-action="Details" asp-controller="Manufacturers" asp-route-id="@manufacturer.Id">
+                            <div class="inner">
+                                <div class="icons">
+                                    <img src="~/files/@manufacturer.Image.Name" alt="Icons Images">
+                                </div>
+                                <div class="content">
+                                    <h5 class="title">@manufacturer.Name</h5>
+                                    <div class="read-more-btn">
+                                        <span class="rbt-btn-link">
+                                            @manufacturer.Catalogs.Count @Localizer["catalogs_cout_of"]
+                                            <i class="feather-arrow-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </a>
-                        <div class="banner-group-shape">
-                            <div class="shape-image scene shape-4">
-                                <span data-depth="2">
-                                    <img src="~/lib/main_template/assets/images/splash/icons/shape-4.png" alt="Shape Images">
-                                </span>
-                            </div>
-                            <div class="shape-image scene shape-5">
-                                <span data-depth="-2">
-                                    <img src="~/lib/main_template/assets/images/splash/icons/shape-5.png" alt="Shape Images">
-                                </span>
-                            </div>
-                            <div class="shape-image scene shape-6">
-                                <span data-depth="5">
-                                    <img src="~/lib/main_template/assets/images/splash/icons/shape-6.png" alt="Shape Images">
-                                </span>
-                            </div>
-                            <div class="shape-image scene shape-7">
-                                <span data-depth="-3">
-                                    <img src="~/lib/main_template/assets/images/splash/icons/shape-7.png" alt="Shape Images">
-                                </span>
+                    </div>
+                    <!-- End Category Box Layout  -->
+                }
+            </div>
+            <br />
+            <div class="row g-3" style="text-align:center;">
+                <div class="col-12">
+                    <a class="rbt-btn btn-gradient radius-round btn-md" asp-action="Index" asp-controller="Manufacturers">
+                        <span class="btn-text">@Localizer["all_manufacturers"]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Eng Manufacturers Area -->
+    <!-- Start Counterup Area  -->
+    <div class="rbt-counterup-area rbt-section-gapBottom">
+        <div class="container">
+            <div class="row mb--60">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">@Localizer["our_company_statistics"]</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 hanger-line">
+                <!-- Start Single Counter  -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
+                        <div class="top-circle-shape"></div>
+                        <div class="inner">
+                            <div class="content">
+                                <h3 class="counter">
+                                    <span class="odometer" data-count="1000">00</span>
+                                </h3>
+                                <span class="subtitle">@Localizer["our_categories"]</span>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- End Single Counter  -->
+                <!-- Start Single Counter  -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--60 mt_md--30 mt_sm--30 mt_mobile--60">
+                    <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
+                        <div class="top-circle-shape"></div>
+                        <div class="inner">
+                            <div class="content">
+                                <h3 class="counter">
+                                    <span class="odometer" data-count="8000">00</span>
+                                </h3>
+                                <span class="subtitle">@Localizer["our_manufacturers"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Counter  -->
+                <!-- Start Single Counter  -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt_md--60 mt_sm--60">
+                    <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
+                        <div class="top-circle-shape"></div>
+                        <div class="inner">
+                            <div class="content">
+                                <h3 class="counter">
+                                    <span class="odometer" data-count="100000">00</span>
+                                </h3>
+                                <span class="subtitle">@Localizer["our_products"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Counter  -->
+                <!-- Start Single Counter  -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--60 mt_md--30 mt_sm--30 mt_mobile--60">
+                    <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
+                        <div class="top-circle-shape"></div>
+                        <div class="inner">
+                            <div class="content">
+                                <h3 class="counter">
+                                    <span class="odometer" data-count="100">00</span>
+                                </h3>
+                                <span class="subtitle">@Localizer["our_partners"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Counter  -->
             </div>
+        </div>
+    </div>
+    <!-- End Counterup Area  -->
+    <!-- Start Course Banner Area  -->
+    <div class="rbt-course-banner-area rbt-section-gap bg-color-darker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner">
+                        <div class="section-title text-center mb--60">
+                            <h2 class="title color-white">
+                                <span class="theme-gradient">
+                                    @Localizer["why_work_with_us"]
+                                </span>
+                            </h2>
+                            <div class="rbt-button-group mt--30">
+                                <a class="rbt-btn btn-gradient hover-icon-reverse" asp-action="ContactUs">
+                                    <span class="icon-reverse-wrapper">
+                                        <span class="btn-text">@Localizer["contact_with_us"]</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
 
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="splash-service-main position-relative">
-                        <div class="service-wrapper service-white">
-                            <div class="row g-0">
-                                <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12 service__style--column">
-                                    <div class="service service__style--1">
-                                        <div class="icon">
-                                            <img src="~/lib/main_template/assets/images/icons/icons-01.png" alt="Icon Images">
+                        <div class="row g-5">
+                            <!-- Start Single Feature Box  -->
+                            <div class="col-lg-12">
+                                <div class="modern-course-features-box h-100">
+                                    <div class="inner">
+                                        <div class="thumbnail">
+                                            <img src="~/files/logistika_image_main_page.png" alt="Image">
                                         </div>
                                         <div class="content">
-                                            <h4 class="title">@Localizer["brush_courses_title"]</h4>
+                                            <span class="rbt-badge-6 bg-secondary-opacity">@Localizer["our_superiority_over_others"]</span>
+                                            <h2 class="title mt--10">@Localizer["our_superiority_over_others_title"]</h2>
                                             <p>
-                                                @Localizer["brush_courses_description"]
+                                                @Localizer["our_superiority_over_others_description"]
                                             </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12 service__style--column">
-                                    <div class="service service__style--1">
-                                        <div class="icon">
-                                            <img src="~/lib/main_template/assets/images/icons/icons-02.png" alt="Icon Images">
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title">@Localizer["on_computers"]</h4>
-                                            <p>
-                                                @Localizer["on_computers_description"]
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12 service__style--column">
-                                    <div class="service service__style--1">
-                                        <div class="icon">
-                                            <img src="~/lib/main_template/assets/images/icons/icons-03.png" alt="Icon Images">
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title">@Localizer["communication_with_teachers_as_well"]</h4>
-                                            <p>
-                                                @Localizer["communication_with_teachers_as_well_description"]
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12 service__style--column">
-                                    <div class="service service__style--1">
-                                        <div class="icon">
-                                            <img src="~/lib/main_template/assets/images/icons/icons-04.png" alt="Icon Images">
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title">@Localizer["everything_is_easy"]</h4>
-                                            <p>
-                                                @Localizer["everything_is_easy_description"]
-                                            </p>
+                                            <ul class="course-feature-list">
+                                                <li>
+                                                    <div class="icon">
+                                                        <img src="~/files/card-icon-1.png" alt="Image Icon">
+                                                    </div>
+                                                    <div class="feature-content">
+                                                        <h4 class="featute-title">400k+ <span>@Localizer["to_delivery"]</span></h4>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Single Feature Box  -->
+                            <!-- Start Single Feature Box  -->
+                            <div class="col-lg-6">
+                                <div class="modern-course-features-box one-colume-grid h-100">
+                                    <div class="inner">
+                                        <div class="thumbnail">
+                                            <img src="~/files/certificate_company.jpg" alt="Image">
+                                        </div>
+                                        <div class="content">
+                                            <h2 class="title">@Localizer["our_certificate"]</h2>
+                                            <p>@Localizer["our_certificate_description"]</p>
+                                            <ul class="course-feature-list">
+                                                <li>
+                                                    <div class="icon">
+                                                        <img src="~/files/card-icon-11.png" alt="Image Icon">
+                                                    </div>
+                                                    <div class="feature-content">
+                                                        <h4 class="featute-title">4+ <span>@Localizer["number_of_admits"]</span></h4>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Feature Box  -->
+                            <!-- Start Single Feature Box  -->
+                            <div class="col-lg-6">
+                                <div class="modern-course-features-box grid-content-reverse h-100">
+                                    <div class="inner">
+                                        <div class="rbt-image-gallery-wrapper">
+                                            <div class="swiper modern-course-carousel-activation rbt-arrow-between swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+                                                <div class="swiper-wrapper" id="swiper-wrapper-64c2ada66af16610" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-558px, 0px, 0px);">
+                                                    <div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 558px;" role="group" aria-label="3 / 3">
+                                                        <div class="thumbnail mt--0">
+                                                            <img src="~/files/certificate_bottom_image_third.jpg" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 558px;" role="group" aria-label="1 / 3">
+                                                        <div class="thumbnail mt--0">
+                                                            <img src="~/files/certificate_bottom_image_first.jpg" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 558px;" role="group" aria-label="2 / 3">
+                                                        <div class="thumbnail mt--0">
+                                                            <img src="~/files/certificate_bottom_image_second.jpg" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="2" style="width: 558px;" role="group" aria-label="3 / 3">
+                                                        <div class="thumbnail mt--0">
+                                                            <img src="~/files/certificate_bottom_image_third.jpg" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" role="group" aria-label="1 / 3" style="width: 558px;">
+                                                        <div class="thumbnail mt--0">
+                                                            <img src="~/files/certificate_bottom_image_first.jpg" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="rbt-swiper-arrow rbt-arrow-left" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-64c2ada66af16610">
+                                                    <div class="custom-overfolow">
+                                                        <i class="rbt-icon feather-arrow-left"></i>
+                                                        <i class="rbt-icon-top feather-arrow-left"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="rbt-swiper-arrow rbt-arrow-right" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-64c2ada66af16610">
+                                                    <div class="custom-overfolow">
+                                                        <i class="rbt-icon feather-arrow-right"></i>
+                                                        <i class="rbt-icon-top feather-arrow-right"></i>
+                                                    </div>
+                                                </div>
+
+                                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            <h2 class="title">@Localizer["we_promise_these"]</h2>
+                                            <p>
+                                                @Localizer["we_promise_these_description"]
+                                            </p>
+                                            <ul class="rbt-list-style-2 flex-wrap">
+                                                <li><i class="feather-check"></i>@Localizer["we_promise_these_1"]</li>
+                                                <li><i class="feather-check"></i>@Localizer["we_promise_these_1"]</li>
+                                                <li><i class="feather-check"></i>@Localizer["we_promise_these_1"]</li>
+                                                <li><i class="feather-check"></i>@Localizer["we_promise_these_1"]</li>
+                                                <li><i class="feather-check"></i>@Localizer["we_promise_these_1"]</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Feature Box  -->
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="shape-wrapper">
-        <div class="shape-image shape-1">
-            <img src="~/lib/main_template/assets/images/splash/icons/shape-1.png" alt="Shape Images">
-        </div>
-        <div class="shape-image shape-2">
-            <img src="~/lib/main_template/assets/images/splash/icons/shape-2.png" alt="Shape Images">
-        </div>
-        <div class="shape-image shape-3">
-            <img src="~/lib/main_template/assets/images/splash/icons/shape-3.png" alt="Shape Images">
+    <!-- End Course Banner Area  -->
+    <!-- Start Catalogs Area -->
+    <div class="rbt-categories-area bg-color-white rbt-section-gapBottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">@Localizer["category_list_description"]</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 mt--20">
+                @foreach (var catalog in Model.Catalogs)
+                {
+                    <!-- Start Category Box Layout  -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a class="rbt-cat-box rbt-cat-box-1 text-center" asp-action="Details" asp-controller="Catalogs" asp-route-id="@catalog.Id">
+                            <div class="inner">
+                                <div class="content">
+                                    <h5 class="title">@catalog.Name</h5>
+                                    <div class="read-more-btn">
+                                        <span class="rbt-btn-link">
+                                            @catalog.Manufacturers.Count @Localizer["manufacturers_cout_of"]
+                                            <i class="feather-arrow-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Category Box Layout  -->
+                }
+            </div>
+            <div class="row g-3" style="text-align:center;">
+                <div class="col-12">
+                    <a class="rbt-btn btn-gradient radius-round btn-md" asp-action="Index" asp-controller="Catalogs">
+                        <span class="btn-text">@Localizer["all_categories"]</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<!-- End Slider Area  -->
+    <!-- Eng Catalogs Area -->
+    <!-- Start CallTo Action Area  -->
+    <div class="rbt-call-to-action-area rbt-section-gap bg-gradient-8">
+        <div class="rbt-callto-action rbt-cta-default style-6">
+            <div class="container">
+                <div class="row g-5 align-items-center content-wrapper">
+                    <div class="col-xxl-3 col-xl-3 col-lg-6">
+                        <div class="inner">
+                            <div class="content text-start">
+                                <h2 class="title color-white mb--0">@Localizer["sonetex_group"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                        <div class="inner-content text-start">
+                            <p class="color-white">
+                                @Localizer["sonetex_group_description"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-6">
+                        <div class="call-to-btn text-start text-xl-end">
+                            <a class="rbt-btn btn-white hover-icon-reverse" asp-action="ContactUs">
+                                <span class="icon-reverse-wrapper">
+                                    <span class="btn-text">@Localizer["contact_with_us"]</span>
+                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End CallTo Action Area  -->
+    <!-- Start Service Area -->
+    <div class="rbt-service-area bg-color-extra2 rbt-section-gap">
+        <div class="container">
+            <div class="row mb--60">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <span class="subtitle bg-primary-opacity">@Localizer["we_are_not_ordinary"]</span>
+                        <h2 class="title">@Localizer["why_choose_use"]</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- Start Card Area -->
+            <div class="row row--15 mt_dec--30">
+                <!-- Start Single Card  -->
+                <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                    <div class="rbt-flipbox">
+
+                        <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-1">
+                            <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                <div class="icon">
+                                    <img src="~/files/card-icon-1.png" alt="card-icon">
+                                </div>
+                                <div class="content">
+                                    <h5 class="title"><a href="#">@Localizer["best_coaching"]</a></h5>
+                                    <p>@Localizer["best_coaching"]</p>
+                                </div>
+                            </div>
+
+                            <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                <p>@Localizer["best_coaching_next"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Card  -->
+                <!-- Start Single Card  -->
+                <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                    <div class="rbt-flipbox">
+                        <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-2">
+                            <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                <div class="icon">
+                                    <img src="~/files/card-icon-2.png" alt="card-icon">
+                                </div>
+                                <div class="content">
+                                    <h5 class="title"><a href="#">@Localizer["convenient_practice"]</a></h5>
+                                    <p>@Localizer["convenient_practice_description"]</p>
+                                </div>
+                            </div>
+
+                            <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                <p>@Localizer["convenient_practice_description_next"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Card  -->
+                <!-- Start Single Card  -->
+                <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                    <div class="rbt-flipbox">
+                        <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-3">
+                            <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                <div class="icon">
+                                    <img src="~/files/card-icon-7.png" alt="card-icon">
+                                </div>
+                                <div class="content">
+                                    <h5 class="title"><a href="#">@Localizer["video_lecture"]</a></h5>
+                                    <p>@Localizer["video_lecture_description"]</p>
+                                </div>
+                            </div>
+
+                            <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                <p>@Localizer["video_lecture_next"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Card  -->
+                <!-- Start Single Card  -->
+                <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                    <div class="rbt-flipbox">
+                        <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-4">
+                            <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                <div class="icon">
+                                    <img src="~/files/card-icon-9.png" alt="card-icon">
+                                </div>
+                                <div class="content">
+                                    <h5 class="title"><a href="#">@Localizer["live_class"]</a></h5>
+                                    <p>@Localizer["live_class_description"]</p>
+                                </div>
+                            </div>
+
+                            <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                <p>@Localizer["live_class_description_next"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Card  -->
+            </div>
+            <!-- End Card Area -->
+        </div>
+    </div>
+    <!-- End Service Area -->
+    <!-- Start Brand Area -->
+    <div class="rbt-brand-area bg-color-white ptb--60">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="section-title text-center mb--40">
+                        <span class="small-title w-600">@Localizer["our_partners_main_page"]</span>
+                    </div>
+                    <ul class="brand-list brand-style-3 justify-content-center justify-content-lg-between">
+                        @foreach (var partner in Model.Partners)
+                        {
+                            <li>
+                                <a href="@partner.Description">
+                                    <img src="~/files/@partner.Image.Name" alt="Brand Image">
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Brand Area -->

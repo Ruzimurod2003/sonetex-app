@@ -12,6 +12,7 @@ using Telegram.Bot.Types;
 using SonetexApp.Models;
 using SonetexApp.Data;
 using Microsoft.EntityFrameworkCore;
+using SonetexApp.Repositories;
 
 namespace SonetexApp.Areas.Main.Controllers
 {
@@ -20,16 +21,33 @@ namespace SonetexApp.Areas.Main.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly ApplicationContext _context;
+        private readonly ICatalogRepository _catalogRepository;
+        private readonly IManufacturerRepository _manufacturerRepository;
 
-        public HomeController(IConfiguration configuration, ApplicationContext context)
+        public HomeController(IConfiguration configuration,
+            ApplicationContext context,
+            ICatalogRepository catalogRepository,
+            IManufacturerRepository manufacturerRepository)
         {
             _configuration = configuration;
             _context = context;
+            _catalogRepository = catalogRepository;
+            _manufacturerRepository = manufacturerRepository;
         }
         // GET: HomeController
         public ActionResult Index()
         {
-            return View();
+            MainHomeIndexVM viewModel = new MainHomeIndexVM();
+            string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            var catalogs = _catalogRepository.GetCatalogs(currentCultureName).Take(12).ToList();
+            var manufacturers = _manufacturerRepository.GetManufacturers(currentCultureName).Take(12).ToList();
+            var partners = _context.Partners.Include(i => i.Image).ToList();
+
+            viewModel.Catalogs = catalogs;
+            viewModel.Manufacturers = manufacturers;
+            viewModel.Partners = partners;
+
+            return View(viewModel);
         }
         public IActionResult TechnicalSupport()
         {
