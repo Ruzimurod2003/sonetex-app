@@ -13,6 +13,7 @@ public class Manufacturer                                                   // �
     public string DescriptionRussian { get; set; }                          // Русский oписание 
     public string DescriptionEnglish { get; set; }                          // Английский oписание 
     public List<Catalog> Catalogs { get; set; } = new List<Catalog>();      // Каталоги
+    public List<MProduct> MProducts { get; set; } = new List<MProduct>();   // Производители product
     public int ImageId { get; set; }                                        
     [ForeignKey(nameof(ImageId))]
     public File Image { get; set; }                                          // Изображение

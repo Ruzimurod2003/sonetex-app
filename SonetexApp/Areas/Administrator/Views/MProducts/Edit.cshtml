@@ -1,0 +1,81 @@
+﻿@model AdministratorMProductVM
+
+<div class="text-center">
+    <h1>@Localizer["edit_category"]</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MProduct.Id" />
+            <div class="form-group">
+                <label asp-for="MProduct.Name" class="control-label">@Localizer["name"]</label>
+                <input asp-for="MProduct.Name" class="form-input" />
+                <span asp-validation-for="MProduct.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.NameRussian" class="control-label">@Localizer["name_russian"]</label>
+                <input asp-for="MProduct.NameRussian" class="form-input" />
+                <span asp-validation-for="MProduct.NameRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.NameEnglish" class="control-label">@Localizer["name_english"]</label>
+                <input asp-for="MProduct.NameEnglish" class="form-input" />
+                <span asp-validation-for="MProduct.NameEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.NameUzbek" class="control-label">@Localizer["name_uzbek"]</label>
+                <input asp-for="MProduct.NameUzbek" class="form-input" />
+                <span asp-validation-for="MProduct.NameUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.Description" class="control-label">@Localizer["description"]</label>
+                <input asp-for="MProduct.Description" class="form-input" />
+                <span asp-validation-for="MProduct.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.DescriptionRussian" class="control-label">@Localizer["description_russian"]</label>
+                <input asp-for="MProduct.DescriptionRussian" class="form-input" />
+                <span asp-validation-for="MProduct.DescriptionRussian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.DescriptionEnglish" class="control-label">@Localizer["description_english"]</label>
+                <input asp-for="MProduct.DescriptionEnglish" class="form-input" />
+                <span asp-validation-for="MProduct.DescriptionEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.DescriptionUzbek" class="control-label">@Localizer["description_uzbek"]</label>
+                <input asp-for="MProduct.DescriptionUzbek" class="form-input" />
+                <span asp-validation-for="MProduct.DescriptionUzbek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.VendorCode" class="control-label">@Localizer["vendor_code"]</label>
+                <input asp-for="MProduct.VendorCode" class="form-input" />
+                <span asp-validation-for="MProduct.VendorCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.AlternativeVendorCode" class="control-label">@Localizer["alternative_vendor_code"]</label>
+                <input asp-for="MProduct.AlternativeVendorCode" class="form-input" />
+                <span asp-validation-for="MProduct.AlternativeVendorCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.Price" class="control-label">@Localizer["price"]</label>
+                <input asp-for="MProduct.Price" class="form-input" />
+                <span asp-validation-for="MProduct.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MProduct.ManufacturerId" class="control-label">@Localizer["manufacturer_name"]</label>
+                <input asp-for="MProduct.ManufacturerId" class="form-input" />
+                <span asp-validation-for="MProduct.ManufacturerId" class="text-danger"></span>
+            </div>
+            <div class="form-group flex">
+                <input type="submit" value="@Localizer["save"]" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success gap-2">
+                    @Localizer["back_to_list"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -22,6 +22,7 @@ public class ApplicationContext : DbContext
     public DbSet<Specialist> Specialists { get; set; }
     public DbSet<Team> Teams { get; set; }
     public DbSet<State> States { get; set; }
+    public DbSet<MProduct> MProducts { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Culture>().HasData(
