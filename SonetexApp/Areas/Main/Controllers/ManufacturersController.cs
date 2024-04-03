@@ -38,7 +38,11 @@ namespace SonetexApp.Areas.Main.Controllers
         {
             string currentCultureName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             var manufacturer = new Manufacturer();
-            var dbManufacturer = _context.Manufacturers.Include(i => i.Catalogs).Include(i => i.Image).FirstOrDefault(i => i.Id == id);
+            var dbManufacturer = _context.Manufacturers
+                .Include(i => i.Catalogs)
+                .Include(i => i.Image)
+                .Include(i => i.MProducts)
+                .FirstOrDefault(i => i.Id == id);
             List<Manufacturer> manufacturers = new List<Manufacturer>();
             if (currentCultureName == "uz")
             {
@@ -67,6 +71,7 @@ namespace SonetexApp.Areas.Main.Controllers
             }
             manufacturer.Id = dbManufacturer.Id;
             manufacturer.Image = dbManufacturer.Image;
+            manufacturer.MProducts = dbManufacturer.MProducts;
 
             return View(manufacturer);
         }

@@ -33,6 +33,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
             statisticsVM.Specialists = _context.Specialists.ToList();
             statisticsVM.States = _context.States.ToList();
             statisticsVM.Teams = _context.Teams.ToList();
+            statisticsVM.MProducts = _context.MProducts.ToList();
 
             return View(statisticsVM);
         }

@@ -162,6 +162,18 @@
                     </div>
                 </a>
             </div>
+            
+            <!-- Manufacturer products -->
+            <div class="panel bg-gradient-to-r from-cyan-500 to-cyan-400">
+                <a asp-controller="MProducts" class="group">
+                    <div class="flex justify-between">
+                        <div class="text-2xl font-semibold ltr:mr-1 rtl:ml-1">@Localizer["manufacturer_products"]</div>
+                    </div>
+                    <div class="mt-5 flex items-center">
+                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">@Localizer["count_of"] : @Model.MProducts.Count</div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

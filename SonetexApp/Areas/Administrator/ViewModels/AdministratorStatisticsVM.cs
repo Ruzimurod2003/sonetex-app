@@ -16,4 +16,5 @@ public class AdministratorStatisticsVM
     public List<Specialist> Specialists { get; set; }
     public List<State> States { get; set; }
     public List<Team> Teams { get; set; }
+    public List<MProduct> MProducts { get; set; }
 }

@@ -125,6 +125,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
             var manufacturer = await _context.Manufacturers
                 .Include(i => i.Image)
                 .Include(i => i.Catalogs)
+                .Include(i => i.MProducts)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (manufacturer == null)
             {
@@ -182,7 +183,10 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var manufacturer = await _context.Manufacturers.Include(i => i.Image).FirstOrDefaultAsync(i => i.Id == id);
+            var manufacturer = await _context.Manufacturers
+                .Include(i => i.Image)
+                .Include(i => i.MProducts)
+                .FirstOrDefaultAsync(i => i.Id == id);
             if (manufacturer == null)
             {
                 return NotFound();
@@ -207,7 +211,11 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             if (ModelState.IsValid)
             {
-                var manufacturer = await _context.Manufacturers.Include(i => i.Image).FirstOrDefaultAsync(i => i.Id == id);
+                var manufacturer = await _context.Manufacturers
+                    .Include(i => i.Image)
+                    .Include(i => i.MProducts)
+                    .FirstOrDefaultAsync(i => i.Id == id);
+
                 int imageId = manufacturer.Image.Id;
                 manufacturer = manufacturerVM.Manufacturer;
 
@@ -254,6 +262,7 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             var manufacturer = await _context.Manufacturers
                 .Include(i => i.Image)
+                .Include(i => i.MProducts)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (manufacturer == null)
             {
@@ -289,7 +298,10 @@ namespace SonetexApp.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var manufacturer = await _context.Manufacturers.Include(i => i.Catalogs).FirstOrDefaultAsync(i => i.Id == id);
+            var manufacturer = await _context.Manufacturers
+                .Include(i => i.Catalogs)
+                .Include(i => i.MProducts)
+                .FirstOrDefaultAsync(i => i.Id == id);
             if (manufacturer == null)
             {
                 return NotFound();
@@ -316,7 +328,10 @@ namespace SonetexApp.Areas.Administrator.Controllers
 
             if (ModelState.IsValid)
             {
-                var manufacturer = await _context.Manufacturers.Include(i => i.Catalogs).FirstOrDefaultAsync(i => i.Id == id);
+                var manufacturer = await _context.Manufacturers
+                    .Include(i => i.Catalogs)
+                    .Include(i => i.MProducts)
+                    .FirstOrDefaultAsync(i => i.Id == id);
 
                 var oldCatalogs = manufacturer.Catalogs.ToList();
                 var markedCatalogs = _context.Catalogs.Where(i => manufacturerVM.CatalogIds.Contains(i.Id)).ToList();
