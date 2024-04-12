@@ -115,10 +115,9 @@ public class CatalogRepository : ICatalogRepository
     {
         List<Catalog> catalogs = new List<Catalog>();
         var dbCatalogs = _context.Catalogs
-                            .Include(i => i.Manufacturers)
-                            .Include(i => i.Products)
-                            .Take(count)
-                            .ToList();
+                            .Take(count);
+        dbCatalogs = dbCatalogs.Include(i => i.Manufacturers)
+                            .Include(i => i.Products);
 
         if (currentCultureName == "uz")
         {

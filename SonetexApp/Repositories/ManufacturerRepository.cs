@@ -113,11 +113,10 @@ public class ManufacturerRepository : IManufacturerRepository
     {
         List<Manufacturer> manufacturers = new List<Manufacturer>();
         var dbManufacturers = _context.Manufacturers
-                                    .Include(i => i.Image)
+                                    .Take(count);
+        dbManufacturers = dbManufacturers.Include(i => i.Image)
                                     .Include(i => i.Catalogs)
-                                    .ThenInclude(i => i.Products)
-                                    .Take(count)
-                                    .ToList();
+                                    .ThenInclude(i => i.Products);
 
         if (currentCultureName == "uz")
         {
